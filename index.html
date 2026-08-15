@@ -52,6 +52,38 @@
     try { return localStorage.getItem('osId') || ''; } catch (e) { return ''; }
   }
 </script>
+
+<!-- ===== ONESIGNAL ===== -->
+<script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+<script>
+  window.OneSignalDeferred = window.OneSignalDeferred || [];
+  OneSignalDeferred.push(async function (OneSignal) {
+    await OneSignal.init({
+      appId: "543a7756-d4d8-4092-847b-6d03f3435ee5",
+      safari_web_id: "web.onesignal.auto.5ffbfb2e-5b9e-4e33-a6e5-d97b1e693743",
+      serviceWorkerParam: { scope: "/onesignal/" },
+      serviceWorkerPath: "OneSignalSDKWorker.js",
+      allowLocalhostAsSecureOrigin: false,
+      notifyButton: { enable: false }
+    });
+
+    OneSignal.User.PushSubscription.addEventListener('change', function (ev) {
+      if (ev.current && ev.current.id) {
+        try { localStorage.setItem('osId', ev.current.id); } catch (e) {}
+      }
+    });
+  });
+
+  function pedirNotificaciones() {
+    OneSignalDeferred.push(async function (OneSignal) {
+      await OneSignal.Notifications.requestPermission();
+    });
+  }
+
+  function osIdActual() {
+    try { return localStorage.getItem('osId') || ''; } catch (e) { return ''; }
+  }
+</script>
 <!-- ============ BANNER DE INSTALACIÓN ============ -->
 <div id="pwaBanner" style="
   position:fixed; left:12px; right:12px; bottom:12px; z-index:99999;
@@ -75,6 +107,11 @@
     display:none; flex:none; background:#5FA3DC; color:#fff; border:0;
     font-size:12.5px; font-weight:600; padding:9px 16px; border-radius:9px;
     cursor:pointer; font-family:inherit;">Instalar</button>
+
+  <button id="pwaNotif" onclick="event.stopPropagation(); pedirNotificaciones(); this.textContent='✓ Activado'; this.disabled=true;" style="
+    display:none; flex:none; background:transparent; border:1px solid rgba(255,255,255,.3);
+    color:#fff; font-size:12px; font-weight:600; padding:8px 14px; border-radius:9px;
+    cursor:pointer; font-family:inherit;">Avisos</button>
 
   <button id="pwaNotif" onclick="event.stopPropagation(); pedirNotificaciones(); this.textContent='✓ Activado'; this.disabled=true;" style="
     display:none; flex:none; background:transparent; border:1px solid rgba(255,255,255,.3);
@@ -138,6 +175,20 @@
 
 var instalado = window.matchMedia('(display-mode: standalone)').matches
                || window.navigator.standalone === true;
+
+  if (instalado && 'Notification' in window && Notification.permission === 'default') {
+    var bn = document.getElementById('pwaNotif');
+    if (bn) {
+      bn.style.display = 'block';
+      var titulo = document.querySelector('#pwaBanner div div');
+      if (titulo) titulo.textContent = 'Activá los avisos';
+      texto.textContent = 'Te avisamos cuando tu mueble esté listo.';
+      banner.style.display = 'flex';
+      setTimeout(function () { banner.style.transform = 'translateY(0)'; }, 800);
+    }
+  }
+
+  function descartado() {
 
   if (instalado && 'Notification' in window && Notification.permission === 'default') {
     var bn = document.getElementById('pwaNotif');
