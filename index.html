@@ -47,6 +47,7 @@
     OneSignal.User.PushSubscription.addEventListener('change', function (ev) {
       if (ev.current && ev.current.id) {
         try { localStorage.setItem('osId', ev.current.id); } catch (e) {}
+        if (typeof avisarOsId === 'function') avisarOsId();
       }
     });
   });
@@ -74,6 +75,24 @@
   function osIdActual() {
     try { return localStorage.getItem('osId') || ''; } catch (e) { return ''; }
   }
+
+  /* ---- Puente con el iframe de Apps Script ---- */
+  window.addEventListener('message', function (ev) {
+    if (!ev.data || ev.data.tipo !== 'pedirOsId') return;
+    var marco = document.querySelector('iframe');
+    if (marco && marco.contentWindow) {
+      marco.contentWindow.postMessage({ tipo: 'osId', valor: osIdActual() }, '*');
+    }
+  });
+
+  // Además lo mandamos solo cada vez que cambia o al cargar
+  function avisarOsId() {
+    var marco = document.querySelector('iframe');
+    if (marco && marco.contentWindow) {
+      marco.contentWindow.postMessage({ tipo: 'osId', valor: osIdActual() }, '*');
+    }
+  }
+  window.addEventListener('load', function () { setTimeout(avisarOsId, 3000); });
 </script>
 
 
