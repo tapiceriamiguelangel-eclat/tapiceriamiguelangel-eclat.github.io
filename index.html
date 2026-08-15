@@ -5,8 +5,18 @@
 <title>Tapicería Miguel Ángel — Eclat</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='6 16 90 70'%3E%3Cpath d='M62 22 L84 78 L74 78 L69.5 66 L54.5 66 L50 78 L40 78 L62 22 Z M57.5 58 L66.5 58 L62 45.5 L57.5 58 Z' fill='%235FA3DC'/%3E%3Cpath d='M10 78 L10 22 L22 22 L36 52 L50 22 L62 22 L62 78 L52 78 L52 40 L39.5 67 L32.5 67 L20 40 L20 78 Z' fill='%23152B4E'/%3E%3Cpath d='M76 24 L48 84' stroke='%23152B4E' stroke-width='3.5' stroke-linecap='round'/%3E%3C/svg%3E"><style>html,body{margin:0;height:100%}iframe{border:0;width:100%;height:100%}</style>
+<link rel="manifest" href="manifest.json">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Eclat">
+  <link rel="apple-touch-icon" href="icon-192.png">
 </head>
 <body>
 <iframe src="https://script.google.com/macros/s/AKfycbzixqTUfjkbpP61JKQRv1hyQKRx19a8x54PiSTPVc5vMYymWmeOxEJqrcZ6sQqxdEYQ/exec" allow="clipboard-write"></iframe>
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => navigator.serviceWorker.register('sw.js'));
+  }
+</script>
 </body>
 </html>
