@@ -18,5 +18,143 @@
     window.addEventListener('load', () => navigator.serviceWorker.register('sw.js'));
   }
 </script>
+<!-- ============ BANNER DE INSTALACIÓN ============ -->
+<div id="pwaBanner" style="
+  position:fixed; left:12px; right:12px; bottom:12px; z-index:99999;
+  background:#152B4E; color:#fff; border-radius:16px; padding:14px 16px;
+  box-shadow:0 12px 32px -8px rgba(0,0,0,.45);
+  font-family:Inter,system-ui,-apple-system,sans-serif;
+  display:none; align-items:center; gap:12px;
+  max-width:520px; margin:0 auto;
+  transform:translateY(140%); transition:transform .45s cubic-bezier(.2,.8,.2,1);">
+
+  <img src="icon-192.png" alt="" style="width:44px;height:44px;border-radius:11px;flex:none;background:#F5F8FC">
+
+  <div style="flex:1; min-width:0">
+    <div style="font-size:14px;font-weight:600;line-height:1.25">Instalá nuestra app</div>
+    <div id="pwaTexto" style="font-size:11.5px;color:rgba(255,255,255,.62);line-height:1.4;margin-top:2px">
+      Acceso directo desde tu pantalla de inicio.
+    </div>
+  </div>
+
+  <button id="pwaInstalar" style="
+    display:none; flex:none; background:#5FA3DC; color:#fff; border:0;
+    font-size:12.5px; font-weight:600; padding:9px 16px; border-radius:9px;
+    cursor:pointer; font-family:inherit;">Instalar</button>
+
+  <button id="pwaCerrar" aria-label="Cerrar" style="
+    flex:none; background:transparent; border:0; color:rgba(255,255,255,.45);
+    font-size:22px; line-height:1; cursor:pointer; padding:2px 4px;">&times;</button>
+</div>
+
+<!-- Instructivo iOS -->
+<div id="pwaIos" style="
+  position:fixed; inset:0; z-index:99998; background:rgba(14,28,52,.75);
+  display:none; align-items:flex-end; justify-content:center; padding:16px;
+  font-family:Inter,system-ui,-apple-system,sans-serif;">
+  <div style="background:#fff; color:#152B4E; border-radius:20px; padding:22px 20px; max-width:400px; width:100%">
+    <div style="font-family:'Cormorant Garamond',Georgia,serif; font-size:22px; font-weight:700; margin-bottom:4px">
+      Agregá Eclat a tu iPhone
+    </div>
+    <div style="font-size:12.5px; color:rgba(21,43,78,.55); margin-bottom:18px">Son tres toques y listo.</div>
+
+    <div style="display:flex; gap:12px; align-items:flex-start; margin-bottom:14px">
+      <span style="flex:none;width:24px;height:24px;border-radius:50%;background:#152B4E;color:#fff;font-size:11px;font-weight:700;display:grid;place-items:center">1</span>
+      <div style="font-size:13px;line-height:1.45">
+        Tocá el botón <b>Compartir</b>
+        <svg style="width:15px;height:15px;vertical-align:-3px;margin:0 2px" viewBox="0 0 24 24" fill="none" stroke="#5FA3DC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 16V4M12 4L8 8M12 4l4 4"/><path d="M5 14v5a1 1 0 001 1h12a1 1 0 001-1v-5"/>
+        </svg>
+        en la barra de abajo.
+      </div>
+    </div>
+
+    <div style="display:flex; gap:12px; align-items:flex-start; margin-bottom:14px">
+      <span style="flex:none;width:24px;height:24px;border-radius:50%;background:#152B4E;color:#fff;font-size:11px;font-weight:700;display:grid;place-items:center">2</span>
+      <div style="font-size:13px;line-height:1.45">Deslizá y elegí <b>Añadir a pantalla de inicio</b>.</div>
+    </div>
+
+    <div style="display:flex; gap:12px; align-items:flex-start; margin-bottom:20px">
+      <span style="flex:none;width:24px;height:24px;border-radius:50%;background:#152B4E;color:#fff;font-size:11px;font-weight:700;display:grid;place-items:center">3</span>
+      <div style="font-size:13px;line-height:1.45">Confirmá con <b>Añadir</b>.</div>
+    </div>
+
+    <button id="pwaIosCerrar" style="
+      width:100%; background:#152B4E; color:#fff; border:0; font-family:inherit;
+      font-size:13.5px; font-weight:600; padding:12px; border-radius:11px; cursor:pointer;">
+      Entendido
+    </button>
+  </div>
+</div>
+
+<script>
+(function () {
+  var banner  = document.getElementById('pwaBanner');
+  var texto   = document.getElementById('pwaTexto');
+  var btnInst = document.getElementById('pwaInstalar');
+  var btnX    = document.getElementById('pwaCerrar');
+  var modal   = document.getElementById('pwaIos');
+  var modalX  = document.getElementById('pwaIosCerrar');
+  var prompt  = null;
+
+  var instalado = window.matchMedia('(display-mode: standalone)').matches
+               || window.navigator.standalone === true;
+
+  function descartado() {
+    try {
+      var d = localStorage.getItem('pwaDescartado');
+      return d && (Date.now() - +d) < 14 * 24 * 60 * 60 * 1000;
+    } catch (e) { return false; }
+  }
+
+  function mostrar() {
+    if (instalado || descartado()) return;
+    banner.style.display = 'flex';
+    setTimeout(function () { banner.style.transform = 'translateY(0)'; }, 60);
+  }
+
+  function ocultar(recordar) {
+    banner.style.transform = 'translateY(140%)';
+    setTimeout(function () { banner.style.display = 'none'; }, 450);
+    if (recordar) { try { localStorage.setItem('pwaDescartado', Date.now()); } catch (e) {} }
+  }
+
+  // --- Android / Chrome de escritorio ---
+  window.addEventListener('beforeinstallprompt', function (e) {
+    e.preventDefault();
+    prompt = e;
+    btnInst.style.display = 'block';
+    texto.textContent = 'Instalala y entrá directo, sin buscar el link.';
+    mostrar();
+  });
+
+  btnInst.addEventListener('click', function () {
+    if (!prompt) return;
+    prompt.prompt();
+    prompt.userChoice.then(function () { prompt = null; ocultar(true); });
+  });
+
+  // --- iPhone / iPad ---
+  var esIOS = /iphone|ipad|ipod/i.test(navigator.userAgent)
+           || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  var esSafari = /safari/i.test(navigator.userAgent) && !/crios|fxios|edgios/i.test(navigator.userAgent);
+
+  if (esIOS && esSafari && !instalado) {
+    texto.textContent = 'Tocá acá y te muestro cómo en 3 pasos.';
+    banner.style.cursor = 'pointer';
+    banner.addEventListener('click', function (e) {
+      if (e.target === btnX) return;
+      modal.style.display = 'flex';
+    });
+    setTimeout(mostrar, 2500);
+  }
+
+  btnX.addEventListener('click', function (e) { e.stopPropagation(); ocultar(true); });
+  modalX.addEventListener('click', function () { modal.style.display = 'none'; ocultar(true); });
+  modal.addEventListener('click', function (e) { if (e.target === modal) modal.style.display = 'none'; });
+
+  window.addEventListener('appinstalled', function () { ocultar(true); });
+})();
+</script>
 </body>
 </html>
