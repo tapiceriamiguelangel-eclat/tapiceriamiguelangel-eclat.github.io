@@ -76,23 +76,18 @@
     try { return localStorage.getItem('osId') || ''; } catch (e) { return ''; }
   }
 
-  /* ---- Puente con el iframe de Apps Script ---- */
+  /* ---- El iframe nos pide etiquetar al suscriptor con su teléfono ---- */
   window.addEventListener('message', function (ev) {
-    if (!ev.data || ev.data.tipo !== 'pedirOsId') return;
-    var marco = document.querySelector('iframe');
-    if (marco && marco.contentWindow) {
-      marco.contentWindow.postMessage({ tipo: 'osId', valor: osIdActual() }, '*');
-    }
+    if (!ev.data || ev.data.tipo !== 'etiquetar' || !ev.data.telefono) return;
+    var tel = String(ev.data.telefono).replace(/\D/g, '');
+    if (!tel) return;
+    OneSignalDeferred.push(async function (OneSignal) {
+      try { await OneSignal.User.addAlias('telefono', tel); } catch (e) {}
+      try { await OneSignal.User.addTag('telefono', tel); } catch (e) {}
+    });
   });
 
-  // Además lo mandamos solo cada vez que cambia o al cargar
-  function avisarOsId() {
-    var marco = document.querySelector('iframe');
-    if (marco && marco.contentWindow) {
-      marco.contentWindow.postMessage({ tipo: 'osId', valor: osIdActual() }, '*');
-    }
-  }
-  window.addEventListener('load', function () { setTimeout(avisarOsId, 3000); });
+  function avisarOsId() {}
 </script>
 
 
