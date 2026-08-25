@@ -103,19 +103,27 @@
   .dark .border-navy-800\/5  { border-color:rgba(140,192,232,.10) !important; }
   .dark .border-navy-800\/8  { border-color:rgba(140,192,232,.14) !important; }
   .dark .border-navy-800\/10 { border-color:rgba(140,192,232,.16) !important; }
+  .dark .border-navy-800\/15 { border-color:rgba(140,192,232,.22) !important; }
   .dark .bg-white\/95 { background-color:rgba(14,28,52,.95) !important; }
   .dark .bg-navy-800 { background-color:#0e1c34 !important; }
+  .dark input, .dark select {
+    background-color:#1b2a45 !important; color:#e6eef7 !important;
+    border-color:rgba(140,192,232,.22) !important;
+  }
   .dark .hover\:bg-navy-50\/50:hover { background-color:rgba(140,192,232,.06) !important; }
   .dark .card:hover { box-shadow:0 12px 28px -12px rgba(0,0,0,.6); }
   .dark ::-webkit-scrollbar-track { background:#16233b }
   .dark ::-webkit-scrollbar-thumb { background:#2f74b0 }
 
+  /* ===== NAV ===== */
   .nav-link { position:relative; }
+  .nav-link.active { color:#152B4E; }
+  .dark .nav-link.active { color:#8CC0E8; }
   .nav-link::after {
     content:''; position:absolute; bottom:0; left:0; right:0; height:2px;
     background:#5FA3DC; transform:scaleX(0); transition:transform .25s ease;
   }
-  .nav-link:hover::after { transform:scaleX(1); }
+  .nav-link.active::after, .nav-link:hover::after { transform:scaleX(1); }
 
   /* ===== NEEDLE-RULE ===== */
   .needle-rule { display:flex; align-items:center; gap:10px; }
@@ -165,7 +173,7 @@
       linear-gradient(135deg, #152B4E 0%, #1d3a67 55%, #0e1c34 100%);
   }
 
-  /* Tarjetas: borde cosido + brillo */
+  /* Tarjetas */
   .card { position:relative; overflow:hidden; transition:transform .25s ease, box-shadow .25s ease; }
   .card::before {
     content:''; position:absolute; inset:5px; z-index:1; pointer-events:none;
@@ -184,7 +192,16 @@
   @keyframes shineMove { from{left:-75%} to{left:130%} }
   .dark .card .shine { background:linear-gradient(120deg, transparent, rgba(140,192,232,.18), transparent); }
 
-  /* Tacha / remache */
+  /* Tacha en tarjetas de producto */
+  .prod > div:first-of-type::after {
+    content:''; position:absolute; top:8px; left:50%; transform:translateX(-50%); z-index:3;
+    width:11px; height:11px; border-radius:50%;
+    background:radial-gradient(circle at 35% 30%, #cdd8e6 0 20%, #8CC0E8 45%, #2f4a70 100%);
+    box-shadow:0 1px 2px rgba(0,0,0,.45), inset 0 -1px 1px rgba(0,0,0,.35), inset 0 1px 1px rgba(255,255,255,.6);
+  }
+  .dark .prod > div:first-of-type::after {
+    background:radial-gradient(circle at 35% 30%, #aab8c9 0 20%, #5FA3DC 45%, #16233b 100%);
+  }
   .card-tacha::after {
     content:''; position:absolute; top:8px; left:50%; transform:translateX(-50%); z-index:3;
     width:11px; height:11px; border-radius:50%;
@@ -194,6 +211,14 @@
   .dark .card-tacha::after {
     background:radial-gradient(circle at 35% 30%, #aab8c9 0 20%, #5FA3DC 45%, #16233b 100%);
   }
+
+  /* Entrada suave de sección */
+  @keyframes fadeUp { from{opacity:0; transform:translateY(12px)} to{opacity:1; transform:none} }
+  .fade-up { animation: fadeUp .45s ease both }
+
+  /* Cascada del catálogo */
+  @keyframes cardIn { from{opacity:0; transform:translateY(14px)} to{opacity:1; transform:none} }
+  .card-in { animation: cardIn .5s ease both; }
 
   /* Acordeón FAQ */
   .faq-item summary { list-style:none; cursor:pointer; }
@@ -261,7 +286,7 @@
   body {
     cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Cline x1='6' y1='26' x2='26' y2='6' stroke='%23152B4E' stroke-width='2' stroke-linecap='round'/%3E%3Cellipse cx='23' cy='9' rx='1.6' ry='3' transform='rotate(45 23 9)' fill='none' stroke='%23152B4E' stroke-width='1.4'/%3E%3Cpath d='M6 26 Q0 30 3 24 Q6 27 6 26' fill='none' stroke='%235FA3DC' stroke-width='1.4' stroke-linecap='round'/%3E%3C/svg%3E") 6 26, auto;
   }
-  a, button, summary, .card {
+  a, button, summary, .card, input, select {
     cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Cline x1='6' y1='26' x2='26' y2='6' stroke='%235FA3DC' stroke-width='2.4' stroke-linecap='round'/%3E%3Cellipse cx='23' cy='9' rx='1.8' ry='3.2' transform='rotate(45 23 9)' fill='%23fff' stroke='%23152B4E' stroke-width='1.4'/%3E%3Cpath d='M6 26 Q-1 31 2 23 Q7 26 6 26' fill='none' stroke='%2325D366' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E") 6 26, pointer;
   }
 
@@ -276,7 +301,9 @@
     .needle-dot { transform:scale(1) !important; }
     .stitch-line path { stroke-dashoffset:0 !important; }
   }
-  a:focus-visible, button:focus-visible, summary:focus-visible { outline:3px solid #5FA3DC; outline-offset:2px; }
+  a:focus-visible, button:focus-visible, summary:focus-visible, select:focus-visible, input:focus-visible {
+    outline:3px solid #5FA3DC; outline-offset:2px;
+  }
 </style>
 </head>
 <body class="bg-navy-50 text-navy-900 font-sans antialiased transition-colors">
@@ -322,10 +349,10 @@
   </div>
 </div>
 
-<!-- ============ HEADER ============ -->
+<!-- ============ HEADER / NAV ============ -->
 <header class="sticky top-0 z-40 bg-white/95 backdrop-blur border-b border-navy-800/10">
   <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between gap-2">
-    <a href="/" class="flex items-center gap-2.5">
+    <a href="#catalogo" data-nav="catalogo" class="flex items-center gap-2.5">
       <svg class="h-10 w-10 shrink-0" viewBox="0 0 100 100" fill="none" aria-label="Tapicería Miguel Ángel">
         <path d="M62 22 L84 78 L74 78 L69.5 66 L54.5 66 L50 78 L40 78 L62 22 Z M57.5 58 L66.5 58 L62 45.5 L57.5 58 Z" fill="#5FA3DC"/>
         <path d="M10 78 L10 22 L22 22 L36 52 L50 22 L62 22 L62 78 L52 78 L52 40 L39.5 67 L32.5 67 L20 40 L20 78 Z" fill="#152B4E"/>
@@ -340,11 +367,11 @@
     </a>
 
     <nav class="hidden md:flex gap-7 text-sm font-medium h-full">
-      <a href="#servicios" class="nav-link flex items-center px-1 text-navy-800">Servicios</a>
-      <a href="#taller"    class="nav-link flex items-center px-1 text-navy-800">El Taller</a>
-      <a href="#zonas"     class="nav-link flex items-center px-1 text-navy-800">Zonas</a>
-      <a href="#faq"       class="nav-link flex items-center px-1 text-navy-800">Preguntas</a>
-      <a href="#contacto"  class="nav-link flex items-center px-1 text-navy-800">Contacto</a>
+      <a href="#catalogo" data-nav="catalogo" class="nav-link active flex items-center px-1 text-navy-800">Catálogo</a>
+      <a href="#telas"    data-nav="telas"    class="nav-link flex items-center px-1 text-navy-800">Telas</a>
+      <a href="#taller"   data-nav="taller"   class="nav-link flex items-center px-1 text-navy-800">El Taller</a>
+      <a href="#nosotros" data-nav="nosotros" class="nav-link flex items-center px-1 text-navy-800">Nosotros</a>
+      <a href="#contacto" data-nav="contacto" class="nav-link flex items-center px-1 text-navy-800">Contacto</a>
     </nav>
 
     <div class="flex items-center gap-1">
@@ -363,15 +390,18 @@
   </div>
 
   <nav id="mobileMenu" class="hidden md:hidden border-t border-navy-800/10 bg-white">
-    <a href="#servicios" class="block px-4 py-3 border-b border-navy-800/5 text-sm font-medium">Servicios</a>
-    <a href="#taller"    class="block px-4 py-3 border-b border-navy-800/5 text-sm font-medium">El Taller</a>
-    <a href="#zonas"     class="block px-4 py-3 border-b border-navy-800/5 text-sm font-medium">Zonas</a>
-    <a href="#faq"       class="block px-4 py-3 border-b border-navy-800/5 text-sm font-medium">Preguntas</a>
-    <a href="#contacto"  class="block px-4 py-3 text-sm font-medium">Contacto</a>
+    <a href="#catalogo" data-nav="catalogo" class="block px-4 py-3 border-b border-navy-800/5 text-sm font-medium">Catálogo</a>
+    <a href="#telas"    data-nav="telas"    class="block px-4 py-3 border-b border-navy-800/5 text-sm font-medium">Telas</a>
+    <a href="#taller"   data-nav="taller"   class="block px-4 py-3 border-b border-navy-800/5 text-sm font-medium">El Taller</a>
+    <a href="#nosotros" data-nav="nosotros" class="block px-4 py-3 border-b border-navy-800/5 text-sm font-medium">Nosotros</a>
+    <a href="#contacto" data-nav="contacto" class="block px-4 py-3 text-sm font-medium">Contacto</a>
   </nav>
 </header>
 
 <main class="max-w-6xl mx-auto px-4 py-6 pb-28">
+
+<!-- ══════════════ CATÁLOGO ══════════════ -->
+<section id="sec-catalogo" data-section>
 
   <!-- HERO -->
   <div class="hero relative overflow-hidden rounded-3xl px-6 py-10 md:px-12 md:py-16 mb-8 text-white">
@@ -385,12 +415,13 @@
       </p>
       <div class="flex flex-wrap gap-3">
         <a href="https://wa.me/5493512043164?text=Hola!%20Quisiera%20una%20consulta%20sobre%20tapizado."
+           target="_blank" rel="noopener"
            class="bg-[#25D366] hover:bg-[#1ebe5a] text-white text-sm font-semibold px-5 py-2.5 rounded-lg transition shadow-lg shadow-black/20">
           Pedir presupuesto por WhatsApp
         </a>
         <a href="https://script.google.com/macros/s/AKfycbzixqTUfjkbpP61JKQRv1hyQKRx19a8x54PiSTPVc5vMYymWmeOxEJqrcZ6sQqxdEYQ/exec"
            class="border border-white/25 hover:border-white/60 hover:bg-white/5 text-white text-sm font-semibold px-5 py-2.5 rounded-lg transition">
-          Ver catálogo y calculadora
+          Calculadora y simulador
         </a>
       </div>
     </div>
@@ -416,215 +447,1071 @@
     </div>
   </div>
 
-  <!-- SERVICIOS -->
-  <section id="servicios" class="mb-14 scroll-mt-20">
-    <div class="needle-rule mb-6"><span class="needle-dot"></span></div>
-    <h2 class="font-display text-3xl md:text-4xl font-bold text-navy-800">Qué tapizamos</h2>
-    <p class="text-sm text-navy-900/55 mb-6 max-w-3xl leading-relaxed">
-      Trabajamos mueble por mueble, sin apuro. Desarmamos, revisamos la estructura, reponemos espuma y resortes cuando hace falta, y recién ahí tapizamos. Es más lento que cambiar la tela por encima, pero es lo que hace que un sillón dure otros veinte años.
-    </p>
+  <div class="needle-rule mb-6"><span class="needle-dot"></span></div>
 
-    <div class="grid gap-4 md:grid-cols-3">
-      <article class="card card-tacha bg-white rounded-2xl shadow-sm border border-navy-800/5 p-5 pt-7">
-        <span class="shine"></span>
-        <h3 class="font-semibold text-base text-navy-800 mb-2">Sofás y sillones</h3>
-        <p class="text-sm text-navy-900/65 leading-relaxed">Sofás de 2 y 3 cuerpos, esquineros en L, sofá cama, chesterfield capitoné, divanes y chaise longue, butacas de living, sillones bergère, orejeros, reclinables, escandinavos y mecedoras.</p>
-      </article>
-      <article class="card card-tacha bg-white rounded-2xl shadow-sm border border-navy-800/5 p-5 pt-7">
-        <span class="shine"></span>
-        <h3 class="font-semibold text-base text-navy-800 mb-2">Sillas y banquetas</h3>
-        <p class="text-sm text-navy-900/65 leading-relaxed">Sillas de comedor por unidad o juego completo de 4 y 6, sillas de oficina ejecutivas, sillas Thonet y vienesas, banquetas altas de barra y banquetas de pie de cama.</p>
-      </article>
-      <article class="card card-tacha bg-white rounded-2xl shadow-sm border border-navy-800/5 p-5 pt-7">
-        <span class="shine"></span>
-        <h3 class="font-semibold text-base text-navy-800 mb-2">Respaldos y a medida</h3>
-        <p class="text-sm text-navy-900/65 leading-relaxed">Respaldos de cama de 1 plaza, 2 plazas y king, en capitoné o con tachas. Puffs redondos y cuadrados, almohadones a medida y tapizado vehicular.</p>
-      </article>
+  <h2 class="font-display text-3xl md:text-4xl font-bold text-navy-800">Catálogo</h2>
+  <p class="text-sm text-navy-900/55 mb-5">Precios de referencia por trabajo de tapizado. El presupuesto final se confirma al ver el mueble.</p>
+
+  <!-- FILTROS -->
+  <div class="bg-white rounded-2xl p-4 shadow-sm border border-navy-800/5 mb-6 grid gap-4 md:grid-cols-3 md:items-end">
+    <div>
+      <label for="fCategoria" class="block text-xs font-semibold mb-1.5 text-navy-800">Categoría</label>
+      <select id="fCategoria" class="w-full rounded-lg border border-navy-800/15 p-2.5 text-sm bg-white">
+        <option value="todas">Todas</option>
+        <option value="Sofá">Sofá</option>
+        <option value="Sillón">Sillón</option>
+        <option value="Silla">Silla</option>
+        <option value="Respaldo">Respaldo</option>
+        <option value="Puff">Puff</option>
+        <option value="Otros">Otros</option>
+      </select>
     </div>
-
-    <div class="mt-8 bg-white rounded-2xl border border-navy-800/5 p-5 shadow-sm">
-      <h3 class="font-semibold text-base text-navy-800 mb-2">Telas para tapicería</h3>
-      <p class="text-sm text-navy-900/65 leading-relaxed">
-        Te asesoramos según el uso del mueble y las mascotas de la casa. Trabajamos con chenille premium y antimanchas, pana lisa clásica, lino rústico, ecocuero soft touch, bouclé texturado, terciopelo velvet y gabardina reforzada. También podés traer tu propia tela: te decimos cuántos metros necesitás y solo cobramos la mano de obra.
-      </p>
+    <div>
+      <label for="fPrecio" class="block text-xs font-semibold mb-1.5 text-navy-800">
+        Precio máximo: <span id="fPrecioLabel" class="text-sky-500 font-bold">$520.000</span>
+      </label>
+      <input id="fPrecio" type="range" min="38000" max="520000" step="1000" value="520000" class="w-full accent-sky-400">
     </div>
-  </section>
+    <label class="flex items-center gap-2.5 md:pb-2.5 select-none">
+      <input id="fOferta" type="checkbox" class="w-4 h-4 rounded accent-sky-500">
+      <span class="text-sm font-medium">Solo ofertas 🔥</span>
+    </label>
+  </div>
 
-  <!-- EL TALLER -->
-  <section id="taller" class="mb-14 scroll-mt-20">
-    <svg class="stitch-line mb-6" viewBox="0 0 400 2" preserveAspectRatio="none" aria-hidden="true"><path d="M0 1 H400"/></svg>
-    <h2 class="font-display text-3xl md:text-4xl font-bold text-navy-800">El Taller</h2>
-    <p class="text-sm text-navy-900/55 mb-6">Oficio, paciencia y materiales de primera.</p>
-
-    <div class="grid gap-6 md:grid-cols-5 items-center mb-10">
-      <div class="md:col-span-2">
-        <div class="capitone aspect-[4/5] rounded-2xl grid place-items-center border border-navy-800/5 shadow-sm">
-          <svg class="w-24 h-24 opacity-30" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+  <p id="catCount" class="text-xs text-navy-900/45 mb-3">28 de 28 trabajos</p>
+  <div id="gridCatalogo" class="grid grid-cols-2 lg:grid-cols-3 gap-4">
+      <article class="card prod bg-white rounded-2xl overflow-hidden shadow-sm border border-navy-800/5" data-cat="Sofá" data-precio="210000" data-oferta="0">
+        <span class="shine"></span>
+        <div class="relative aspect-[4/3] overflow-hidden bg-navy-100">
+          <div class="capitone w-full h-full grid place-items-center">
+          <svg class="w-16 h-16 opacity-25" viewBox="0 0 100 100" fill="none" aria-hidden="true">
             <path d="M62 22 L84 78 L74 78 L69.5 66 L54.5 66 L50 78 L40 78 L62 22 Z M57.5 58 L66.5 58 L62 45.5 L57.5 58 Z" fill="#5FA3DC"/>
             <path d="M10 78 L10 22 L22 22 L36 52 L50 22 L62 22 L62 78 L52 78 L52 40 L39.5 67 L32.5 67 L20 40 L20 78 Z" fill="#fff"/>
           </svg>
         </div>
-      </div>
-      <div class="md:col-span-3 space-y-3.5 text-sm text-navy-900/70 leading-relaxed">
-        <p>Tapicería Miguel Ángel nació hace más de veinte años en un taller chico de Córdoba, con una máquina de coser y la idea de que un mueble bien hecho no se tira: se restaura.</p>
-        <p>Nos especializamos en restauración de piezas antiguas, tapizado a medida y trabajos donde el detalle importa: capitoné, tachas, resortes atados a mano y terminaciones cosidas.</p>
-        <div class="flex flex-wrap gap-2 pt-1">
-          <span class="text-[11px] font-semibold text-navy-800 bg-navy-100 border border-sky-300/40 px-3 py-1.5 rounded-full">+20 años de oficio</span>
-          <span class="text-[11px] font-semibold text-navy-800 bg-navy-100 border border-sky-300/40 px-3 py-1.5 rounded-full">Trabajo artesanal</span>
-          <span class="text-[11px] font-semibold text-navy-800 bg-navy-100 border border-sky-300/40 px-3 py-1.5 rounded-full">Telas de primera</span>
-          <span class="text-[11px] font-semibold text-navy-800 bg-navy-100 border border-sky-300/40 px-3 py-1.5 rounded-full">Presupuesto sin cargo</span>
         </div>
-      </div>
-    </div>
+        <div class="p-3">
+          <span class="text-[10px] uppercase tracking-wider text-sky-500 font-bold">Sofá</span>
+          <h3 class="font-semibold text-sm leading-snug mt-0.5 mb-2 text-navy-800">Sofá 2 Cuerpos</h3>
+          <div class="flex items-center justify-between gap-2">
+            <span class="font-display font-bold text-lg text-navy-800">$210.000</span>
+            <a href="https://wa.me/5493512043164?text=Hola%21%20Me%20interesa%3A%20%2ASof%C3%A1%202%20Cuerpos%2A%20%28Sof%C3%A1%29%20%E2%80%94%20%24210.000.%20%C2%BFMe%20pas%C3%A1s%20m%C3%A1s%20info%3F" target="_blank" rel="noopener" class="text-xs bg-navy-800 hover:bg-navy-600 text-white px-3 py-1.5 rounded-lg transition shrink-0">Consultar</a>
+          </div>
+        </div>
+      </article>
+      <article class="card prod bg-white rounded-2xl overflow-hidden shadow-sm border border-navy-800/5" data-cat="Sofá" data-precio="320000" data-oferta="1">
+        <span class="shine"></span>
+        <div class="relative aspect-[4/3] overflow-hidden bg-navy-100">
+          <div class="capitone w-full h-full grid place-items-center">
+          <svg class="w-16 h-16 opacity-25" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+            <path d="M62 22 L84 78 L74 78 L69.5 66 L54.5 66 L50 78 L40 78 L62 22 Z M57.5 58 L66.5 58 L62 45.5 L57.5 58 Z" fill="#5FA3DC"/>
+            <path d="M10 78 L10 22 L22 22 L36 52 L50 22 L62 22 L62 78 L52 78 L52 40 L39.5 67 L32.5 67 L20 40 L20 78 Z" fill="#fff"/>
+          </svg>
+        </div>
+        <span class="absolute top-2 left-2 bg-red-600 text-white text-[10px] font-bold px-2 py-1 rounded-full z-[3]">OFERTA</span>
+        </div>
+        <div class="p-3">
+          <span class="text-[10px] uppercase tracking-wider text-sky-500 font-bold">Sofá</span>
+          <h3 class="font-semibold text-sm leading-snug mt-0.5 mb-2 text-navy-800">Sofá 3 Cuerpos</h3>
+          <div class="flex items-center justify-between gap-2">
+            <span class="font-display font-bold text-lg text-red-600">$320.000</span>
+            <a href="https://wa.me/5493512043164?text=Hola%21%20Me%20interesa%3A%20%2ASof%C3%A1%203%20Cuerpos%2A%20%28Sof%C3%A1%29%20%E2%80%94%20%24320.000.%20%C2%BFMe%20pas%C3%A1s%20m%C3%A1s%20info%3F" target="_blank" rel="noopener" class="text-xs bg-navy-800 hover:bg-navy-600 text-white px-3 py-1.5 rounded-lg transition shrink-0">Consultar</a>
+          </div>
+        </div>
+      </article>
+      <article class="card prod bg-white rounded-2xl overflow-hidden shadow-sm border border-navy-800/5" data-cat="Sofá" data-precio="450000" data-oferta="0">
+        <span class="shine"></span>
+        <div class="relative aspect-[4/3] overflow-hidden bg-navy-100">
+          <div class="capitone w-full h-full grid place-items-center">
+          <svg class="w-16 h-16 opacity-25" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+            <path d="M62 22 L84 78 L74 78 L69.5 66 L54.5 66 L50 78 L40 78 L62 22 Z M57.5 58 L66.5 58 L62 45.5 L57.5 58 Z" fill="#5FA3DC"/>
+            <path d="M10 78 L10 22 L22 22 L36 52 L50 22 L62 22 L62 78 L52 78 L52 40 L39.5 67 L32.5 67 L20 40 L20 78 Z" fill="#fff"/>
+          </svg>
+        </div>
+        </div>
+        <div class="p-3">
+          <span class="text-[10px] uppercase tracking-wider text-sky-500 font-bold">Sofá</span>
+          <h3 class="font-semibold text-sm leading-snug mt-0.5 mb-2 text-navy-800">Sofá Esquinero en L</h3>
+          <div class="flex items-center justify-between gap-2">
+            <span class="font-display font-bold text-lg text-navy-800">$450.000</span>
+            <a href="https://wa.me/5493512043164?text=Hola%21%20Me%20interesa%3A%20%2ASof%C3%A1%20Esquinero%20en%20L%2A%20%28Sof%C3%A1%29%20%E2%80%94%20%24450.000.%20%C2%BFMe%20pas%C3%A1s%20m%C3%A1s%20info%3F" target="_blank" rel="noopener" class="text-xs bg-navy-800 hover:bg-navy-600 text-white px-3 py-1.5 rounded-lg transition shrink-0">Consultar</a>
+          </div>
+        </div>
+      </article>
+      <article class="card prod bg-white rounded-2xl overflow-hidden shadow-sm border border-navy-800/5" data-cat="Sofá" data-precio="285000" data-oferta="0">
+        <span class="shine"></span>
+        <div class="relative aspect-[4/3] overflow-hidden bg-navy-100">
+          <div class="capitone w-full h-full grid place-items-center">
+          <svg class="w-16 h-16 opacity-25" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+            <path d="M62 22 L84 78 L74 78 L69.5 66 L54.5 66 L50 78 L40 78 L62 22 Z M57.5 58 L66.5 58 L62 45.5 L57.5 58 Z" fill="#5FA3DC"/>
+            <path d="M10 78 L10 22 L22 22 L36 52 L50 22 L62 22 L62 78 L52 78 L52 40 L39.5 67 L32.5 67 L20 40 L20 78 Z" fill="#fff"/>
+          </svg>
+        </div>
+        </div>
+        <div class="p-3">
+          <span class="text-[10px] uppercase tracking-wider text-sky-500 font-bold">Sofá</span>
+          <h3 class="font-semibold text-sm leading-snug mt-0.5 mb-2 text-navy-800">Sofá Cama</h3>
+          <div class="flex items-center justify-between gap-2">
+            <span class="font-display font-bold text-lg text-navy-800">$285.000</span>
+            <a href="https://wa.me/5493512043164?text=Hola%21%20Me%20interesa%3A%20%2ASof%C3%A1%20Cama%2A%20%28Sof%C3%A1%29%20%E2%80%94%20%24285.000.%20%C2%BFMe%20pas%C3%A1s%20m%C3%A1s%20info%3F" target="_blank" rel="noopener" class="text-xs bg-navy-800 hover:bg-navy-600 text-white px-3 py-1.5 rounded-lg transition shrink-0">Consultar</a>
+          </div>
+        </div>
+      </article>
+      <article class="card prod bg-white rounded-2xl overflow-hidden shadow-sm border border-navy-800/5" data-cat="Sofá" data-precio="520000" data-oferta="0">
+        <span class="shine"></span>
+        <div class="relative aspect-[4/3] overflow-hidden bg-navy-100">
+          <div class="capitone w-full h-full grid place-items-center">
+          <svg class="w-16 h-16 opacity-25" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+            <path d="M62 22 L84 78 L74 78 L69.5 66 L54.5 66 L50 78 L40 78 L62 22 Z M57.5 58 L66.5 58 L62 45.5 L57.5 58 Z" fill="#5FA3DC"/>
+            <path d="M10 78 L10 22 L22 22 L36 52 L50 22 L62 22 L62 78 L52 78 L52 40 L39.5 67 L32.5 67 L20 40 L20 78 Z" fill="#fff"/>
+          </svg>
+        </div>
+        </div>
+        <div class="p-3">
+          <span class="text-[10px] uppercase tracking-wider text-sky-500 font-bold">Sofá</span>
+          <h3 class="font-semibold text-sm leading-snug mt-0.5 mb-2 text-navy-800">Sofá Chesterfield Capitoné</h3>
+          <div class="flex items-center justify-between gap-2">
+            <span class="font-display font-bold text-lg text-navy-800">$520.000</span>
+            <a href="https://wa.me/5493512043164?text=Hola%21%20Me%20interesa%3A%20%2ASof%C3%A1%20Chesterfield%20Capiton%C3%A9%2A%20%28Sof%C3%A1%29%20%E2%80%94%20%24520.000.%20%C2%BFMe%20pas%C3%A1s%20m%C3%A1s%20info%3F" target="_blank" rel="noopener" class="text-xs bg-navy-800 hover:bg-navy-600 text-white px-3 py-1.5 rounded-lg transition shrink-0">Consultar</a>
+          </div>
+        </div>
+      </article>
+      <article class="card prod bg-white rounded-2xl overflow-hidden shadow-sm border border-navy-800/5" data-cat="Sofá" data-precio="195000" data-oferta="0">
+        <span class="shine"></span>
+        <div class="relative aspect-[4/3] overflow-hidden bg-navy-100">
+          <div class="capitone w-full h-full grid place-items-center">
+          <svg class="w-16 h-16 opacity-25" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+            <path d="M62 22 L84 78 L74 78 L69.5 66 L54.5 66 L50 78 L40 78 L62 22 Z M57.5 58 L66.5 58 L62 45.5 L57.5 58 Z" fill="#5FA3DC"/>
+            <path d="M10 78 L10 22 L22 22 L36 52 L50 22 L62 22 L62 78 L52 78 L52 40 L39.5 67 L32.5 67 L20 40 L20 78 Z" fill="#fff"/>
+          </svg>
+        </div>
+        </div>
+        <div class="p-3">
+          <span class="text-[10px] uppercase tracking-wider text-sky-500 font-bold">Sofá</span>
+          <h3 class="font-semibold text-sm leading-snug mt-0.5 mb-2 text-navy-800">Diván / Chaise Longue</h3>
+          <div class="flex items-center justify-between gap-2">
+            <span class="font-display font-bold text-lg text-navy-800">$195.000</span>
+            <a href="https://wa.me/5493512043164?text=Hola%21%20Me%20interesa%3A%20%2ADiv%C3%A1n%20/%20Chaise%20Longue%2A%20%28Sof%C3%A1%29%20%E2%80%94%20%24195.000.%20%C2%BFMe%20pas%C3%A1s%20m%C3%A1s%20info%3F" target="_blank" rel="noopener" class="text-xs bg-navy-800 hover:bg-navy-600 text-white px-3 py-1.5 rounded-lg transition shrink-0">Consultar</a>
+          </div>
+        </div>
+      </article>
+      <article class="card prod bg-white rounded-2xl overflow-hidden shadow-sm border border-navy-800/5" data-cat="Sillón" data-precio="120000" data-oferta="0">
+        <span class="shine"></span>
+        <div class="relative aspect-[4/3] overflow-hidden bg-navy-100">
+          <div class="capitone w-full h-full grid place-items-center">
+          <svg class="w-16 h-16 opacity-25" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+            <path d="M62 22 L84 78 L74 78 L69.5 66 L54.5 66 L50 78 L40 78 L62 22 Z M57.5 58 L66.5 58 L62 45.5 L57.5 58 Z" fill="#5FA3DC"/>
+            <path d="M10 78 L10 22 L22 22 L36 52 L50 22 L62 22 L62 78 L52 78 L52 40 L39.5 67 L32.5 67 L20 40 L20 78 Z" fill="#fff"/>
+          </svg>
+        </div>
+        </div>
+        <div class="p-3">
+          <span class="text-[10px] uppercase tracking-wider text-sky-500 font-bold">Sillón</span>
+          <h3 class="font-semibold text-sm leading-snug mt-0.5 mb-2 text-navy-800">Sillón Individual Clásico</h3>
+          <div class="flex items-center justify-between gap-2">
+            <span class="font-display font-bold text-lg text-navy-800">$120.000</span>
+            <a href="https://wa.me/5493512043164?text=Hola%21%20Me%20interesa%3A%20%2ASill%C3%B3n%20Individual%20Cl%C3%A1sico%2A%20%28Sill%C3%B3n%29%20%E2%80%94%20%24120.000.%20%C2%BFMe%20pas%C3%A1s%20m%C3%A1s%20info%3F" target="_blank" rel="noopener" class="text-xs bg-navy-800 hover:bg-navy-600 text-white px-3 py-1.5 rounded-lg transition shrink-0">Consultar</a>
+          </div>
+        </div>
+      </article>
+      <article class="card prod bg-white rounded-2xl overflow-hidden shadow-sm border border-navy-800/5" data-cat="Sillón" data-precio="185000" data-oferta="0">
+        <span class="shine"></span>
+        <div class="relative aspect-[4/3] overflow-hidden bg-navy-100">
+          <div class="capitone w-full h-full grid place-items-center">
+          <svg class="w-16 h-16 opacity-25" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+            <path d="M62 22 L84 78 L74 78 L69.5 66 L54.5 66 L50 78 L40 78 L62 22 Z M57.5 58 L66.5 58 L62 45.5 L57.5 58 Z" fill="#5FA3DC"/>
+            <path d="M10 78 L10 22 L22 22 L36 52 L50 22 L62 22 L62 78 L52 78 L52 40 L39.5 67 L32.5 67 L20 40 L20 78 Z" fill="#fff"/>
+          </svg>
+        </div>
+        </div>
+        <div class="p-3">
+          <span class="text-[10px] uppercase tracking-wider text-sky-500 font-bold">Sillón</span>
+          <h3 class="font-semibold text-sm leading-snug mt-0.5 mb-2 text-navy-800">Sillón Bergère Restaurado</h3>
+          <div class="flex items-center justify-between gap-2">
+            <span class="font-display font-bold text-lg text-navy-800">$185.000</span>
+            <a href="https://wa.me/5493512043164?text=Hola%21%20Me%20interesa%3A%20%2ASill%C3%B3n%20Berg%C3%A8re%20Restaurado%2A%20%28Sill%C3%B3n%29%20%E2%80%94%20%24185.000.%20%C2%BFMe%20pas%C3%A1s%20m%C3%A1s%20info%3F" target="_blank" rel="noopener" class="text-xs bg-navy-800 hover:bg-navy-600 text-white px-3 py-1.5 rounded-lg transition shrink-0">Consultar</a>
+          </div>
+        </div>
+      </article>
+      <article class="card prod bg-white rounded-2xl overflow-hidden shadow-sm border border-navy-800/5" data-cat="Sillón" data-precio="135000" data-oferta="1">
+        <span class="shine"></span>
+        <div class="relative aspect-[4/3] overflow-hidden bg-navy-100">
+          <div class="capitone w-full h-full grid place-items-center">
+          <svg class="w-16 h-16 opacity-25" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+            <path d="M62 22 L84 78 L74 78 L69.5 66 L54.5 66 L50 78 L40 78 L62 22 Z M57.5 58 L66.5 58 L62 45.5 L57.5 58 Z" fill="#5FA3DC"/>
+            <path d="M10 78 L10 22 L22 22 L36 52 L50 22 L62 22 L62 78 L52 78 L52 40 L39.5 67 L32.5 67 L20 40 L20 78 Z" fill="#fff"/>
+          </svg>
+        </div>
+        <span class="absolute top-2 left-2 bg-red-600 text-white text-[10px] font-bold px-2 py-1 rounded-full z-[3]">OFERTA</span>
+        </div>
+        <div class="p-3">
+          <span class="text-[10px] uppercase tracking-wider text-sky-500 font-bold">Sillón</span>
+          <h3 class="font-semibold text-sm leading-snug mt-0.5 mb-2 text-navy-800">Butaca de Living</h3>
+          <div class="flex items-center justify-between gap-2">
+            <span class="font-display font-bold text-lg text-red-600">$135.000</span>
+            <a href="https://wa.me/5493512043164?text=Hola%21%20Me%20interesa%3A%20%2AButaca%20de%20Living%2A%20%28Sill%C3%B3n%29%20%E2%80%94%20%24135.000.%20%C2%BFMe%20pas%C3%A1s%20m%C3%A1s%20info%3F" target="_blank" rel="noopener" class="text-xs bg-navy-800 hover:bg-navy-600 text-white px-3 py-1.5 rounded-lg transition shrink-0">Consultar</a>
+          </div>
+        </div>
+      </article>
+      <article class="card prod bg-white rounded-2xl overflow-hidden shadow-sm border border-navy-800/5" data-cat="Sillón" data-precio="175000" data-oferta="0">
+        <span class="shine"></span>
+        <div class="relative aspect-[4/3] overflow-hidden bg-navy-100">
+          <div class="capitone w-full h-full grid place-items-center">
+          <svg class="w-16 h-16 opacity-25" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+            <path d="M62 22 L84 78 L74 78 L69.5 66 L54.5 66 L50 78 L40 78 L62 22 Z M57.5 58 L66.5 58 L62 45.5 L57.5 58 Z" fill="#5FA3DC"/>
+            <path d="M10 78 L10 22 L22 22 L36 52 L50 22 L62 22 L62 78 L52 78 L52 40 L39.5 67 L32.5 67 L20 40 L20 78 Z" fill="#fff"/>
+          </svg>
+        </div>
+        </div>
+        <div class="p-3">
+          <span class="text-[10px] uppercase tracking-wider text-sky-500 font-bold">Sillón</span>
+          <h3 class="font-semibold text-sm leading-snug mt-0.5 mb-2 text-navy-800">Sillón Reclinable</h3>
+          <div class="flex items-center justify-between gap-2">
+            <span class="font-display font-bold text-lg text-navy-800">$175.000</span>
+            <a href="https://wa.me/5493512043164?text=Hola%21%20Me%20interesa%3A%20%2ASill%C3%B3n%20Reclinable%2A%20%28Sill%C3%B3n%29%20%E2%80%94%20%24175.000.%20%C2%BFMe%20pas%C3%A1s%20m%C3%A1s%20info%3F" target="_blank" rel="noopener" class="text-xs bg-navy-800 hover:bg-navy-600 text-white px-3 py-1.5 rounded-lg transition shrink-0">Consultar</a>
+          </div>
+        </div>
+      </article>
+      <article class="card prod bg-white rounded-2xl overflow-hidden shadow-sm border border-navy-800/5" data-cat="Sillón" data-precio="165000" data-oferta="0">
+        <span class="shine"></span>
+        <div class="relative aspect-[4/3] overflow-hidden bg-navy-100">
+          <div class="capitone w-full h-full grid place-items-center">
+          <svg class="w-16 h-16 opacity-25" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+            <path d="M62 22 L84 78 L74 78 L69.5 66 L54.5 66 L50 78 L40 78 L62 22 Z M57.5 58 L66.5 58 L62 45.5 L57.5 58 Z" fill="#5FA3DC"/>
+            <path d="M10 78 L10 22 L22 22 L36 52 L50 22 L62 22 L62 78 L52 78 L52 40 L39.5 67 L32.5 67 L20 40 L20 78 Z" fill="#fff"/>
+          </svg>
+        </div>
+        </div>
+        <div class="p-3">
+          <span class="text-[10px] uppercase tracking-wider text-sky-500 font-bold">Sillón</span>
+          <h3 class="font-semibold text-sm leading-snug mt-0.5 mb-2 text-navy-800">Sillón Orejero</h3>
+          <div class="flex items-center justify-between gap-2">
+            <span class="font-display font-bold text-lg text-navy-800">$165.000</span>
+            <a href="https://wa.me/5493512043164?text=Hola%21%20Me%20interesa%3A%20%2ASill%C3%B3n%20Orejero%2A%20%28Sill%C3%B3n%29%20%E2%80%94%20%24165.000.%20%C2%BFMe%20pas%C3%A1s%20m%C3%A1s%20info%3F" target="_blank" rel="noopener" class="text-xs bg-navy-800 hover:bg-navy-600 text-white px-3 py-1.5 rounded-lg transition shrink-0">Consultar</a>
+          </div>
+        </div>
+      </article>
+      <article class="card prod bg-white rounded-2xl overflow-hidden shadow-sm border border-navy-800/5" data-cat="Sillón" data-precio="145000" data-oferta="0">
+        <span class="shine"></span>
+        <div class="relative aspect-[4/3] overflow-hidden bg-navy-100">
+          <div class="capitone w-full h-full grid place-items-center">
+          <svg class="w-16 h-16 opacity-25" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+            <path d="M62 22 L84 78 L74 78 L69.5 66 L54.5 66 L50 78 L40 78 L62 22 Z M57.5 58 L66.5 58 L62 45.5 L57.5 58 Z" fill="#5FA3DC"/>
+            <path d="M10 78 L10 22 L22 22 L36 52 L50 22 L62 22 L62 78 L52 78 L52 40 L39.5 67 L32.5 67 L20 40 L20 78 Z" fill="#fff"/>
+          </svg>
+        </div>
+        </div>
+        <div class="p-3">
+          <span class="text-[10px] uppercase tracking-wider text-sky-500 font-bold">Sillón</span>
+          <h3 class="font-semibold text-sm leading-snug mt-0.5 mb-2 text-navy-800">Mecedora / Sillón Hamaca</h3>
+          <div class="flex items-center justify-between gap-2">
+            <span class="font-display font-bold text-lg text-navy-800">$145.000</span>
+            <a href="https://wa.me/5493512043164?text=Hola%21%20Me%20interesa%3A%20%2AMecedora%20/%20Sill%C3%B3n%20Hamaca%2A%20%28Sill%C3%B3n%29%20%E2%80%94%20%24145.000.%20%C2%BFMe%20pas%C3%A1s%20m%C3%A1s%20info%3F" target="_blank" rel="noopener" class="text-xs bg-navy-800 hover:bg-navy-600 text-white px-3 py-1.5 rounded-lg transition shrink-0">Consultar</a>
+          </div>
+        </div>
+      </article>
+      <article class="card prod bg-white rounded-2xl overflow-hidden shadow-sm border border-navy-800/5" data-cat="Sillón" data-precio="155000" data-oferta="1">
+        <span class="shine"></span>
+        <div class="relative aspect-[4/3] overflow-hidden bg-navy-100">
+          <div class="capitone w-full h-full grid place-items-center">
+          <svg class="w-16 h-16 opacity-25" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+            <path d="M62 22 L84 78 L74 78 L69.5 66 L54.5 66 L50 78 L40 78 L62 22 Z M57.5 58 L66.5 58 L62 45.5 L57.5 58 Z" fill="#5FA3DC"/>
+            <path d="M10 78 L10 22 L22 22 L36 52 L50 22 L62 22 L62 78 L52 78 L52 40 L39.5 67 L32.5 67 L20 40 L20 78 Z" fill="#fff"/>
+          </svg>
+        </div>
+        <span class="absolute top-2 left-2 bg-red-600 text-white text-[10px] font-bold px-2 py-1 rounded-full z-[3]">OFERTA</span>
+        </div>
+        <div class="p-3">
+          <span class="text-[10px] uppercase tracking-wider text-sky-500 font-bold">Sillón</span>
+          <h3 class="font-semibold text-sm leading-snug mt-0.5 mb-2 text-navy-800">Sillón Escandinavo Retapizado</h3>
+          <div class="flex items-center justify-between gap-2">
+            <span class="font-display font-bold text-lg text-red-600">$155.000</span>
+            <a href="https://wa.me/5493512043164?text=Hola%21%20Me%20interesa%3A%20%2ASill%C3%B3n%20Escandinavo%20Retapizado%2A%20%28Sill%C3%B3n%29%20%E2%80%94%20%24155.000.%20%C2%BFMe%20pas%C3%A1s%20m%C3%A1s%20info%3F" target="_blank" rel="noopener" class="text-xs bg-navy-800 hover:bg-navy-600 text-white px-3 py-1.5 rounded-lg transition shrink-0">Consultar</a>
+          </div>
+        </div>
+      </article>
+      <article class="card prod bg-white rounded-2xl overflow-hidden shadow-sm border border-navy-800/5" data-cat="Silla" data-precio="45000" data-oferta="0">
+        <span class="shine"></span>
+        <div class="relative aspect-[4/3] overflow-hidden bg-navy-100">
+          <div class="capitone w-full h-full grid place-items-center">
+          <svg class="w-16 h-16 opacity-25" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+            <path d="M62 22 L84 78 L74 78 L69.5 66 L54.5 66 L50 78 L40 78 L62 22 Z M57.5 58 L66.5 58 L62 45.5 L57.5 58 Z" fill="#5FA3DC"/>
+            <path d="M10 78 L10 22 L22 22 L36 52 L50 22 L62 22 L62 78 L52 78 L52 40 L39.5 67 L32.5 67 L20 40 L20 78 Z" fill="#fff"/>
+          </svg>
+        </div>
+        </div>
+        <div class="p-3">
+          <span class="text-[10px] uppercase tracking-wider text-sky-500 font-bold">Silla</span>
+          <h3 class="font-semibold text-sm leading-snug mt-0.5 mb-2 text-navy-800">Silla de Comedor (unidad)</h3>
+          <div class="flex items-center justify-between gap-2">
+            <span class="font-display font-bold text-lg text-navy-800">$45.000</span>
+            <a href="https://wa.me/5493512043164?text=Hola%21%20Me%20interesa%3A%20%2ASilla%20de%20Comedor%20%28unidad%29%2A%20%28Silla%29%20%E2%80%94%20%2445.000.%20%C2%BFMe%20pas%C3%A1s%20m%C3%A1s%20info%3F" target="_blank" rel="noopener" class="text-xs bg-navy-800 hover:bg-navy-600 text-white px-3 py-1.5 rounded-lg transition shrink-0">Consultar</a>
+          </div>
+        </div>
+      </article>
+      <article class="card prod bg-white rounded-2xl overflow-hidden shadow-sm border border-navy-800/5" data-cat="Silla" data-precio="165000" data-oferta="0">
+        <span class="shine"></span>
+        <div class="relative aspect-[4/3] overflow-hidden bg-navy-100">
+          <div class="capitone w-full h-full grid place-items-center">
+          <svg class="w-16 h-16 opacity-25" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+            <path d="M62 22 L84 78 L74 78 L69.5 66 L54.5 66 L50 78 L40 78 L62 22 Z M57.5 58 L66.5 58 L62 45.5 L57.5 58 Z" fill="#5FA3DC"/>
+            <path d="M10 78 L10 22 L22 22 L36 52 L50 22 L62 22 L62 78 L52 78 L52 40 L39.5 67 L32.5 67 L20 40 L20 78 Z" fill="#fff"/>
+          </svg>
+        </div>
+        </div>
+        <div class="p-3">
+          <span class="text-[10px] uppercase tracking-wider text-sky-500 font-bold">Silla</span>
+          <h3 class="font-semibold text-sm leading-snug mt-0.5 mb-2 text-navy-800">Juego 4 Sillas de Comedor</h3>
+          <div class="flex items-center justify-between gap-2">
+            <span class="font-display font-bold text-lg text-navy-800">$165.000</span>
+            <a href="https://wa.me/5493512043164?text=Hola%21%20Me%20interesa%3A%20%2AJuego%204%20Sillas%20de%20Comedor%2A%20%28Silla%29%20%E2%80%94%20%24165.000.%20%C2%BFMe%20pas%C3%A1s%20m%C3%A1s%20info%3F" target="_blank" rel="noopener" class="text-xs bg-navy-800 hover:bg-navy-600 text-white px-3 py-1.5 rounded-lg transition shrink-0">Consultar</a>
+          </div>
+        </div>
+      </article>
+      <article class="card prod bg-white rounded-2xl overflow-hidden shadow-sm border border-navy-800/5" data-cat="Silla" data-precio="240000" data-oferta="1">
+        <span class="shine"></span>
+        <div class="relative aspect-[4/3] overflow-hidden bg-navy-100">
+          <div class="capitone w-full h-full grid place-items-center">
+          <svg class="w-16 h-16 opacity-25" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+            <path d="M62 22 L84 78 L74 78 L69.5 66 L54.5 66 L50 78 L40 78 L62 22 Z M57.5 58 L66.5 58 L62 45.5 L57.5 58 Z" fill="#5FA3DC"/>
+            <path d="M10 78 L10 22 L22 22 L36 52 L50 22 L62 22 L62 78 L52 78 L52 40 L39.5 67 L32.5 67 L20 40 L20 78 Z" fill="#fff"/>
+          </svg>
+        </div>
+        <span class="absolute top-2 left-2 bg-red-600 text-white text-[10px] font-bold px-2 py-1 rounded-full z-[3]">OFERTA</span>
+        </div>
+        <div class="p-3">
+          <span class="text-[10px] uppercase tracking-wider text-sky-500 font-bold">Silla</span>
+          <h3 class="font-semibold text-sm leading-snug mt-0.5 mb-2 text-navy-800">Juego 6 Sillas de Comedor</h3>
+          <div class="flex items-center justify-between gap-2">
+            <span class="font-display font-bold text-lg text-red-600">$240.000</span>
+            <a href="https://wa.me/5493512043164?text=Hola%21%20Me%20interesa%3A%20%2AJuego%206%20Sillas%20de%20Comedor%2A%20%28Silla%29%20%E2%80%94%20%24240.000.%20%C2%BFMe%20pas%C3%A1s%20m%C3%A1s%20info%3F" target="_blank" rel="noopener" class="text-xs bg-navy-800 hover:bg-navy-600 text-white px-3 py-1.5 rounded-lg transition shrink-0">Consultar</a>
+          </div>
+        </div>
+      </article>
+      <article class="card prod bg-white rounded-2xl overflow-hidden shadow-sm border border-navy-800/5" data-cat="Silla" data-precio="62000" data-oferta="1">
+        <span class="shine"></span>
+        <div class="relative aspect-[4/3] overflow-hidden bg-navy-100">
+          <div class="capitone w-full h-full grid place-items-center">
+          <svg class="w-16 h-16 opacity-25" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+            <path d="M62 22 L84 78 L74 78 L69.5 66 L54.5 66 L50 78 L40 78 L62 22 Z M57.5 58 L66.5 58 L62 45.5 L57.5 58 Z" fill="#5FA3DC"/>
+            <path d="M10 78 L10 22 L22 22 L36 52 L50 22 L62 22 L62 78 L52 78 L52 40 L39.5 67 L32.5 67 L20 40 L20 78 Z" fill="#fff"/>
+          </svg>
+        </div>
+        <span class="absolute top-2 left-2 bg-red-600 text-white text-[10px] font-bold px-2 py-1 rounded-full z-[3]">OFERTA</span>
+        </div>
+        <div class="p-3">
+          <span class="text-[10px] uppercase tracking-wider text-sky-500 font-bold">Silla</span>
+          <h3 class="font-semibold text-sm leading-snug mt-0.5 mb-2 text-navy-800">Silla Oficina Ejecutiva</h3>
+          <div class="flex items-center justify-between gap-2">
+            <span class="font-display font-bold text-lg text-red-600">$62.000</span>
+            <a href="https://wa.me/5493512043164?text=Hola%21%20Me%20interesa%3A%20%2ASilla%20Oficina%20Ejecutiva%2A%20%28Silla%29%20%E2%80%94%20%2462.000.%20%C2%BFMe%20pas%C3%A1s%20m%C3%A1s%20info%3F" target="_blank" rel="noopener" class="text-xs bg-navy-800 hover:bg-navy-600 text-white px-3 py-1.5 rounded-lg transition shrink-0">Consultar</a>
+          </div>
+        </div>
+      </article>
+      <article class="card prod bg-white rounded-2xl overflow-hidden shadow-sm border border-navy-800/5" data-cat="Silla" data-precio="58000" data-oferta="0">
+        <span class="shine"></span>
+        <div class="relative aspect-[4/3] overflow-hidden bg-navy-100">
+          <div class="capitone w-full h-full grid place-items-center">
+          <svg class="w-16 h-16 opacity-25" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+            <path d="M62 22 L84 78 L74 78 L69.5 66 L54.5 66 L50 78 L40 78 L62 22 Z M57.5 58 L66.5 58 L62 45.5 L57.5 58 Z" fill="#5FA3DC"/>
+            <path d="M10 78 L10 22 L22 22 L36 52 L50 22 L62 22 L62 78 L52 78 L52 40 L39.5 67 L32.5 67 L20 40 L20 78 Z" fill="#fff"/>
+          </svg>
+        </div>
+        </div>
+        <div class="p-3">
+          <span class="text-[10px] uppercase tracking-wider text-sky-500 font-bold">Silla</span>
+          <h3 class="font-semibold text-sm leading-snug mt-0.5 mb-2 text-navy-800">Silla Thonet / Vienesa</h3>
+          <div class="flex items-center justify-between gap-2">
+            <span class="font-display font-bold text-lg text-navy-800">$58.000</span>
+            <a href="https://wa.me/5493512043164?text=Hola%21%20Me%20interesa%3A%20%2ASilla%20Thonet%20/%20Vienesa%2A%20%28Silla%29%20%E2%80%94%20%2458.000.%20%C2%BFMe%20pas%C3%A1s%20m%C3%A1s%20info%3F" target="_blank" rel="noopener" class="text-xs bg-navy-800 hover:bg-navy-600 text-white px-3 py-1.5 rounded-lg transition shrink-0">Consultar</a>
+          </div>
+        </div>
+      </article>
+      <article class="card prod bg-white rounded-2xl overflow-hidden shadow-sm border border-navy-800/5" data-cat="Silla" data-precio="52000" data-oferta="0">
+        <span class="shine"></span>
+        <div class="relative aspect-[4/3] overflow-hidden bg-navy-100">
+          <div class="capitone w-full h-full grid place-items-center">
+          <svg class="w-16 h-16 opacity-25" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+            <path d="M62 22 L84 78 L74 78 L69.5 66 L54.5 66 L50 78 L40 78 L62 22 Z M57.5 58 L66.5 58 L62 45.5 L57.5 58 Z" fill="#5FA3DC"/>
+            <path d="M10 78 L10 22 L22 22 L36 52 L50 22 L62 22 L62 78 L52 78 L52 40 L39.5 67 L32.5 67 L20 40 L20 78 Z" fill="#fff"/>
+          </svg>
+        </div>
+        </div>
+        <div class="p-3">
+          <span class="text-[10px] uppercase tracking-wider text-sky-500 font-bold">Silla</span>
+          <h3 class="font-semibold text-sm leading-snug mt-0.5 mb-2 text-navy-800">Banqueta Alta de Barra</h3>
+          <div class="flex items-center justify-between gap-2">
+            <span class="font-display font-bold text-lg text-navy-800">$52.000</span>
+            <a href="https://wa.me/5493512043164?text=Hola%21%20Me%20interesa%3A%20%2ABanqueta%20Alta%20de%20Barra%2A%20%28Silla%29%20%E2%80%94%20%2452.000.%20%C2%BFMe%20pas%C3%A1s%20m%C3%A1s%20info%3F" target="_blank" rel="noopener" class="text-xs bg-navy-800 hover:bg-navy-600 text-white px-3 py-1.5 rounded-lg transition shrink-0">Consultar</a>
+          </div>
+        </div>
+      </article>
+      <article class="card prod bg-white rounded-2xl overflow-hidden shadow-sm border border-navy-800/5" data-cat="Respaldo" data-precio="72000" data-oferta="0">
+        <span class="shine"></span>
+        <div class="relative aspect-[4/3] overflow-hidden bg-navy-100">
+          <div class="capitone w-full h-full grid place-items-center">
+          <svg class="w-16 h-16 opacity-25" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+            <path d="M62 22 L84 78 L74 78 L69.5 66 L54.5 66 L50 78 L40 78 L62 22 Z M57.5 58 L66.5 58 L62 45.5 L57.5 58 Z" fill="#5FA3DC"/>
+            <path d="M10 78 L10 22 L22 22 L36 52 L50 22 L62 22 L62 78 L52 78 L52 40 L39.5 67 L32.5 67 L20 40 L20 78 Z" fill="#fff"/>
+          </svg>
+        </div>
+        </div>
+        <div class="p-3">
+          <span class="text-[10px] uppercase tracking-wider text-sky-500 font-bold">Respaldo</span>
+          <h3 class="font-semibold text-sm leading-snug mt-0.5 mb-2 text-navy-800">Respaldo de Cama 1 Plaza</h3>
+          <div class="flex items-center justify-between gap-2">
+            <span class="font-display font-bold text-lg text-navy-800">$72.000</span>
+            <a href="https://wa.me/5493512043164?text=Hola%21%20Me%20interesa%3A%20%2ARespaldo%20de%20Cama%201%20Plaza%2A%20%28Respaldo%29%20%E2%80%94%20%2472.000.%20%C2%BFMe%20pas%C3%A1s%20m%C3%A1s%20info%3F" target="_blank" rel="noopener" class="text-xs bg-navy-800 hover:bg-navy-600 text-white px-3 py-1.5 rounded-lg transition shrink-0">Consultar</a>
+          </div>
+        </div>
+      </article>
+      <article class="card prod bg-white rounded-2xl overflow-hidden shadow-sm border border-navy-800/5" data-cat="Respaldo" data-precio="95000" data-oferta="0">
+        <span class="shine"></span>
+        <div class="relative aspect-[4/3] overflow-hidden bg-navy-100">
+          <div class="capitone w-full h-full grid place-items-center">
+          <svg class="w-16 h-16 opacity-25" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+            <path d="M62 22 L84 78 L74 78 L69.5 66 L54.5 66 L50 78 L40 78 L62 22 Z M57.5 58 L66.5 58 L62 45.5 L57.5 58 Z" fill="#5FA3DC"/>
+            <path d="M10 78 L10 22 L22 22 L36 52 L50 22 L62 22 L62 78 L52 78 L52 40 L39.5 67 L32.5 67 L20 40 L20 78 Z" fill="#fff"/>
+          </svg>
+        </div>
+        </div>
+        <div class="p-3">
+          <span class="text-[10px] uppercase tracking-wider text-sky-500 font-bold">Respaldo</span>
+          <h3 class="font-semibold text-sm leading-snug mt-0.5 mb-2 text-navy-800">Respaldo de Cama 2 Plazas</h3>
+          <div class="flex items-center justify-between gap-2">
+            <span class="font-display font-bold text-lg text-navy-800">$95.000</span>
+            <a href="https://wa.me/5493512043164?text=Hola%21%20Me%20interesa%3A%20%2ARespaldo%20de%20Cama%202%20Plazas%2A%20%28Respaldo%29%20%E2%80%94%20%2495.000.%20%C2%BFMe%20pas%C3%A1s%20m%C3%A1s%20info%3F" target="_blank" rel="noopener" class="text-xs bg-navy-800 hover:bg-navy-600 text-white px-3 py-1.5 rounded-lg transition shrink-0">Consultar</a>
+          </div>
+        </div>
+      </article>
+      <article class="card prod bg-white rounded-2xl overflow-hidden shadow-sm border border-navy-800/5" data-cat="Respaldo" data-precio="165000" data-oferta="1">
+        <span class="shine"></span>
+        <div class="relative aspect-[4/3] overflow-hidden bg-navy-100">
+          <div class="capitone w-full h-full grid place-items-center">
+          <svg class="w-16 h-16 opacity-25" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+            <path d="M62 22 L84 78 L74 78 L69.5 66 L54.5 66 L50 78 L40 78 L62 22 Z M57.5 58 L66.5 58 L62 45.5 L57.5 58 Z" fill="#5FA3DC"/>
+            <path d="M10 78 L10 22 L22 22 L36 52 L50 22 L62 22 L62 78 L52 78 L52 40 L39.5 67 L32.5 67 L20 40 L20 78 Z" fill="#fff"/>
+          </svg>
+        </div>
+        <span class="absolute top-2 left-2 bg-red-600 text-white text-[10px] font-bold px-2 py-1 rounded-full z-[3]">OFERTA</span>
+        </div>
+        <div class="p-3">
+          <span class="text-[10px] uppercase tracking-wider text-sky-500 font-bold">Respaldo</span>
+          <h3 class="font-semibold text-sm leading-snug mt-0.5 mb-2 text-navy-800">Respaldo Capitoné King</h3>
+          <div class="flex items-center justify-between gap-2">
+            <span class="font-display font-bold text-lg text-red-600">$165.000</span>
+            <a href="https://wa.me/5493512043164?text=Hola%21%20Me%20interesa%3A%20%2ARespaldo%20Capiton%C3%A9%20King%2A%20%28Respaldo%29%20%E2%80%94%20%24165.000.%20%C2%BFMe%20pas%C3%A1s%20m%C3%A1s%20info%3F" target="_blank" rel="noopener" class="text-xs bg-navy-800 hover:bg-navy-600 text-white px-3 py-1.5 rounded-lg transition shrink-0">Consultar</a>
+          </div>
+        </div>
+      </article>
+      <article class="card prod bg-white rounded-2xl overflow-hidden shadow-sm border border-navy-800/5" data-cat="Respaldo" data-precio="140000" data-oferta="0">
+        <span class="shine"></span>
+        <div class="relative aspect-[4/3] overflow-hidden bg-navy-100">
+          <div class="capitone w-full h-full grid place-items-center">
+          <svg class="w-16 h-16 opacity-25" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+            <path d="M62 22 L84 78 L74 78 L69.5 66 L54.5 66 L50 78 L40 78 L62 22 Z M57.5 58 L66.5 58 L62 45.5 L57.5 58 Z" fill="#5FA3DC"/>
+            <path d="M10 78 L10 22 L22 22 L36 52 L50 22 L62 22 L62 78 L52 78 L52 40 L39.5 67 L32.5 67 L20 40 L20 78 Z" fill="#fff"/>
+          </svg>
+        </div>
+        </div>
+        <div class="p-3">
+          <span class="text-[10px] uppercase tracking-wider text-sky-500 font-bold">Respaldo</span>
+          <h3 class="font-semibold text-sm leading-snug mt-0.5 mb-2 text-navy-800">Respaldo con Tachas a Medida</h3>
+          <div class="flex items-center justify-between gap-2">
+            <span class="font-display font-bold text-lg text-navy-800">$140.000</span>
+            <a href="https://wa.me/5493512043164?text=Hola%21%20Me%20interesa%3A%20%2ARespaldo%20con%20Tachas%20a%20Medida%2A%20%28Respaldo%29%20%E2%80%94%20%24140.000.%20%C2%BFMe%20pas%C3%A1s%20m%C3%A1s%20info%3F" target="_blank" rel="noopener" class="text-xs bg-navy-800 hover:bg-navy-600 text-white px-3 py-1.5 rounded-lg transition shrink-0">Consultar</a>
+          </div>
+        </div>
+      </article>
+      <article class="card prod bg-white rounded-2xl overflow-hidden shadow-sm border border-navy-800/5" data-cat="Puff" data-precio="38000" data-oferta="0">
+        <span class="shine"></span>
+        <div class="relative aspect-[4/3] overflow-hidden bg-navy-100">
+          <div class="capitone w-full h-full grid place-items-center">
+          <svg class="w-16 h-16 opacity-25" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+            <path d="M62 22 L84 78 L74 78 L69.5 66 L54.5 66 L50 78 L40 78 L62 22 Z M57.5 58 L66.5 58 L62 45.5 L57.5 58 Z" fill="#5FA3DC"/>
+            <path d="M10 78 L10 22 L22 22 L36 52 L50 22 L62 22 L62 78 L52 78 L52 40 L39.5 67 L32.5 67 L20 40 L20 78 Z" fill="#fff"/>
+          </svg>
+        </div>
+        </div>
+        <div class="p-3">
+          <span class="text-[10px] uppercase tracking-wider text-sky-500 font-bold">Puff</span>
+          <h3 class="font-semibold text-sm leading-snug mt-0.5 mb-2 text-navy-800">Puff Redondo a Medida</h3>
+          <div class="flex items-center justify-between gap-2">
+            <span class="font-display font-bold text-lg text-navy-800">$38.000</span>
+            <a href="https://wa.me/5493512043164?text=Hola%21%20Me%20interesa%3A%20%2APuff%20Redondo%20a%20Medida%2A%20%28Puff%29%20%E2%80%94%20%2438.000.%20%C2%BFMe%20pas%C3%A1s%20m%C3%A1s%20info%3F" target="_blank" rel="noopener" class="text-xs bg-navy-800 hover:bg-navy-600 text-white px-3 py-1.5 rounded-lg transition shrink-0">Consultar</a>
+          </div>
+        </div>
+      </article>
+      <article class="card prod bg-white rounded-2xl overflow-hidden shadow-sm border border-navy-800/5" data-cat="Puff" data-precio="46000" data-oferta="0">
+        <span class="shine"></span>
+        <div class="relative aspect-[4/3] overflow-hidden bg-navy-100">
+          <div class="capitone w-full h-full grid place-items-center">
+          <svg class="w-16 h-16 opacity-25" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+            <path d="M62 22 L84 78 L74 78 L69.5 66 L54.5 66 L50 78 L40 78 L62 22 Z M57.5 58 L66.5 58 L62 45.5 L57.5 58 Z" fill="#5FA3DC"/>
+            <path d="M10 78 L10 22 L22 22 L36 52 L50 22 L62 22 L62 78 L52 78 L52 40 L39.5 67 L32.5 67 L20 40 L20 78 Z" fill="#fff"/>
+          </svg>
+        </div>
+        </div>
+        <div class="p-3">
+          <span class="text-[10px] uppercase tracking-wider text-sky-500 font-bold">Puff</span>
+          <h3 class="font-semibold text-sm leading-snug mt-0.5 mb-2 text-navy-800">Puff Cuadrado con Tapa</h3>
+          <div class="flex items-center justify-between gap-2">
+            <span class="font-display font-bold text-lg text-navy-800">$46.000</span>
+            <a href="https://wa.me/5493512043164?text=Hola%21%20Me%20interesa%3A%20%2APuff%20Cuadrado%20con%20Tapa%2A%20%28Puff%29%20%E2%80%94%20%2446.000.%20%C2%BFMe%20pas%C3%A1s%20m%C3%A1s%20info%3F" target="_blank" rel="noopener" class="text-xs bg-navy-800 hover:bg-navy-600 text-white px-3 py-1.5 rounded-lg transition shrink-0">Consultar</a>
+          </div>
+        </div>
+      </article>
+      <article class="card prod bg-white rounded-2xl overflow-hidden shadow-sm border border-navy-800/5" data-cat="Puff" data-precio="68000" data-oferta="0">
+        <span class="shine"></span>
+        <div class="relative aspect-[4/3] overflow-hidden bg-navy-100">
+          <div class="capitone w-full h-full grid place-items-center">
+          <svg class="w-16 h-16 opacity-25" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+            <path d="M62 22 L84 78 L74 78 L69.5 66 L54.5 66 L50 78 L40 78 L62 22 Z M57.5 58 L66.5 58 L62 45.5 L57.5 58 Z" fill="#5FA3DC"/>
+            <path d="M10 78 L10 22 L22 22 L36 52 L50 22 L62 22 L62 78 L52 78 L52 40 L39.5 67 L32.5 67 L20 40 L20 78 Z" fill="#fff"/>
+          </svg>
+        </div>
+        </div>
+        <div class="p-3">
+          <span class="text-[10px] uppercase tracking-wider text-sky-500 font-bold">Puff</span>
+          <h3 class="font-semibold text-sm leading-snug mt-0.5 mb-2 text-navy-800">Banqueta de Pie de Cama</h3>
+          <div class="flex items-center justify-between gap-2">
+            <span class="font-display font-bold text-lg text-navy-800">$68.000</span>
+            <a href="https://wa.me/5493512043164?text=Hola%21%20Me%20interesa%3A%20%2ABanqueta%20de%20Pie%20de%20Cama%2A%20%28Puff%29%20%E2%80%94%20%2468.000.%20%C2%BFMe%20pas%C3%A1s%20m%C3%A1s%20info%3F" target="_blank" rel="noopener" class="text-xs bg-navy-800 hover:bg-navy-600 text-white px-3 py-1.5 rounded-lg transition shrink-0">Consultar</a>
+          </div>
+        </div>
+      </article>
+      <article class="card prod bg-white rounded-2xl overflow-hidden shadow-sm border border-navy-800/5" data-cat="Otros" data-precio="110000" data-oferta="0">
+        <span class="shine"></span>
+        <div class="relative aspect-[4/3] overflow-hidden bg-navy-100">
+          <div class="capitone w-full h-full grid place-items-center">
+          <svg class="w-16 h-16 opacity-25" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+            <path d="M62 22 L84 78 L74 78 L69.5 66 L54.5 66 L50 78 L40 78 L62 22 Z M57.5 58 L66.5 58 L62 45.5 L57.5 58 Z" fill="#5FA3DC"/>
+            <path d="M10 78 L10 22 L22 22 L36 52 L50 22 L62 22 L62 78 L52 78 L52 40 L39.5 67 L32.5 67 L20 40 L20 78 Z" fill="#fff"/>
+          </svg>
+        </div>
+        </div>
+        <div class="p-3">
+          <span class="text-[10px] uppercase tracking-wider text-sky-500 font-bold">Otros</span>
+          <h3 class="font-semibold text-sm leading-snug mt-0.5 mb-2 text-navy-800">Cabecera de Auto / Tapizado Vehicular</h3>
+          <div class="flex items-center justify-between gap-2">
+            <span class="font-display font-bold text-lg text-navy-800">$110.000</span>
+            <a href="https://wa.me/5493512043164?text=Hola%21%20Me%20interesa%3A%20%2ACabecera%20de%20Auto%20/%20Tapizado%20Vehicular%2A%20%28Otros%29%20%E2%80%94%20%24110.000.%20%C2%BFMe%20pas%C3%A1s%20m%C3%A1s%20info%3F" target="_blank" rel="noopener" class="text-xs bg-navy-800 hover:bg-navy-600 text-white px-3 py-1.5 rounded-lg transition shrink-0">Consultar</a>
+          </div>
+        </div>
+      </article>
+      <article class="card prod bg-white rounded-2xl overflow-hidden shadow-sm border border-navy-800/5" data-cat="Otros" data-precio="42000" data-oferta="0">
+        <span class="shine"></span>
+        <div class="relative aspect-[4/3] overflow-hidden bg-navy-100">
+          <div class="capitone w-full h-full grid place-items-center">
+          <svg class="w-16 h-16 opacity-25" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+            <path d="M62 22 L84 78 L74 78 L69.5 66 L54.5 66 L50 78 L40 78 L62 22 Z M57.5 58 L66.5 58 L62 45.5 L57.5 58 Z" fill="#5FA3DC"/>
+            <path d="M10 78 L10 22 L22 22 L36 52 L50 22 L62 22 L62 78 L52 78 L52 40 L39.5 67 L32.5 67 L20 40 L20 78 Z" fill="#fff"/>
+          </svg>
+        </div>
+        </div>
+        <div class="p-3">
+          <span class="text-[10px] uppercase tracking-wider text-sky-500 font-bold">Otros</span>
+          <h3 class="font-semibold text-sm leading-snug mt-0.5 mb-2 text-navy-800">Almohadones a Medida (juego x4)</h3>
+          <div class="flex items-center justify-between gap-2">
+            <span class="font-display font-bold text-lg text-navy-800">$42.000</span>
+            <a href="https://wa.me/5493512043164?text=Hola%21%20Me%20interesa%3A%20%2AAlmohadones%20a%20Medida%20%28juego%20x4%29%2A%20%28Otros%29%20%E2%80%94%20%2442.000.%20%C2%BFMe%20pas%C3%A1s%20m%C3%A1s%20info%3F" target="_blank" rel="noopener" class="text-xs bg-navy-800 hover:bg-navy-600 text-white px-3 py-1.5 rounded-lg transition shrink-0">Consultar</a>
+          </div>
+        </div>
+      </article>
+  </div>
+  <p id="catVacio" class="hidden text-center py-12 text-sm text-navy-900/45">No hay trabajos con esos filtros.</p>
 
+  <!-- TESTIMONIOS -->
+  <div class="mt-12">
     <svg class="stitch-line mb-6" viewBox="0 0 400 2" preserveAspectRatio="none" aria-hidden="true"><path d="M0 1 H400"/></svg>
-    <h2 class="font-display text-2xl md:text-3xl font-bold text-navy-800 text-center mb-6">Cómo trabajamos</h2>
-    <ol class="grid gap-4 grid-cols-2 lg:grid-cols-4 list-none p-0 mb-10">
-      <li class="card bg-white rounded-2xl p-4 shadow-sm border border-navy-800/5">
+    <h2 class="font-display text-2xl md:text-3xl font-bold text-navy-800 text-center mb-1">Lo que dicen nuestros clientes</h2>
+    <p class="text-sm text-navy-900/55 text-center mb-6">Trabajos entregados en Córdoba y alrededores.</p>
+    <div class="grid gap-4 md:grid-cols-3">
+      <blockquote class="card bg-white rounded-2xl p-5 shadow-sm border border-navy-800/5">
         <span class="shine"></span>
-        <div class="font-display text-3xl font-bold text-sky-300 leading-none mb-2">01</div>
-        <h3 class="font-semibold text-sm text-navy-800 mb-1">Consulta</h3>
-        <p class="text-[11px] text-navy-900/55 leading-relaxed">Mandás fotos por WhatsApp y te pasamos un estimado sin cargo.</p>
-      </li>
-      <li class="card bg-white rounded-2xl p-4 shadow-sm border border-navy-800/5">
+        <div class="text-sky-400 text-sm mb-2.5 tracking-wider" aria-label="5 de 5 estrellas">★★★★★</div>
+        <p class="text-sm text-navy-900/70 leading-relaxed mb-4">Restauraron el sillón de mi abuela y quedó mejor que nuevo. Muy prolijos con los tiempos y me fueron mandando fotos del avance.</p>
+        <footer class="flex items-center gap-2.5 pt-3 border-t border-navy-800/5">
+          <span class="w-8 h-8 rounded-full bg-navy-800 text-white grid place-items-center font-display font-bold text-sm shrink-0">L</span>
+          <span class="leading-tight">
+            <span class="block text-xs font-semibold text-navy-800">Laura M.</span>
+            <span class="block text-[10px] text-navy-900/45">Nueva Córdoba</span>
+          </span>
+        </footer>
+      </blockquote>
+      <blockquote class="card bg-white rounded-2xl p-5 shadow-sm border border-navy-800/5">
         <span class="shine"></span>
-        <div class="font-display text-3xl font-bold text-sky-300 leading-none mb-2">02</div>
-        <h3 class="font-semibold text-sm text-navy-800 mb-1">Retiro</h3>
-        <p class="text-[11px] text-navy-900/55 leading-relaxed">Pasamos por tu casa, vemos el mueble y confirmamos el presupuesto final.</p>
-      </li>
-      <li class="card bg-white rounded-2xl p-4 shadow-sm border border-navy-800/5">
+        <div class="text-sky-400 text-sm mb-2.5 tracking-wider" aria-label="5 de 5 estrellas">★★★★★</div>
+        <p class="text-sm text-navy-900/70 leading-relaxed mb-4">Retiraron y entregaron a domicilio sin que yo moviera un dedo. El juego de sillas del comedor quedó impecable.</p>
+        <footer class="flex items-center gap-2.5 pt-3 border-t border-navy-800/5">
+          <span class="w-8 h-8 rounded-full bg-navy-800 text-white grid place-items-center font-display font-bold text-sm shrink-0">D</span>
+          <span class="leading-tight">
+            <span class="block text-xs font-semibold text-navy-800">Diego R.</span>
+            <span class="block text-[10px] text-navy-900/45">Cerro de las Rosas</span>
+          </span>
+        </footer>
+      </blockquote>
+      <blockquote class="card bg-white rounded-2xl p-5 shadow-sm border border-navy-800/5">
         <span class="shine"></span>
-        <div class="font-display text-3xl font-bold text-sky-300 leading-none mb-2">03</div>
-        <h3 class="font-semibold text-sm text-navy-800 mb-1">Taller</h3>
-        <p class="text-[11px] text-navy-900/55 leading-relaxed">Desarme, revisión de estructura, relleno nuevo y tapizado a mano.</p>
-      </li>
-      <li class="card bg-white rounded-2xl p-4 shadow-sm border border-navy-800/5">
-        <span class="shine"></span>
-        <div class="font-display text-3xl font-bold text-sky-300 leading-none mb-2">04</div>
-        <h3 class="font-semibold text-sm text-navy-800 mb-1">Entrega</h3>
-        <p class="text-[11px] text-navy-900/55 leading-relaxed">Te lo llevamos listo. Te avisamos con fotos antes de salir.</p>
-      </li>
-    </ol>
-
-    <div class="bg-white rounded-2xl border border-navy-800/5 p-5 shadow-sm text-sm text-navy-900/65 leading-relaxed">
-      <b class="text-navy-800">Tiempos, pago y garantía.</b> Una silla de comedor sale en 3 a 5 días; un sofá de 3 cuerpos, entre 10 y 15 días hábiles. Se abona el 50% al retirar el mueble y el 50% restante contra entrega — efectivo, transferencia o tarjeta. Damos 6 meses de garantía sobre la mano de obra.
+        <div class="text-sky-400 text-sm mb-2.5 tracking-wider" aria-label="5 de 5 estrellas">★★★★★</div>
+        <p class="text-sm text-navy-900/70 leading-relaxed mb-4">Me asesoraron con la tela y acertaron. Buen precio y trabajo hecho con dedicación. Ya les llevé un segundo mueble.</p>
+        <footer class="flex items-center gap-2.5 pt-3 border-t border-navy-800/5">
+          <span class="w-8 h-8 rounded-full bg-navy-800 text-white grid place-items-center font-display font-bold text-sm shrink-0">C</span>
+          <span class="leading-tight">
+            <span class="block text-xs font-semibold text-navy-800">Carolina S.</span>
+            <span class="block text-[10px] text-navy-900/45">Villa Allende</span>
+          </span>
+        </footer>
+      </blockquote>
     </div>
-  </section>
+  </div>
 
-  <!-- ZONAS -->
-  <section id="zonas" class="mb-14 scroll-mt-20">
-    <div class="bg-navy-800 rounded-2xl p-6 md:p-8 text-white relative overflow-hidden">
-      <div class="absolute inset-0 opacity-[0.05] pointer-events-none" style="background-image:repeating-linear-gradient(45deg,#fff 0 1px,transparent 1px 12px)"></div>
-      <div class="relative">
-        <div class="text-[10px] tracking-[0.25em] text-sky-300 font-bold mb-2">RETIRO Y ENTREGA</div>
-        <h2 class="font-display text-2xl md:text-3xl font-bold mb-2 text-white">Zona de cobertura</h2>
-        <p class="text-sm text-white/65 mb-5 max-w-lg">Retiramos y entregamos tu mueble sin que tengas que moverlo. Cubrimos Córdoba capital y localidades cercanas.</p>
-        <ul class="flex flex-wrap gap-2 mb-5 list-none p-0">
-          <li class="text-xs text-white/85 bg-white/10 border border-white/15 px-3 py-1.5 rounded-full">Centro</li>
-          <li class="text-xs text-white/85 bg-white/10 border border-white/15 px-3 py-1.5 rounded-full">Nueva Córdoba</li>
-          <li class="text-xs text-white/85 bg-white/10 border border-white/15 px-3 py-1.5 rounded-full">Güemes</li>
-          <li class="text-xs text-white/85 bg-white/10 border border-white/15 px-3 py-1.5 rounded-full">General Paz</li>
-          <li class="text-xs text-white/85 bg-white/10 border border-white/15 px-3 py-1.5 rounded-full">Alta Córdoba</li>
-          <li class="text-xs text-white/85 bg-white/10 border border-white/15 px-3 py-1.5 rounded-full">Cerro de las Rosas</li>
-          <li class="text-xs text-white/85 bg-white/10 border border-white/15 px-3 py-1.5 rounded-full">Urca</li>
-          <li class="text-xs text-white/85 bg-white/10 border border-white/15 px-3 py-1.5 rounded-full">Villa Belgrano</li>
-          <li class="text-xs text-white/85 bg-white/10 border border-white/15 px-3 py-1.5 rounded-full">Argüello</li>
-          <li class="text-xs text-white/85 bg-white/10 border border-white/15 px-3 py-1.5 rounded-full">Jardín</li>
-          <li class="text-xs text-white/85 bg-white/10 border border-white/15 px-3 py-1.5 rounded-full">Alto Alberdi</li>
-          <li class="text-xs text-white/85 bg-white/10 border border-white/15 px-3 py-1.5 rounded-full">Villa Allende</li>
-          <li class="text-xs text-white/85 bg-white/10 border border-white/15 px-3 py-1.5 rounded-full">Mendiolaza</li>
-          <li class="text-xs text-white/85 bg-white/10 border border-white/15 px-3 py-1.5 rounded-full">Unquillo</li>
-        </ul>
-        <p class="text-xs text-white/45">¿Tu zona no aparece? Escribinos igual — cotizamos el envío según distancia.</p>
+  <!-- CTA de cierre -->
+  <div class="mt-10 bg-navy-800 rounded-2xl p-6 md:p-8 text-center text-white relative overflow-hidden">
+    <div class="absolute inset-0 opacity-[0.06]" style="background-image:repeating-linear-gradient(45deg,#fff 0 1px,transparent 1px 12px)"></div>
+    <div class="relative">
+      <h3 class="font-display text-2xl font-bold mb-1.5">¿No encontrás tu mueble?</h3>
+      <p class="text-sm text-white/65 mb-5 max-w-md mx-auto">Trabajamos a medida. Mandanos una foto y te pasamos un presupuesto sin cargo.</p>
+      <a href="https://wa.me/5493512043164?text=Hola!%20Quisiera%20una%20consulta%20sobre%20tapizado." target="_blank" rel="noopener"
+         class="inline-block bg-sky-400 hover:bg-sky-500 text-white text-sm font-semibold px-6 py-2.5 rounded-lg transition">
+        Consultar ahora
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ TELAS ══════════════ -->
+<section id="sec-telas" data-section class="hidden">
+  <svg class="stitch-line mb-6" viewBox="0 0 400 2" preserveAspectRatio="none" aria-hidden="true"><path d="M0 1 H400"/></svg>
+  <h2 class="font-display text-3xl md:text-4xl font-bold text-navy-800">Catálogo de telas</h2>
+  <p class="text-sm text-navy-900/55 mb-5">Precio por metro lineal. Consultá disponibilidad de color.</p>
+
+  <div class="flex gap-2 overflow-x-auto pb-2 mb-5" id="filtrosTela">
+    <button data-tela="todas" class="btn-tela shrink-0 px-4 py-1.5 rounded-full text-xs font-semibold border transition bg-navy-800 text-white border-navy-800">Todas</button>
+    <button data-tela="Chenille" class="btn-tela shrink-0 px-4 py-1.5 rounded-full text-xs font-semibold border transition bg-white text-navy-800 border-navy-800/15 hover:border-sky-400">Chenille</button>
+    <button data-tela="Pana" class="btn-tela shrink-0 px-4 py-1.5 rounded-full text-xs font-semibold border transition bg-white text-navy-800 border-navy-800/15 hover:border-sky-400">Pana</button>
+    <button data-tela="Lino" class="btn-tela shrink-0 px-4 py-1.5 rounded-full text-xs font-semibold border transition bg-white text-navy-800 border-navy-800/15 hover:border-sky-400">Lino</button>
+    <button data-tela="Ecocuero" class="btn-tela shrink-0 px-4 py-1.5 rounded-full text-xs font-semibold border transition bg-white text-navy-800 border-navy-800/15 hover:border-sky-400">Ecocuero</button>
+    <button data-tela="Bouclé" class="btn-tela shrink-0 px-4 py-1.5 rounded-full text-xs font-semibold border transition bg-white text-navy-800 border-navy-800/15 hover:border-sky-400">Bouclé</button>
+    <button data-tela="Terciopelo" class="btn-tela shrink-0 px-4 py-1.5 rounded-full text-xs font-semibold border transition bg-white text-navy-800 border-navy-800/15 hover:border-sky-400">Terciopelo</button>
+    <button data-tela="Gabardina" class="btn-tela shrink-0 px-4 py-1.5 rounded-full text-xs font-semibold border transition bg-white text-navy-800 border-navy-800/15 hover:border-sky-400">Gabardina</button>
+  </div>
+
+  <div id="gridTelas" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      <article class="card tela bg-white rounded-2xl overflow-hidden shadow-sm border border-navy-800/5" data-tipo="Chenille">
+        <span class="shine"></span>
+        <div class="relative aspect-square overflow-hidden bg-navy-100">
+          <div class="w-full h-full" style="background-color:#8a8272;background-image:repeating-linear-gradient(90deg,rgba(255,255,255,.10) 0 1px,transparent 1px 3px),repeating-linear-gradient(0deg,rgba(0,0,0,.08) 0 1px,transparent 1px 3px);background-size:3px 3px"></div>
+        </div>
+        <div class="p-3">
+          <span class="text-[10px] uppercase tracking-wider text-sky-500 font-bold">Chenille</span>
+          <h3 class="font-semibold text-sm text-navy-800 mt-0.5">Chenille Premium</h3>
+          <p class="text-[11px] text-navy-900/50 mt-1 mb-2">Beige · Gris · Verde oliva</p>
+          <div class="flex items-end justify-between gap-2">
+            <div>
+              <span class="font-display font-bold text-base text-navy-800">$18.500</span>
+              <span class="text-[10px] text-navy-900/45">/metro</span>
+            </div>
+            <a href="https://wa.me/5493512043164?text=Hola%21%20Consulto%20por%20la%20tela%20%2AChenille%20Premium%2A%20%28Chenille%29%20%E2%80%94%20%2418.500/metro.%20%C2%BFQu%C3%A9%20colores%20tienen%20disponibles%3F" target="_blank" rel="noopener" class="text-[11px] bg-sky-400 hover:bg-sky-500 text-white px-2.5 py-1.5 rounded-lg transition shrink-0">Consultar</a>
+          </div>
+        </div>
+      </article>
+      <article class="card tela bg-white rounded-2xl overflow-hidden shadow-sm border border-navy-800/5" data-tipo="Pana">
+        <span class="shine"></span>
+        <div class="relative aspect-square overflow-hidden bg-navy-100">
+          <div class="w-full h-full" style="background-color:#2f5540;background-image:repeating-linear-gradient(90deg,rgba(0,0,0,.22) 0 2px,rgba(255,255,255,.06) 2px 4px,transparent 4px 7px)"></div>
+        </div>
+        <div class="p-3">
+          <span class="text-[10px] uppercase tracking-wider text-sky-500 font-bold">Pana</span>
+          <h3 class="font-semibold text-sm text-navy-800 mt-0.5">Pana Lisa Clásica</h3>
+          <p class="text-[11px] text-navy-900/50 mt-1 mb-2">Verde botella · Mostaza · Petróleo</p>
+          <div class="flex items-end justify-between gap-2">
+            <div>
+              <span class="font-display font-bold text-base text-navy-800">$22.000</span>
+              <span class="text-[10px] text-navy-900/45">/metro</span>
+            </div>
+            <a href="https://wa.me/5493512043164?text=Hola%21%20Consulto%20por%20la%20tela%20%2APana%20Lisa%20Cl%C3%A1sica%2A%20%28Pana%29%20%E2%80%94%20%2422.000/metro.%20%C2%BFQu%C3%A9%20colores%20tienen%20disponibles%3F" target="_blank" rel="noopener" class="text-[11px] bg-sky-400 hover:bg-sky-500 text-white px-2.5 py-1.5 rounded-lg transition shrink-0">Consultar</a>
+          </div>
+        </div>
+      </article>
+      <article class="card tela bg-white rounded-2xl overflow-hidden shadow-sm border border-navy-800/5" data-tipo="Lino">
+        <span class="shine"></span>
+        <div class="relative aspect-square overflow-hidden bg-navy-100">
+          <div class="w-full h-full" style="background-color:#c8bda6;background-image:repeating-linear-gradient(45deg,rgba(255,255,255,.07) 0 1px,transparent 1px 3px),repeating-linear-gradient(-45deg,rgba(0,0,0,.10) 0 1px,transparent 1px 3px)"></div>
+        </div>
+        <div class="p-3">
+          <span class="text-[10px] uppercase tracking-wider text-sky-500 font-bold">Lino</span>
+          <h3 class="font-semibold text-sm text-navy-800 mt-0.5">Lino Rústico</h3>
+          <p class="text-[11px] text-navy-900/50 mt-1 mb-2">Natural · Arena · Grafito</p>
+          <div class="flex items-end justify-between gap-2">
+            <div>
+              <span class="font-display font-bold text-base text-navy-800">$26.500</span>
+              <span class="text-[10px] text-navy-900/45">/metro</span>
+            </div>
+            <a href="https://wa.me/5493512043164?text=Hola%21%20Consulto%20por%20la%20tela%20%2ALino%20R%C3%BAstico%2A%20%28Lino%29%20%E2%80%94%20%2426.500/metro.%20%C2%BFQu%C3%A9%20colores%20tienen%20disponibles%3F" target="_blank" rel="noopener" class="text-[11px] bg-sky-400 hover:bg-sky-500 text-white px-2.5 py-1.5 rounded-lg transition shrink-0">Consultar</a>
+          </div>
+        </div>
+      </article>
+      <article class="card tela bg-white rounded-2xl overflow-hidden shadow-sm border border-navy-800/5" data-tipo="Ecocuero">
+        <span class="shine"></span>
+        <div class="relative aspect-square overflow-hidden bg-navy-100">
+          <div class="w-full h-full" style="background-color:#8a4b26;background-image:radial-gradient(circle at 30% 30%,rgba(255,255,255,.10) 0 1px,transparent 2px),radial-gradient(circle at 70% 60%,rgba(0,0,0,.25) 0 1px,transparent 2px);background-size:6px 6px,5px 5px"></div>
+        </div>
+        <div class="p-3">
+          <span class="text-[10px] uppercase tracking-wider text-sky-500 font-bold">Ecocuero</span>
+          <h3 class="font-semibold text-sm text-navy-800 mt-0.5">Ecocuero Soft Touch</h3>
+          <p class="text-[11px] text-navy-900/50 mt-1 mb-2">Cognac · Negro · Blanco</p>
+          <div class="flex items-end justify-between gap-2">
+            <div>
+              <span class="font-display font-bold text-base text-navy-800">$31.000</span>
+              <span class="text-[10px] text-navy-900/45">/metro</span>
+            </div>
+            <a href="https://wa.me/5493512043164?text=Hola%21%20Consulto%20por%20la%20tela%20%2AEcocuero%20Soft%20Touch%2A%20%28Ecocuero%29%20%E2%80%94%20%2431.000/metro.%20%C2%BFQu%C3%A9%20colores%20tienen%20disponibles%3F" target="_blank" rel="noopener" class="text-[11px] bg-sky-400 hover:bg-sky-500 text-white px-2.5 py-1.5 rounded-lg transition shrink-0">Consultar</a>
+          </div>
+        </div>
+      </article>
+      <article class="card tela bg-white rounded-2xl overflow-hidden shadow-sm border border-navy-800/5" data-tipo="Bouclé">
+        <span class="shine"></span>
+        <div class="relative aspect-square overflow-hidden bg-navy-100">
+          <div class="w-full h-full" style="background-color:#d8cdb8;background-image:radial-gradient(circle,rgba(90,75,55,.28) 0 1.4px,transparent 1.6px);background-size:5px 5px"></div>
+        </div>
+        <div class="p-3">
+          <span class="text-[10px] uppercase tracking-wider text-sky-500 font-bold">Bouclé</span>
+          <h3 class="font-semibold text-sm text-navy-800 mt-0.5">Bouclé Texturado</h3>
+          <p class="text-[11px] text-navy-900/50 mt-1 mb-2">Crudo · Camel</p>
+          <div class="flex items-end justify-between gap-2">
+            <div>
+              <span class="font-display font-bold text-base text-navy-800">$34.500</span>
+              <span class="text-[10px] text-navy-900/45">/metro</span>
+            </div>
+            <a href="https://wa.me/5493512043164?text=Hola%21%20Consulto%20por%20la%20tela%20%2ABoucl%C3%A9%20Texturado%2A%20%28Boucl%C3%A9%29%20%E2%80%94%20%2434.500/metro.%20%C2%BFQu%C3%A9%20colores%20tienen%20disponibles%3F" target="_blank" rel="noopener" class="text-[11px] bg-sky-400 hover:bg-sky-500 text-white px-2.5 py-1.5 rounded-lg transition shrink-0">Consultar</a>
+          </div>
+        </div>
+      </article>
+      <article class="card tela bg-white rounded-2xl overflow-hidden shadow-sm border border-navy-800/5" data-tipo="Chenille">
+        <span class="shine"></span>
+        <div class="relative aspect-square overflow-hidden bg-navy-100">
+          <div class="w-full h-full" style="background-color:#9a9088;background-image:repeating-linear-gradient(90deg,rgba(255,255,255,.10) 0 1px,transparent 1px 3px),repeating-linear-gradient(0deg,rgba(0,0,0,.08) 0 1px,transparent 1px 3px);background-size:3px 3px"></div>
+        </div>
+        <div class="p-3">
+          <span class="text-[10px] uppercase tracking-wider text-sky-500 font-bold">Chenille</span>
+          <h3 class="font-semibold text-sm text-navy-800 mt-0.5">Chenille Antimanchas</h3>
+          <p class="text-[11px] text-navy-900/50 mt-1 mb-2">Gris perla · Topo</p>
+          <div class="flex items-end justify-between gap-2">
+            <div>
+              <span class="font-display font-bold text-base text-navy-800">$24.000</span>
+              <span class="text-[10px] text-navy-900/45">/metro</span>
+            </div>
+            <a href="https://wa.me/5493512043164?text=Hola%21%20Consulto%20por%20la%20tela%20%2AChenille%20Antimanchas%2A%20%28Chenille%29%20%E2%80%94%20%2424.000/metro.%20%C2%BFQu%C3%A9%20colores%20tienen%20disponibles%3F" target="_blank" rel="noopener" class="text-[11px] bg-sky-400 hover:bg-sky-500 text-white px-2.5 py-1.5 rounded-lg transition shrink-0">Consultar</a>
+          </div>
+        </div>
+      </article>
+      <article class="card tela bg-white rounded-2xl overflow-hidden shadow-sm border border-navy-800/5" data-tipo="Terciopelo">
+        <span class="shine"></span>
+        <div class="relative aspect-square overflow-hidden bg-navy-100">
+          <div class="w-full h-full" style="background-color:#243b6b;background-image:repeating-linear-gradient(90deg,rgba(255,255,255,.09) 0 1px,transparent 1px 2px),linear-gradient(180deg,rgba(255,255,255,.10),transparent 40%,rgba(0,0,0,.25))"></div>
+          <div class="absolute inset-0 bg-navy-900/60 grid place-items-center z-[3]"><span class="text-white text-[11px] font-bold border border-white/70 px-2 py-1 rounded">SIN STOCK</span></div>
+        </div>
+        <div class="p-3">
+          <span class="text-[10px] uppercase tracking-wider text-sky-500 font-bold">Terciopelo</span>
+          <h3 class="font-semibold text-sm text-navy-800 mt-0.5">Terciopelo Velvet</h3>
+          <p class="text-[11px] text-navy-900/50 mt-1 mb-2">Azul noche · Bordó · Esmeralda</p>
+          <div class="flex items-end justify-between gap-2">
+            <div>
+              <span class="font-display font-bold text-base text-navy-800">$29.500</span>
+              <span class="text-[10px] text-navy-900/45">/metro</span>
+            </div>
+            
+          </div>
+        </div>
+      </article>
+      <article class="card tela bg-white rounded-2xl overflow-hidden shadow-sm border border-navy-800/5" data-tipo="Gabardina">
+        <span class="shine"></span>
+        <div class="relative aspect-square overflow-hidden bg-navy-100">
+          <div class="w-full h-full" style="background-color:#2f4f7a;background-image:repeating-linear-gradient(45deg,rgba(255,255,255,.07) 0 1px,transparent 1px 3px),repeating-linear-gradient(-45deg,rgba(0,0,0,.10) 0 1px,transparent 1px 3px)"></div>
+        </div>
+        <div class="p-3">
+          <span class="text-[10px] uppercase tracking-wider text-sky-500 font-bold">Gabardina</span>
+          <h3 class="font-semibold text-sm text-navy-800 mt-0.5">Gabardina Reforzada</h3>
+          <p class="text-[11px] text-navy-900/50 mt-1 mb-2">Azul · Negro · Beige</p>
+          <div class="flex items-end justify-between gap-2">
+            <div>
+              <span class="font-display font-bold text-base text-navy-800">$14.500</span>
+              <span class="text-[10px] text-navy-900/45">/metro</span>
+            </div>
+            <a href="https://wa.me/5493512043164?text=Hola%21%20Consulto%20por%20la%20tela%20%2AGabardina%20Reforzada%2A%20%28Gabardina%29%20%E2%80%94%20%2414.500/metro.%20%C2%BFQu%C3%A9%20colores%20tienen%20disponibles%3F" target="_blank" rel="noopener" class="text-[11px] bg-sky-400 hover:bg-sky-500 text-white px-2.5 py-1.5 rounded-lg transition shrink-0">Consultar</a>
+          </div>
+        </div>
+      </article>
+  </div>
+
+  <div class="mt-6 bg-navy-100 border border-sky-300/40 rounded-xl p-4 text-xs text-navy-800 leading-relaxed">
+    <b>Referencia rápida de consumo:</b> sillón 1 cuerpo ≈ 3-4 m · sofá 2 cuerpos ≈ 6-8 m · sofá 3 cuerpos ≈ 9-12 m · silla de comedor ≈ 0,8-1 m c/u · respaldo 2 plazas ≈ 4-5 m.
+  </div>
+
+  <p class="text-sm text-navy-900/55 mt-6 leading-relaxed">
+    ¿Querés calcular cuánto sale tu trabajo con una tela puntual, o ver cómo queda sobre una foto de tu mueble?
+    <a href="https://script.google.com/macros/s/AKfycbzixqTUfjkbpP61JKQRv1hyQKRx19a8x54PiSTPVc5vMYymWmeOxEJqrcZ6sQqxdEYQ/exec" class="text-sky-500 font-semibold hover:underline">Abrí la calculadora y el simulador →</a>
+  </p>
+</section>
+
+<!-- ══════════════ EL TALLER ══════════════ -->
+<section id="sec-taller" data-section class="hidden">
+  <svg class="stitch-line mb-6" viewBox="0 0 400 2" preserveAspectRatio="none" aria-hidden="true"><path d="M0 1 H400"/></svg>
+  <h2 class="font-display text-3xl md:text-4xl font-bold text-navy-800">El Taller</h2>
+  <p class="text-sm text-navy-900/55 mb-6">Oficio, paciencia y materiales de primera.</p>
+
+  <div class="grid gap-6 md:grid-cols-5 items-center mb-12">
+    <div class="md:col-span-2">
+      <div class="capitone aspect-[4/5] rounded-2xl grid place-items-center border border-navy-800/5 shadow-sm">
+        <svg class="w-24 h-24 opacity-30" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+          <path d="M62 22 L84 78 L74 78 L69.5 66 L54.5 66 L50 78 L40 78 L62 22 Z M57.5 58 L66.5 58 L62 45.5 L57.5 58 Z" fill="#5FA3DC"/>
+          <path d="M10 78 L10 22 L22 22 L36 52 L50 22 L62 22 L62 78 L52 78 L52 40 L39.5 67 L32.5 67 L20 40 L20 78 Z" fill="#fff"/>
+        </svg>
       </div>
     </div>
-  </section>
+    <div class="md:col-span-3 space-y-3.5 text-sm text-navy-900/70 leading-relaxed">
+      <p>Trabajamos mueble por mueble, sin apuro. Desarmamos, revisamos la estructura, reponemos espuma y resortes cuando hace falta, y recién ahí tapizamos. Es más lento que cambiar la tela por encima, pero es lo que hace que un sillón dure otros veinte años.</p>
+      <p>Nos especializamos en restauración de piezas antiguas, tapizado a medida y trabajos donde el detalle importa: capitoné, tachas, resortes atados a mano y terminaciones cosidas.</p>
+      <div class="flex flex-wrap gap-2 pt-1">
+        <span class="text-[11px] font-semibold text-navy-800 bg-navy-100 border border-sky-300/40 px-3 py-1.5 rounded-full">+20 años de oficio</span>
+        <span class="text-[11px] font-semibold text-navy-800 bg-navy-100 border border-sky-300/40 px-3 py-1.5 rounded-full">Trabajo artesanal</span>
+        <span class="text-[11px] font-semibold text-navy-800 bg-navy-100 border border-sky-300/40 px-3 py-1.5 rounded-full">Telas de primera</span>
+        <span class="text-[11px] font-semibold text-navy-800 bg-navy-100 border border-sky-300/40 px-3 py-1.5 rounded-full">Presupuesto sin cargo</span>
+      </div>
+    </div>
+  </div>
+
+  <svg class="stitch-line mb-6" viewBox="0 0 400 2" preserveAspectRatio="none" aria-hidden="true"><path d="M0 1 H400"/></svg>
+  <h2 class="font-display text-2xl md:text-3xl font-bold text-navy-800 text-center mb-6">Cómo trabajamos</h2>
+  <ol class="grid gap-4 grid-cols-2 lg:grid-cols-4 list-none p-0 mb-12">
+    <li class="card bg-white rounded-2xl p-4 shadow-sm border border-navy-800/5">
+      <span class="shine"></span>
+      <div class="font-display text-3xl font-bold text-sky-300 leading-none mb-2">01</div>
+      <h3 class="font-semibold text-sm text-navy-800 mb-1">Consulta</h3>
+      <p class="text-[11px] text-navy-900/55 leading-relaxed">Mandás fotos por WhatsApp y te pasamos un estimado sin cargo.</p>
+    </li>
+    <li class="card bg-white rounded-2xl p-4 shadow-sm border border-navy-800/5">
+      <span class="shine"></span>
+      <div class="font-display text-3xl font-bold text-sky-300 leading-none mb-2">02</div>
+      <h3 class="font-semibold text-sm text-navy-800 mb-1">Retiro</h3>
+      <p class="text-[11px] text-navy-900/55 leading-relaxed">Pasamos por tu casa, vemos el mueble y confirmamos el presupuesto final.</p>
+    </li>
+    <li class="card bg-white rounded-2xl p-4 shadow-sm border border-navy-800/5">
+      <span class="shine"></span>
+      <div class="font-display text-3xl font-bold text-sky-300 leading-none mb-2">03</div>
+      <h3 class="font-semibold text-sm text-navy-800 mb-1">Taller</h3>
+      <p class="text-[11px] text-navy-900/55 leading-relaxed">Desarme, revisión de estructura, relleno nuevo y tapizado a mano.</p>
+    </li>
+    <li class="card bg-white rounded-2xl p-4 shadow-sm border border-navy-800/5">
+      <span class="shine"></span>
+      <div class="font-display text-3xl font-bold text-sky-300 leading-none mb-2">04</div>
+      <h3 class="font-semibold text-sm text-navy-800 mb-1">Entrega</h3>
+      <p class="text-[11px] text-navy-900/55 leading-relaxed">Te lo llevamos listo. Te avisamos con fotos antes de salir.</p>
+    </li>
+  </ol>
+
+  <!-- COBERTURA -->
+  <div class="bg-navy-800 rounded-2xl p-6 md:p-8 text-white mb-12 relative overflow-hidden">
+    <div class="absolute inset-0 opacity-[0.05] pointer-events-none" style="background-image:repeating-linear-gradient(45deg,#fff 0 1px,transparent 1px 12px)"></div>
+    <div class="relative">
+      <div class="text-[10px] tracking-[0.25em] text-sky-300 font-bold mb-2">RETIRO Y ENTREGA</div>
+      <h2 class="font-display text-2xl font-bold mb-2 text-white">Zona de cobertura</h2>
+      <p class="text-sm text-white/65 mb-5 max-w-lg">Retiramos y entregamos tu mueble sin que tengas que moverlo. Consultá si tu barrio está en la lista.</p>
+      <ul class="flex flex-wrap gap-2 mb-5 list-none p-0">
+        <li class="text-xs text-white/85 bg-white/10 border border-white/15 px-3 py-1.5 rounded-full">Centro</li>
+        <li class="text-xs text-white/85 bg-white/10 border border-white/15 px-3 py-1.5 rounded-full">Nueva Córdoba</li>
+        <li class="text-xs text-white/85 bg-white/10 border border-white/15 px-3 py-1.5 rounded-full">Güemes</li>
+        <li class="text-xs text-white/85 bg-white/10 border border-white/15 px-3 py-1.5 rounded-full">General Paz</li>
+        <li class="text-xs text-white/85 bg-white/10 border border-white/15 px-3 py-1.5 rounded-full">Alta Córdoba</li>
+        <li class="text-xs text-white/85 bg-white/10 border border-white/15 px-3 py-1.5 rounded-full">Cerro de las Rosas</li>
+        <li class="text-xs text-white/85 bg-white/10 border border-white/15 px-3 py-1.5 rounded-full">Urca</li>
+        <li class="text-xs text-white/85 bg-white/10 border border-white/15 px-3 py-1.5 rounded-full">Villa Belgrano</li>
+        <li class="text-xs text-white/85 bg-white/10 border border-white/15 px-3 py-1.5 rounded-full">Argüello</li>
+        <li class="text-xs text-white/85 bg-white/10 border border-white/15 px-3 py-1.5 rounded-full">Jardín</li>
+        <li class="text-xs text-white/85 bg-white/10 border border-white/15 px-3 py-1.5 rounded-full">Alto Alberdi</li>
+        <li class="text-xs text-white/85 bg-white/10 border border-white/15 px-3 py-1.5 rounded-full">Villa Allende</li>
+        <li class="text-xs text-white/85 bg-white/10 border border-white/15 px-3 py-1.5 rounded-full">Mendiolaza</li>
+        <li class="text-xs text-white/85 bg-white/10 border border-white/15 px-3 py-1.5 rounded-full">Unquillo</li>
+      </ul>
+      <p class="text-xs text-white/45">¿Tu zona no aparece? Escribinos igual — cotizamos el envío según distancia.</p>
+    </div>
+  </div>
 
   <!-- FAQ -->
-  <section id="faq" class="mb-14 scroll-mt-20">
-    <svg class="stitch-line mb-6" viewBox="0 0 400 2" preserveAspectRatio="none" aria-hidden="true"><path d="M0 1 H400"/></svg>
-    <h2 class="font-display text-2xl md:text-3xl font-bold text-navy-800 text-center mb-6">Preguntas frecuentes</h2>
-    <div class="max-w-3xl mx-auto space-y-2.5">
+  <svg class="stitch-line mb-6" viewBox="0 0 400 2" preserveAspectRatio="none" aria-hidden="true"><path d="M0 1 H400"/></svg>
+  <h2 class="font-display text-2xl md:text-3xl font-bold text-navy-800 text-center mb-6">Preguntas frecuentes</h2>
+  <div class="max-w-3xl mx-auto space-y-2.5">
 
-      <details class="faq-item bg-white rounded-xl border border-navy-800/8 overflow-hidden transition-colors" open>
-        <summary class="flex items-center justify-between gap-3 p-4 hover:bg-navy-50/50 transition">
-          <span class="text-sm font-semibold text-navy-800">¿Cuánto tarda un trabajo de tapizado?</span>
-          <svg class="chev w-4 h-4 text-sky-400 shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
-        </summary>
-        <div class="px-4 pb-4 -mt-1"><p class="text-xs text-navy-900/65 leading-relaxed border-t border-navy-800/5 pt-3">Depende del mueble y de la carga del taller. Una silla de comedor sale en 3 a 5 días; un sillón de 3 cuerpos, entre 10 y 15 días hábiles. Al confirmar el presupuesto te damos una fecha concreta y la cumplimos.</p></div>
-      </details>
+    <details class="faq-item bg-white rounded-xl border border-navy-800/8 overflow-hidden transition-colors" open>
+      <summary class="flex items-center justify-between gap-3 p-4 hover:bg-navy-50/50 transition">
+        <span class="text-sm font-semibold text-navy-800">¿Cuánto tarda un trabajo?</span>
+        <svg class="chev w-4 h-4 text-sky-400 shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+      </summary>
+      <div class="px-4 pb-4 -mt-1"><p class="text-xs text-navy-900/65 leading-relaxed border-t border-navy-800/5 pt-3">Depende del mueble y de la carga del taller. Una silla de comedor sale en 3 a 5 días; un sillón de 3 cuerpos, entre 10 y 15 días hábiles. Al confirmar el presupuesto te damos una fecha concreta y la cumplimos.</p></div>
+    </details>
 
-      <details class="faq-item bg-white rounded-xl border border-navy-800/8 overflow-hidden transition-colors">
-        <summary class="flex items-center justify-between gap-3 p-4 hover:bg-navy-50/50 transition">
-          <span class="text-sm font-semibold text-navy-800">¿Retiran el mueble a domicilio?</span>
-          <svg class="chev w-4 h-4 text-sky-400 shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
-        </summary>
-        <div class="px-4 pb-4 -mt-1"><p class="text-xs text-navy-900/65 leading-relaxed border-t border-navy-800/5 pt-3">Sí, en Córdoba capital y localidades cercanas. El retiro y la entrega tienen un costo dentro de la ciudad. Fuera del radio lo cotizamos según distancia.</p></div>
-      </details>
+    <details class="faq-item bg-white rounded-xl border border-navy-800/8 overflow-hidden transition-colors">
+      <summary class="flex items-center justify-between gap-3 p-4 hover:bg-navy-50/50 transition">
+        <span class="text-sm font-semibold text-navy-800">¿Retiran el mueble a domicilio?</span>
+        <svg class="chev w-4 h-4 text-sky-400 shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+      </summary>
+      <div class="px-4 pb-4 -mt-1"><p class="text-xs text-navy-900/65 leading-relaxed border-t border-navy-800/5 pt-3">Sí, en Córdoba capital y localidades cercanas. El retiro y la entrega tienen un costo dentro de la ciudad. Fuera del radio lo cotizamos según distancia.</p></div>
+    </details>
 
-      <details class="faq-item bg-white rounded-xl border border-navy-800/8 overflow-hidden transition-colors">
-        <summary class="flex items-center justify-between gap-3 p-4 hover:bg-navy-50/50 transition">
-          <span class="text-sm font-semibold text-navy-800">¿Puedo llevar mi propia tela?</span>
-          <svg class="chev w-4 h-4 text-sky-400 shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
-        </summary>
-        <div class="px-4 pb-4 -mt-1"><p class="text-xs text-navy-900/65 leading-relaxed border-t border-navy-800/5 pt-3">Sí, sin problema. En ese caso te decimos exactamente cuántos metros necesitás y solo cobramos la mano de obra. Ojo: la tela tiene que ser apta para tapicería, no cualquier tela de indumentaria aguanta el uso.</p></div>
-      </details>
+    <details class="faq-item bg-white rounded-xl border border-navy-800/8 overflow-hidden transition-colors">
+      <summary class="flex items-center justify-between gap-3 p-4 hover:bg-navy-50/50 transition">
+        <span class="text-sm font-semibold text-navy-800">¿Puedo llevar mi propia tela?</span>
+        <svg class="chev w-4 h-4 text-sky-400 shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+      </summary>
+      <div class="px-4 pb-4 -mt-1"><p class="text-xs text-navy-900/65 leading-relaxed border-t border-navy-800/5 pt-3">Sí, sin problema. En ese caso te decimos exactamente cuántos metros necesitás y solo cobramos la mano de obra. Ojo: la tela tiene que ser apta para tapicería, no cualquier tela de indumentaria aguanta el uso.</p></div>
+    </details>
 
-      <details class="faq-item bg-white rounded-xl border border-navy-800/8 overflow-hidden transition-colors">
-        <summary class="flex items-center justify-between gap-3 p-4 hover:bg-navy-50/50 transition">
-          <span class="text-sm font-semibold text-navy-800">¿El presupuesto tiene costo?</span>
-          <svg class="chev w-4 h-4 text-sky-400 shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
-        </summary>
-        <div class="px-4 pb-4 -mt-1"><p class="text-xs text-navy-900/65 leading-relaxed border-t border-navy-800/5 pt-3">No. Mandás fotos por WhatsApp y te pasamos un estimado sin cargo. El presupuesto final se confirma al ver el mueble en persona, y tampoco tiene costo ni te obliga a nada.</p></div>
-      </details>
+    <details class="faq-item bg-white rounded-xl border border-navy-800/8 overflow-hidden transition-colors">
+      <summary class="flex items-center justify-between gap-3 p-4 hover:bg-navy-50/50 transition">
+        <span class="text-sm font-semibold text-navy-800">¿Cómo se paga?</span>
+        <svg class="chev w-4 h-4 text-sky-400 shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+      </summary>
+      <div class="px-4 pb-4 -mt-1"><p class="text-xs text-navy-900/65 leading-relaxed border-t border-navy-800/5 pt-3">Se abona el 50% al retirar el mueble y el 50% restante contra entrega. Aceptamos efectivo, transferencia y tarjeta. Consultá por planes en cuotas.</p></div>
+    </details>
 
-      <details class="faq-item bg-white rounded-xl border border-navy-800/8 overflow-hidden transition-colors">
-        <summary class="flex items-center justify-between gap-3 p-4 hover:bg-navy-50/50 transition">
-          <span class="text-sm font-semibold text-navy-800">¿Hacen muebles a medida?</span>
-          <svg class="chev w-4 h-4 text-sky-400 shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
-        </summary>
-        <div class="px-4 pb-4 -mt-1"><p class="text-xs text-navy-900/65 leading-relaxed border-t border-navy-800/5 pt-3">Sí. Respaldos de cama, puffs, banquetas y sillones a medida. Traés la idea o la foto y lo fabricamos con las medidas que necesites.</p></div>
-      </details>
+    <details class="faq-item bg-white rounded-xl border border-navy-800/8 overflow-hidden transition-colors">
+      <summary class="flex items-center justify-between gap-3 p-4 hover:bg-navy-50/50 transition">
+        <span class="text-sm font-semibold text-navy-800">¿El presupuesto tiene costo?</span>
+        <svg class="chev w-4 h-4 text-sky-400 shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+      </summary>
+      <div class="px-4 pb-4 -mt-1"><p class="text-xs text-navy-900/65 leading-relaxed border-t border-navy-800/5 pt-3">No. Mandás fotos por WhatsApp y te pasamos un estimado sin cargo. El presupuesto final se confirma al ver el mueble en persona, y tampoco tiene costo ni te obliga a nada.</p></div>
+    </details>
 
-      <details class="faq-item bg-white rounded-xl border border-navy-800/8 overflow-hidden transition-colors">
-        <summary class="flex items-center justify-between gap-3 p-4 hover:bg-navy-50/50 transition">
-          <span class="text-sm font-semibold text-navy-800">¿Trabajan muebles antiguos?</span>
-          <svg class="chev w-4 h-4 text-sky-400 shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
-        </summary>
-        <div class="px-4 pb-4 -mt-1"><p class="text-xs text-navy-900/65 leading-relaxed border-t border-navy-800/5 pt-3">Es nuestra especialidad. Restauramos piezas de época respetando la estructura y las técnicas originales: capitoné, resortes atados a mano, tachas. Si tenés algo heredado, es probable que se pueda salvar.</p></div>
-      </details>
+    <details class="faq-item bg-white rounded-xl border border-navy-800/8 overflow-hidden transition-colors">
+      <summary class="flex items-center justify-between gap-3 p-4 hover:bg-navy-50/50 transition">
+        <span class="text-sm font-semibold text-navy-800">¿Hacen muebles a medida?</span>
+        <svg class="chev w-4 h-4 text-sky-400 shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+      </summary>
+      <div class="px-4 pb-4 -mt-1"><p class="text-xs text-navy-900/65 leading-relaxed border-t border-navy-800/5 pt-3">Sí. Respaldos de cama, puffs, banquetas y sillones a medida. Traés la idea o la foto y lo fabricamos con las medidas que necesites.</p></div>
+    </details>
 
-      <details class="faq-item bg-white rounded-xl border border-navy-800/8 overflow-hidden transition-colors">
-        <summary class="flex items-center justify-between gap-3 p-4 hover:bg-navy-50/50 transition">
-          <span class="text-sm font-semibold text-navy-800">¿Dan garantía?</span>
-          <svg class="chev w-4 h-4 text-sky-400 shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
-        </summary>
-        <div class="px-4 pb-4 -mt-1"><p class="text-xs text-navy-900/65 leading-relaxed border-t border-navy-800/5 pt-3">Sí, 6 meses sobre la mano de obra. Si algo cede o se descose por un problema del trabajo, lo corregimos sin cargo.</p></div>
-      </details>
+    <details class="faq-item bg-white rounded-xl border border-navy-800/8 overflow-hidden transition-colors">
+      <summary class="flex items-center justify-between gap-3 p-4 hover:bg-navy-50/50 transition">
+        <span class="text-sm font-semibold text-navy-800">¿Trabajan muebles antiguos?</span>
+        <svg class="chev w-4 h-4 text-sky-400 shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+      </summary>
+      <div class="px-4 pb-4 -mt-1"><p class="text-xs text-navy-900/65 leading-relaxed border-t border-navy-800/5 pt-3">Es nuestra especialidad. Restauramos piezas de época respetando la estructura y las técnicas originales: capitoné, resortes atados a mano, tachas. Si tenés algo heredado, es probable que se pueda salvar.</p></div>
+    </details>
 
+    <details class="faq-item bg-white rounded-xl border border-navy-800/8 overflow-hidden transition-colors">
+      <summary class="flex items-center justify-between gap-3 p-4 hover:bg-navy-50/50 transition">
+        <span class="text-sm font-semibold text-navy-800">¿Dan garantía?</span>
+        <svg class="chev w-4 h-4 text-sky-400 shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+      </summary>
+      <div class="px-4 pb-4 -mt-1"><p class="text-xs text-navy-900/65 leading-relaxed border-t border-navy-800/5 pt-3">Sí, 6 meses sobre la mano de obra. Si algo cede o se descose por un problema del trabajo, lo corregimos sin cargo.</p></div>
+    </details>
+
+  </div>
+</section>
+
+<!-- ══════════════ NOSOTROS ══════════════ -->
+<section id="sec-nosotros" data-section class="hidden">
+  <div class="needle-rule mb-6"><span class="needle-dot"></span></div>
+  <h2 class="font-display text-3xl md:text-4xl font-bold text-navy-800">Nosotros</h2>
+  <p class="text-sm text-navy-900/55 mb-6">Un mueble bien hecho no se tira: se restaura.</p>
+
+  <div class="space-y-4 text-sm text-navy-900/70 leading-relaxed max-w-3xl">
+    <p>Tapicería Miguel Ángel nació hace más de veinte años en un taller chico de Córdoba, con una máquina de coser y una idea simple: un mueble bien hecho no se tira, se restaura. Empezamos retapizando sillas del barrio y hoy pasan por el taller sillones heredados, sofás de living, respaldos a medida y piezas de época que otros ya habían dado por perdidas.</p>
+    <p>No trabajamos por volumen. Cada mueble se desarma, se revisa la estructura, se repone lo que hay que reponer y recién ahí se tapiza. Si un resorte cedió, se ata de nuevo a mano. Si la madera está floja, se encola antes de poner un solo metro de tela. Eso es lo que separa un retapizado que dura veinte años de uno que dura dos.</p>
+    <p>El nombre Eclat vino después, cuando empezamos a hacer terminaciones más finas — capitoné, tachas, costuras a la vista. Es la misma mano de siempre, con más oficio encima.</p>
+  </div>
+
+  <div class="grid gap-4 md:grid-cols-3 mt-10">
+    <article class="card card-tacha bg-white rounded-2xl shadow-sm border border-navy-800/5 p-5 pt-7">
+      <span class="shine"></span>
+      <h3 class="font-semibold text-base text-navy-800 mb-2">Restauración de antigüedades</h3>
+      <p class="text-sm text-navy-900/65 leading-relaxed">Piezas de época tratadas con técnicas originales: resortes atados a mano, crin, capitoné y tachas de latón.</p>
+    </article>
+    <article class="card card-tacha bg-white rounded-2xl shadow-sm border border-navy-800/5 p-5 pt-7">
+      <span class="shine"></span>
+      <h3 class="font-semibold text-base text-navy-800 mb-2">Tapizado a medida</h3>
+      <p class="text-sm text-navy-900/65 leading-relaxed">Respaldos, puffs, banquetas y sillones fabricados con las medidas exactas que necesitás para tu espacio.</p>
+    </article>
+    <article class="card card-tacha bg-white rounded-2xl shadow-sm border border-navy-800/5 p-5 pt-7">
+      <span class="shine"></span>
+      <h3 class="font-semibold text-base text-navy-800 mb-2">Asesoramiento en telas</h3>
+      <p class="text-sm text-navy-900/65 leading-relaxed">Te ayudamos a elegir según el uso real del mueble, la luz del ambiente y si hay chicos o mascotas en casa.</p>
+    </article>
+  </div>
+
+  <div class="mt-10 bg-white rounded-2xl border border-navy-800/5 p-5 shadow-sm text-sm text-navy-900/65 leading-relaxed max-w-3xl">
+    <b class="text-navy-800">Tiempos, pago y garantía.</b> Una silla de comedor sale en 3 a 5 días; un sofá de 3 cuerpos, entre 10 y 15 días hábiles. Se abona el 50% al retirar el mueble y el 50% restante contra entrega — efectivo, transferencia o tarjeta. Damos 6 meses de garantía sobre la mano de obra.
+  </div>
+</section>
+
+<!-- ══════════════ CONTACTO ══════════════ -->
+<section id="sec-contacto" data-section class="hidden">
+  <svg class="stitch-line mb-6" viewBox="0 0 400 2" preserveAspectRatio="none" aria-hidden="true"><path d="M0 1 H400"/></svg>
+  <h2 class="font-display text-3xl md:text-4xl font-bold text-navy-800">Pedí tu presupuesto</h2>
+  <p class="text-sm text-navy-900/55 mb-6">Mandanos una foto del mueble y te respondemos con un estimado sin cargo.</p>
+
+  <div class="grid gap-5 lg:grid-cols-5">
+    <div class="lg:col-span-3 space-y-4">
+      <a href="https://wa.me/5493512043164?text=Hola!%20Quisiera%20una%20consulta%20sobre%20tapizado." target="_blank" rel="noopener"
+         class="card block bg-white rounded-2xl border border-navy-800/5 shadow-sm p-5">
+        <span class="shine"></span>
+        <div class="flex items-center gap-4">
+          <span class="w-12 h-12 rounded-full bg-[#25D366] grid place-items-center shrink-0">
+            <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M17.5 14.4c-.3-.2-1.7-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.7 1-.9 1.2-.2.2-.3.2-.6.1-1.7-.9-2.9-1.6-4-3.5-.3-.5.3-.5.8-1.5.1-.2 0-.4 0-.5s-.7-1.6-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.2.2 2.1 3.2 5.1 4.5 1.9.8 2.6.9 3.5.7.6-.1 1.7-.7 1.9-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.5-.3M12 2a10 10 0 00-8.6 15.1L2 22l5-1.3A10 10 0 1012 2"/></svg>
+          </span>
+          <span>
+            <span class="block font-semibold text-base text-navy-800">WhatsApp</span>
+            <span class="block text-sm text-navy-900/55">+54 9 351 204 3164 — la vía más rápida</span>
+          </span>
+        </div>
+      </a>
+
+      <a href="https://script.google.com/macros/s/AKfycbzixqTUfjkbpP61JKQRv1hyQKRx19a8x54PiSTPVc5vMYymWmeOxEJqrcZ6sQqxdEYQ/exec"
+         class="card block bg-white rounded-2xl border border-navy-800/5 shadow-sm p-5">
+        <span class="shine"></span>
+        <div class="flex items-center gap-4">
+          <span class="w-12 h-12 rounded-full bg-sky-400 grid place-items-center shrink-0">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 9h18M9 21V9M5 3h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2z"/></svg>
+          </span>
+          <span>
+            <span class="block font-semibold text-base text-navy-800">Formulario de encargo</span>
+            <span class="block text-sm text-navy-900/55">Subí fotos y videos del mueble desde la app</span>
+          </span>
+        </div>
+      </a>
+
+      <div class="bg-navy-100 border border-sky-300/40 rounded-xl p-4 text-xs text-navy-800 leading-relaxed">
+        <b>Para que el presupuesto salga más preciso,</b> mandanos: una foto del mueble completo, una del detalle que más te preocupa (tela rota, apoyabrazos hundido) y, si podés, la medida del largo.
+      </div>
     </div>
-  </section>
 
-  <!-- CTA -->
-  <section id="contacto" class="scroll-mt-20">
-    <div class="bg-navy-800 rounded-2xl p-6 md:p-8 text-center text-white relative overflow-hidden">
-      <div class="absolute inset-0 opacity-[0.06]" style="background-image:repeating-linear-gradient(45deg,#fff 0 1px,transparent 1px 12px)"></div>
-      <div class="relative">
-        <h2 class="font-display text-2xl md:text-3xl font-bold mb-1.5 text-white">Contanos qué mueble querés recuperar</h2>
-        <p class="text-sm text-white/65 mb-5 max-w-md mx-auto">Mandanos una foto y te pasamos un presupuesto sin cargo. También podés usar el catálogo de telas, la calculadora y el simulador en nuestra app.</p>
-        <div class="flex flex-wrap gap-3 justify-center">
-          <a href="https://wa.me/5493512043164?text=Hola!%20Quisiera%20una%20consulta%20sobre%20tapizado."
-             class="bg-[#25D366] hover:bg-[#1ebe5a] text-white text-sm font-semibold px-6 py-2.5 rounded-lg transition">
-            Escribinos por WhatsApp
-          </a>
-          <a href="https://script.google.com/macros/s/AKfycbzixqTUfjkbpP61JKQRv1hyQKRx19a8x54PiSTPVc5vMYymWmeOxEJqrcZ6sQqxdEYQ/exec"
-             class="bg-sky-400 hover:bg-sky-500 text-white text-sm font-semibold px-6 py-2.5 rounded-lg transition">
-            Abrir la app
-          </a>
+    <div class="lg:col-span-2">
+      <div class="bg-navy-800 rounded-2xl p-5 text-white relative overflow-hidden">
+        <div class="absolute inset-0 opacity-[0.05] pointer-events-none" style="background-image:repeating-linear-gradient(45deg,#fff 0 1px,transparent 1px 12px)"></div>
+        <div class="relative space-y-4">
+          <div class="text-[10px] tracking-[0.25em] text-sky-300 font-bold">DATOS</div>
+          <div>
+            <div class="text-[10px] text-white/45 mb-0.5">Dónde estamos</div>
+            <div class="text-sm">Córdoba, Argentina</div>
+          </div>
+          <div>
+            <div class="text-[10px] text-white/45 mb-0.5">Retiro y entrega</div>
+            <div class="text-sm">Córdoba capital y alrededores</div>
+          </div>
+          <div>
+            <div class="text-[10px] text-white/45 mb-0.5">Horario del taller</div>
+            <div class="text-sm">Lunes a viernes, 9 a 18 h</div>
+          </div>
+          <div>
+            <div class="text-[10px] text-white/45 mb-0.5">Presupuesto</div>
+            <div class="text-sm">Sin cargo y sin compromiso</div>
+          </div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
 </main>
 
@@ -652,12 +1539,15 @@
 </footer>
 
 <script>
+var $ = function (s) { return document.querySelector(s); };
+var $$ = function (s) { return Array.prototype.slice.call(document.querySelectorAll(s)); };
+
 /* ---------- Tema claro / oscuro ---------- */
 function aplicarTema(oscuro) {
   document.documentElement.classList.toggle('dark', oscuro);
   document.body.classList.toggle('dark', oscuro);
-  document.getElementById('iconSol').classList.toggle('hidden', !oscuro);
-  document.getElementById('iconLuna').classList.toggle('hidden', oscuro);
+  $('#iconSol').classList.toggle('hidden', !oscuro);
+  $('#iconLuna').classList.toggle('hidden', oscuro);
   var meta = document.querySelector('meta[name="theme-color"]');
   if (meta) meta.setAttribute('content', oscuro ? '#0b1526' : '#152B4E');
   try { localStorage.setItem('tema', oscuro ? 'oscuro' : 'claro'); } catch (e) {}
@@ -669,24 +1559,96 @@ function aplicarTema(oscuro) {
     : window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
   aplicarTema(oscuro);
 })();
-document.getElementById('btnTema').addEventListener('click', function () {
+$('#btnTema').addEventListener('click', function () {
   aplicarTema(!document.documentElement.classList.contains('dark'));
 });
 
-/* ---------- Menú móvil ---------- */
-var btnMenu = document.getElementById('btnMenu'), mm = document.getElementById('mobileMenu');
-btnMenu.addEventListener('click', function () {
-  var abierto = mm.classList.toggle('hidden') === false;
-  btnMenu.setAttribute('aria-expanded', abierto ? 'true' : 'false');
+/* ---------- Navegación por paneles ---------- */
+var SECCIONES = ['catalogo','telas','taller','nosotros','contacto'];
+
+function irA(id, empujarHistorial) {
+  if (SECCIONES.indexOf(id) === -1) id = 'catalogo';
+  $$('[data-section]').forEach(function (s) { s.classList.add('hidden'); });
+  var sec = $('#sec-' + id);
+  sec.classList.remove('hidden');
+  sec.classList.remove('fade-up'); void sec.offsetWidth; sec.classList.add('fade-up');
+  $$('.nav-link').forEach(function (a) { a.classList.toggle('active', a.dataset.nav === id); });
+  $('#mobileMenu').classList.add('hidden');
+  $('#btnMenu').setAttribute('aria-expanded', 'false');
+  if (empujarHistorial !== false && location.hash !== '#' + id) {
+    history.pushState({ sec: id }, '', '#' + id);
+  }
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  refrescarReveals(sec);
+  if (id === 'catalogo') cascadaCatalogo();
+}
+
+$$('[data-nav]').forEach(function (a) {
+  a.addEventListener('click', function (e) { e.preventDefault(); irA(a.dataset.nav); });
 });
-Array.prototype.forEach.call(mm.querySelectorAll('a'), function (a) {
-  a.addEventListener('click', function () {
-    mm.classList.add('hidden');
-    btnMenu.setAttribute('aria-expanded', 'false');
+window.addEventListener('popstate', function () {
+  irA((location.hash || '#catalogo').slice(1), false);
+});
+
+/* ---------- Menú móvil ---------- */
+$('#btnMenu').addEventListener('click', function () {
+  var abierto = $('#mobileMenu').classList.toggle('hidden') === false;
+  this.setAttribute('aria-expanded', abierto ? 'true' : 'false');
+});
+
+/* ---------- Filtros del catálogo ---------- */
+var fmtAR = function (n) { return '$' + n.toLocaleString('es-AR'); };
+var PRODS = $$('#gridCatalogo .prod');
+
+function filtrarCatalogo() {
+  var cat = $('#fCategoria').value;
+  var max = +$('#fPrecio').value;
+  var soloOferta = $('#fOferta').checked;
+  $('#fPrecioLabel').textContent = fmtAR(max);
+
+  var visibles = 0;
+  PRODS.forEach(function (el) {
+    var ok = (cat === 'todas' || el.dataset.cat === cat)
+          && (+el.dataset.precio <= max)
+          && (!soloOferta || el.dataset.oferta === '1');
+    el.classList.toggle('hidden', !ok);
+    if (ok) visibles++;
+  });
+  $('#catCount').textContent = visibles + ' de ' + PRODS.length + ' trabajos';
+  $('#catVacio').classList.toggle('hidden', visibles > 0);
+}
+['#fCategoria','#fPrecio','#fOferta'].forEach(function (s) {
+  $(s).addEventListener('input', filtrarCatalogo);
+});
+
+function cascadaCatalogo() {
+  var vis = PRODS.filter(function (el) { return !el.classList.contains('hidden'); });
+  vis.forEach(function (el, i) {
+    el.classList.remove('card-in'); void el.offsetWidth;
+    el.style.animationDelay = (i * 40) + 'ms';
+    el.classList.add('card-in');
+  });
+}
+
+/* ---------- Filtros de telas ---------- */
+var TELAS_EL = $$('#gridTelas .tela');
+$$('.btn-tela').forEach(function (btn) {
+  btn.addEventListener('click', function () {
+    var tipo = btn.dataset.tela;
+    $$('.btn-tela').forEach(function (b) {
+      var on = b === btn;
+      b.className = 'btn-tela shrink-0 px-4 py-1.5 rounded-full text-xs font-semibold border transition ' + (on
+        ? 'bg-navy-800 text-white border-navy-800'
+        : 'bg-white text-navy-800 border-navy-800/15 hover:border-sky-400');
+    });
+    TELAS_EL.forEach(function (el) {
+      el.classList.toggle('hidden', !(tipo === 'todas' || el.dataset.tipo === tipo));
+    });
   });
 });
 
-document.getElementById('anio').textContent = new Date().getFullYear();
+/* ---------- Año ---------- */
+$('#anio').textContent = new Date().getFullYear();
 
 /* ---------- Loader aguja + hilo ---------- */
 (function animarLoader() {
@@ -776,6 +1738,7 @@ function ocultarLoader() {
           document.body.style.overflow = '';
           try { sessionStorage.setItem('introVisto', '1'); } catch (e) {}
           ocultarLoader();
+          cascadaCatalogo();
         }, 500);
       }, 2100);
     }
@@ -784,27 +1747,38 @@ function ocultarLoader() {
   requestAnimationFrame(frame);
 })();
 
-/* ---------- Reveals al hacer scroll ---------- */
-(function reveals() {
-  var io = new IntersectionObserver(function (es) {
-    es.forEach(function (e) {
-      if (e.isIntersecting) {
-        e.target.classList.add('seen');
-        e.target.classList.add('drawn');
-        io.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.35 });
-  Array.prototype.forEach.call(document.querySelectorAll('.stitch-line, .needle-rule'), function (el) { io.observe(el); });
-})();
+/* ---------- Reveals (puntadas y needle-rules) ---------- */
+var revealObs = new IntersectionObserver(function (es) {
+  es.forEach(function (e) {
+    if (e.isIntersecting) {
+      e.target.classList.add('seen');
+      e.target.classList.add('drawn');
+    }
+  });
+}, { threshold: 0.35 });
+
+function refrescarReveals(scope) {
+  (scope || document).querySelectorAll('.stitch-line, .needle-rule').forEach(function (el) {
+    el.classList.remove('seen', 'drawn');
+    revealObs.observe(el);
+  });
+}
+refrescarReveals();
 
 /* ---------- Globito de WhatsApp ---------- */
 setTimeout(function () {
-  var tip = document.getElementById('waTip');
+  var tip = $('#waTip');
   if (!tip) return;
   tip.classList.add('visible');
   setTimeout(function () { tip.classList.remove('visible'); }, 4500);
 }, 3500);
+
+/* ---------- Arranque: respetar el hash de la URL ---------- */
+(function arranque() {
+  var h = (location.hash || '').slice(1);
+  if (h && SECCIONES.indexOf(h) > -1 && h !== 'catalogo') irA(h, false);
+  filtrarCatalogo();
+})();
 </script>
 </body>
 </html>
