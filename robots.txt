@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://tapiceriamiguelangel-eclat.github.io/sitemap.xml
