@@ -397,6 +397,7 @@
       <a href="#catalogo" data-nav="catalogo" class="nav-link active flex items-center px-1 text-navy-800">Catálogo</a>
       <a href="#telas"    data-nav="telas"    class="nav-link flex items-center px-1 text-navy-800">Telas</a>
       <a href="#taller"   data-nav="taller"   class="nav-link flex items-center px-1 text-navy-800">El Taller</a>
+      <a href="#antes-despues" data-nav="antes-despues" class="nav-link flex items-center px-1 text-navy-800">Antes / Después</a>
       <a href="#nosotros" data-nav="nosotros" class="nav-link flex items-center px-1 text-navy-800">Nosotros</a>
       <a href="#contacto" data-nav="contacto" class="nav-link flex items-center px-1 text-navy-800">Contacto</a>
     </nav>
@@ -420,6 +421,7 @@
     <a href="#catalogo" data-nav="catalogo" class="block px-4 py-3 border-b border-navy-800/5 text-sm font-medium">Catálogo</a>
     <a href="#telas"    data-nav="telas"    class="block px-4 py-3 border-b border-navy-800/5 text-sm font-medium">Telas</a>
     <a href="#taller"   data-nav="taller"   class="block px-4 py-3 border-b border-navy-800/5 text-sm font-medium">El Taller</a>
+    <a href="#antes-despues" data-nav="antes-despues" class="block px-4 py-3 border-b border-navy-800/5 text-sm font-medium">Antes / Después</a>
     <a href="#nosotros" data-nav="nosotros" class="block px-4 py-3 border-b border-navy-800/5 text-sm font-medium">Nosotros</a>
     <a href="#contacto" data-nav="contacto" class="block px-4 py-3 text-sm font-medium">Contacto</a>
   </nav>
@@ -752,46 +754,14 @@
   <h2 class="font-display text-3xl md:text-4xl font-bold text-navy-800">El Taller</h2>
   <p class="text-sm text-navy-900/55 mb-6">Oficio, paciencia y materiales de primera.</p>
 
-  <div class="grid gap-6 md:grid-cols-5 items-center mb-12">
-    <div class="md:col-span-2">
-      <div id="antesDespues" class="ad-slider relative aspect-[4/5] rounded-2xl overflow-hidden border border-navy-800/5 shadow-sm select-none">
-        <!-- ANTES -->
-        <div class="ad-antes absolute inset-0 grid place-items-center">
-          <span class="absolute top-3 left-3 z-10 text-[10px] font-bold tracking-wider bg-navy-900/70 text-white px-2.5 py-1 rounded-full">ANTES</span>
-          <svg class="w-16 h-16 opacity-30" viewBox="0 0 100 100" fill="none" aria-hidden="true">
-            <path d="M62 22 L84 78 L74 78 L69.5 66 L54.5 66 L50 78 L40 78 L62 22 Z M57.5 58 L66.5 58 L62 45.5 L57.5 58 Z" fill="#7c8ba0"/>
-            <path d="M10 78 L10 22 L22 22 L36 52 L50 22 L62 22 L62 78 L52 78 L52 40 L39.5 67 L32.5 67 L20 40 L20 78 Z" fill="#e7e2d6"/>
-          </svg>
-        </div>
-        <!-- DESPUÉS -->
-        <div id="adDespues" class="capitone absolute inset-0 grid place-items-center" style="clip-path:inset(0 50% 0 0)">
-          <span class="absolute top-3 right-3 z-10 text-[10px] font-bold tracking-wider bg-sky-400 text-white px-2.5 py-1 rounded-full">DESPUÉS</span>
-          <svg class="w-16 h-16 opacity-40" viewBox="0 0 100 100" fill="none" aria-hidden="true">
-            <path d="M62 22 L84 78 L74 78 L69.5 66 L54.5 66 L50 78 L40 78 L62 22 Z M57.5 58 L66.5 58 L62 45.5 L57.5 58 Z" fill="#5FA3DC"/>
-            <path d="M10 78 L10 22 L22 22 L36 52 L50 22 L62 22 L62 78 L52 78 L52 40 L39.5 67 L32.5 67 L20 40 L20 78 Z" fill="#fff"/>
-          </svg>
-        </div>
-        <!-- MANIJA -->
-        <div id="adHandle" class="absolute inset-y-0 z-20 pointer-events-none" style="left:50%">
-          <div class="absolute inset-y-0 -translate-x-1/2 w-0.5 bg-white/80"></div>
-          <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white shadow-lg grid place-items-center">
-            <svg class="w-4 h-4 text-navy-800" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M8 7l-4 5 4 5M16 7l4 5-4 5"/></svg>
-          </div>
-        </div>
-        <input id="adRange" type="range" min="0" max="100" value="50" aria-label="Deslizar para comparar antes y después"
-               class="absolute inset-0 w-full h-full opacity-0 cursor-ew-resize z-30 m-0">
-      </div>
-      <p class="text-center text-[11px] text-navy-900/45 mt-2">← Deslizá para ver la diferencia →</p>
-    </div>
-    <div class="md:col-span-3 space-y-3.5 text-sm text-navy-900/70 leading-relaxed">
-      <p>Trabajamos mueble por mueble, sin apuro. Desarmamos, revisamos la estructura, reponemos espuma y resortes cuando hace falta, y recién ahí tapizamos. Es más lento que cambiar la tela por encima, pero es lo que hace que un sillón dure otros veinte años.</p>
-      <p>Nos especializamos en restauración de piezas antiguas, tapizado a medida y trabajos donde el detalle importa: capitoné, tachas, resortes atados a mano y terminaciones cosidas.</p>
-      <div class="flex flex-wrap gap-2 pt-1">
-        <span class="text-[11px] font-semibold text-navy-800 bg-navy-100 border border-sky-300/40 px-3 py-1.5 rounded-full">+20 años de oficio</span>
-        <span class="text-[11px] font-semibold text-navy-800 bg-navy-100 border border-sky-300/40 px-3 py-1.5 rounded-full">Trabajo artesanal</span>
-        <span class="text-[11px] font-semibold text-navy-800 bg-navy-100 border border-sky-300/40 px-3 py-1.5 rounded-full">Telas de primera</span>
-        <span class="text-[11px] font-semibold text-navy-800 bg-navy-100 border border-sky-300/40 px-3 py-1.5 rounded-full">Presupuesto sin cargo</span>
-      </div>
+  <div class="space-y-3.5 text-sm text-navy-900/70 leading-relaxed mb-12 max-w-3xl">
+    <p>Trabajamos mueble por mueble, sin apuro. Desarmamos, revisamos la estructura, reponemos espuma y resortes cuando hace falta, y recién ahí tapizamos. Es más lento que cambiar la tela por encima, pero es lo que hace que un sillón dure otros veinte años.</p>
+    <p>Nos especializamos en restauración de piezas antiguas, tapizado a medida y trabajos donde el detalle importa: capitoné, tachas, resortes atados a mano y terminaciones cosidas.</p>
+    <div class="flex flex-wrap gap-2 pt-1">
+      <span class="text-[11px] font-semibold text-navy-800 bg-navy-100 border border-sky-300/40 px-3 py-1.5 rounded-full">+20 años de oficio</span>
+      <span class="text-[11px] font-semibold text-navy-800 bg-navy-100 border border-sky-300/40 px-3 py-1.5 rounded-full">Trabajo artesanal</span>
+      <span class="text-[11px] font-semibold text-navy-800 bg-navy-100 border border-sky-300/40 px-3 py-1.5 rounded-full">Telas de primera</span>
+      <span class="text-[11px] font-semibold text-navy-800 bg-navy-100 border border-sky-300/40 px-3 py-1.5 rounded-full">Presupuesto sin cargo</span>
     </div>
   </div>
 
@@ -920,6 +890,54 @@
       <div class="px-4 pb-4 -mt-1"><p class="text-xs text-navy-900/65 leading-relaxed border-t border-navy-800/5 pt-3">Sí, 6 meses sobre la mano de obra. Si algo cede o se descose por un problema del trabajo, lo corregimos sin cargo.</p></div>
     </details>
 
+  </div>
+</section>
+
+<!-- ══════════════ ANTES / DESPUÉS ══════════════ -->
+<section id="sec-antes-despues" data-section class="hidden">
+  <svg class="stitch-line mb-6" viewBox="0 0 400 10" preserveAspectRatio="none" aria-hidden="true"><path d="M0 5 L20 1 L40 9 L60 1 L80 9 L100 1 L120 9 L140 1 L160 9 L180 1 L200 9 L220 1 L240 9 L260 1 L280 9 L300 1 L320 9 L340 1 L360 9 L380 1 L400 5"/></svg>
+  <h2 class="font-display text-3xl md:text-4xl font-bold text-navy-800">Antes / Después</h2>
+  <p class="text-sm text-navy-900/55 mb-8 max-w-2xl">Así se ve la transformación de un mueble cuando pasa por el taller: misma estructura, tela y terminación completamente nuevas.</p>
+
+  <div class="grid gap-8 md:grid-cols-2 items-start max-w-4xl mx-auto">
+    <div>
+      <div id="antesDespues" class="ad-slider relative aspect-[4/5] rounded-2xl overflow-hidden border border-navy-800/5 shadow-sm select-none">
+        <!-- ANTES -->
+        <div class="ad-antes absolute inset-0 grid place-items-center">
+          <span class="absolute top-3 left-3 z-10 text-[10px] font-bold tracking-wider bg-navy-900/70 text-white px-2.5 py-1 rounded-full">ANTES</span>
+          <svg class="w-16 h-16 opacity-30" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+            <path d="M62 22 L84 78 L74 78 L69.5 66 L54.5 66 L50 78 L40 78 L62 22 Z M57.5 58 L66.5 58 L62 45.5 L57.5 58 Z" fill="#7c8ba0"/>
+            <path d="M10 78 L10 22 L22 22 L36 52 L50 22 L62 22 L62 78 L52 78 L52 40 L39.5 67 L32.5 67 L20 40 L20 78 Z" fill="#e7e2d6"/>
+          </svg>
+        </div>
+        <!-- DESPUÉS -->
+        <div id="adDespues" class="capitone absolute inset-0 grid place-items-center" style="clip-path:inset(0 50% 0 0)">
+          <span class="absolute top-3 right-3 z-10 text-[10px] font-bold tracking-wider bg-sky-400 text-white px-2.5 py-1 rounded-full">DESPUÉS</span>
+          <svg class="w-16 h-16 opacity-40" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+            <path d="M62 22 L84 78 L74 78 L69.5 66 L54.5 66 L50 78 L40 78 L62 22 Z M57.5 58 L66.5 58 L62 45.5 L57.5 58 Z" fill="#5FA3DC"/>
+            <path d="M10 78 L10 22 L22 22 L36 52 L50 22 L62 22 L62 78 L52 78 L52 40 L39.5 67 L32.5 67 L20 40 L20 78 Z" fill="#fff"/>
+          </svg>
+        </div>
+        <!-- MANIJA -->
+        <div id="adHandle" class="absolute inset-y-0 z-20 pointer-events-none" style="left:50%">
+          <div class="absolute inset-y-0 -translate-x-1/2 w-0.5 bg-white/80"></div>
+          <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white shadow-lg grid place-items-center">
+            <svg class="w-4 h-4 text-navy-800" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M8 7l-4 5 4 5M16 7l4 5-4 5"/></svg>
+          </div>
+        </div>
+        <input id="adRange" type="range" min="0" max="100" value="50" aria-label="Deslizar para comparar antes y después"
+               class="absolute inset-0 w-full h-full opacity-0 cursor-ew-resize z-30 m-0">
+      </div>
+      <p class="text-center text-[11px] text-navy-900/45 mt-2">← Deslizá para ver la diferencia →</p>
+    </div>
+    <div class="space-y-3.5 text-sm text-navy-900/70 leading-relaxed pt-2">
+      <p>Cada trabajo pasa por el mismo proceso: se revisa la estructura, se repone el relleno que haga falta y recién ahí se tapiza con la tela elegida. El resultado es un mueble que se ve —y se siente— como nuevo, con la estructura original que le da su valor.</p>
+      <p>¿Tenés un mueble en un estado similar al "antes"? Mandanos una foto y te contamos qué se puede hacer.</p>
+      <a href="https://wa.me/5493512043164?text=Hola!%20Tengo%20un%20mueble%20para%20restaurar%2C%20te%20mando%20una%20foto." target="_blank" rel="noopener"
+         class="inline-block bg-[#25D366] hover:bg-[#1ebe5a] text-white text-sm font-semibold px-5 py-2.5 rounded-lg transition">
+        Mandar foto por WhatsApp
+      </a>
+    </div>
   </div>
 </section>
 
@@ -1100,7 +1118,7 @@ $('#btnTema').addEventListener('click', function () {
 })();
 
 /* ---------- Navegación por paneles ---------- */
-var SECCIONES = ['catalogo','telas','taller','nosotros','contacto'];
+var SECCIONES = ['catalogo','telas','taller','antes-despues','nosotros','contacto'];
 
 var META_SECCIONES = {
   catalogo: {
@@ -1114,6 +1132,10 @@ var META_SECCIONES = {
   taller: {
     title: 'El Taller — Tapicería Miguel Ángel | Proceso de tapizado artesanal en Córdoba',
     desc:  'Conocé el proceso de trabajo de nuestro taller de tapicería artesanal en Córdoba: diagnóstico, armado, tapizado y terminación a medida.'
+  },
+  'antes-despues': {
+    title: 'Antes / Después — Tapicería Miguel Ángel | Restauración de muebles en Córdoba',
+    desc:  'Mirá la transformación de un mueble restaurado por Tapicería Miguel Ángel: mismo mueble, tela y terminación completamente nuevas.'
   },
   nosotros: {
     title: 'Nosotros — Tapicería Miguel Ángel | Más de 20 años de oficio en Córdoba',
