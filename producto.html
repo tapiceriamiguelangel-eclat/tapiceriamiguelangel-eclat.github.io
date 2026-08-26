@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title id="tituloPagina">Producto — Tapicería Miguel Ángel</title>
+<meta id="metaDesc" name="description" content="Ficha de producto de Tapicería Miguel Ángel (Eclat) en Córdoba.">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#152B4E">
+<link rel="canonical" id="canonicalLink" href="https://tapiceriamiguelangel-eclat.github.io/producto.html">
+<link rel="icon" href="icon-192.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root { --navy-900:#0e1c34; --navy-800:#152B4E; --navy-600:#1d3a67; --navy-100:#e6eef7; --navy-50:#f5f8fc; --sky-400:#5FA3DC; --sky-300:#8CC0E8; --sky-500:#3d8bcd; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:'Inter', system-ui, sans-serif; background:var(--navy-50); color:var(--navy-900); line-height:1.6; }
+  @media (prefers-color-scheme: dark) {
+    body { background:#0b1526; color:#e6eef7; }
+    header, footer { background:#0e1c34 !important; }
+    .card { background:#0f1d34 !important; border-color:rgba(255,255,255,.06) !important; }
+    a.back { color:#cfe1f5 !important; }
+    .muted { color:#a9b8cd !important; }
+    .badge-oferta { background:#7a2020 !important; }
+  }
+  header { background:var(--navy-800); color:#fff; padding:18px 20px; }
+  .headwrap { max-width:920px; margin:0 auto; display:flex; align-items:center; gap:12px; }
+  header a.back { color:#cfe1f5; text-decoration:none; font-size:13px; font-weight:600; white-space:nowrap; }
+  main { max-width:920px; margin:0 auto; padding:32px 20px 60px; }
+  .grid { display:grid; grid-template-columns:1fr; gap:28px; }
+  @media (min-width:760px) { .grid { grid-template-columns:1fr 1fr; align-items:start; } }
+  .foto {
+    aspect-ratio:4/3; border-radius:18px; overflow:hidden; position:relative;
+    background:#152B4E;
+    background-image:
+      radial-gradient(circle at 50% 50%, rgba(95,163,220,.16) 0 2px, transparent 3px),
+      repeating-linear-gradient(45deg,  rgba(255,255,255,.05) 0 1px, transparent 1px 26px),
+      repeating-linear-gradient(-45deg, rgba(255,255,255,.05) 0 1px, transparent 1px 26px),
+      linear-gradient(135deg,#152B4E,#1d3a67);
+    background-size: 26px 26px, 37px 37px, 37px 37px, 100% 100%;
+    box-shadow:0 12px 32px -14px rgba(21,43,78,.4);
+  }
+  .foto img { width:100%; height:100%; object-fit:cover; display:block; }
+  .foto .placeholder { position:absolute; inset:0; display:grid; place-items:center; }
+  .badge-cat { display:inline-block; font-size:10.5px; letter-spacing:.14em; text-transform:uppercase; font-weight:700; color:var(--sky-500); margin-bottom:6px; }
+  h1 { font-family:'Cormorant Garamond', serif; font-size:30px; margin:0 0 10px; }
+  .precio-row { display:flex; align-items:center; gap:10px; margin-bottom:18px; flex-wrap:wrap; }
+  .precio { font-family:'Cormorant Garamond', serif; font-weight:700; font-size:30px; color:var(--navy-800); }
+  .dark .precio { color:#e6eef7; }
+  .badge-oferta { background:#dc2626; color:#fff; font-size:11px; font-weight:700; padding:3px 10px; border-radius:999px; }
+  p.desc { font-size:14.5px; color:#3d4c66; margin-bottom:22px; }
+  .dark p.desc { color:#c3d0e2; }
+  .card { background:#fff; border:1px solid rgba(21,43,78,.06); border-radius:16px; padding:18px 20px; margin-bottom:14px; }
+  .card b { color:var(--navy-800); }
+  .dark .card b { color:#e6eef7; }
+  .cta { display:flex; flex-wrap:wrap; gap:10px; margin-top:6px; }
+  .btn { font-size:14px; font-weight:600; text-decoration:none; padding:12px 22px; border-radius:999px; display:inline-flex; align-items:center; gap:8px; transition:transform .15s ease; }
+  .btn:hover { transform:translateY(-1px); }
+  .btn-wa { background:#25D366; color:#fff; }
+  .btn-outline { background:transparent; color:var(--navy-800); border:1.5px solid var(--navy-800); }
+  .dark .btn-outline { color:#e6eef7 !important; border-color:#8CC0E8 !important; }
+  footer { background:var(--navy-900); color:rgba(255,255,255,.5); text-align:center; padding:22px; font-size:12px; margin-top:40px; }
+  #estadoCarga, #estadoError { max-width:920px; margin:60px auto; text-align:center; padding:0 20px; font-size:14px; color:#6b7d99; }
+  #estadoError a { color:var(--sky-400); }
+</style>
+</head>
+<body>
+  <header>
+    <div class="headwrap">
+      <svg width="30" height="30" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+        <path d="M62 22 L84 78 L74 78 L69.5 66 L54.5 66 L50 78 L40 78 L62 22 Z M57.5 58 L66.5 58 L62 45.5 L57.5 58 Z" fill="#5FA3DC"/>
+        <path d="M10 78 L10 22 L22 22 L36 52 L50 22 L62 22 L62 78 L52 78 L52 40 L39.5 67 L32.5 67 L20 40 L20 78 Z" fill="#fff"/>
+      </svg>
+      <div style="flex:1">
+        <div style="font-family:'Cormorant Garamond',serif;font-weight:700;font-size:16px">Tapicería Miguel Ángel</div>
+        <div style="font-size:8px;letter-spacing:.28em;color:#8CC0E8;font-weight:600">TAPICERÍA · ECLAT</div>
+      </div>
+      <a class="back" href="/#catalogo">← Ver catálogo</a>
+    </div>
+  </header>
+
+  <p id="estadoCarga">Cargando producto…</p>
+  <div id="estadoError" style="display:none">
+    No encontramos este producto. <a href="/#catalogo">Volver al catálogo</a>.
+  </div>
+
+  <main id="main" style="display:none">
+    <div class="grid">
+      <div class="foto" id="foto">
+        <div class="placeholder">
+          <svg width="72" height="72" viewBox="0 0 100 100" fill="none" opacity="0.35" aria-hidden="true">
+            <path d="M62 22 L84 78 L74 78 L69.5 66 L54.5 66 L50 78 L40 78 L62 22 Z M57.5 58 L66.5 58 L62 45.5 L57.5 58 Z" fill="#5FA3DC"/>
+            <path d="M10 78 L10 22 L22 22 L36 52 L50 22 L62 22 L62 78 L52 78 L52 40 L39.5 67 L32.5 67 L20 40 L20 78 Z" fill="#fff"/>
+          </svg>
+        </div>
+      </div>
+      <div>
+        <span class="badge-cat" id="catLabel"></span>
+        <h1 id="nombreProducto"></h1>
+        <div class="precio-row">
+          <span class="precio" id="precioProducto"></span>
+          <span class="badge-oferta" id="ofertaBadge" style="display:none">OFERTA</span>
+        </div>
+        <p class="desc" id="descProducto"></p>
+
+        <div class="card">
+          <b>¿Cómo sigue esto?</b> Nos escribís por WhatsApp con este producto ya seleccionado, nos contás el estado de tu mueble (o si es una pieza nueva a tapizar) y te confirmamos el presupuesto final antes de empezar. Retiro y entrega a domicilio en Córdoba capital y alrededores.
+        </div>
+
+        <div class="cta">
+          <a id="btnWa" class="btn btn-wa" target="_blank" rel="noopener">Consultar por WhatsApp</a>
+          <a class="btn btn-outline" href="/#catalogo">Ver todo el catálogo</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>© <span id="anio"></span> Tapicería Miguel Ángel — Eclat</footer>
+
+  <script>
+    document.getElementById('anio').textContent = new Date().getFullYear();
+
+    function fmtAR(n) { return '$' + Number(n).toLocaleString('es-AR'); }
+
+    var params = new URLSearchParams(location.search);
+    var id = params.get('id');
+
+    fetch('productos.json', { cache: 'no-store' })
+      .then(function (r) { return r.json(); })
+      .then(function (productos) {
+        var p = productos.find(function (x) { return x.id === id && x.activo !== false; });
+        if (!p) { mostrarError(); return; }
+        renderizar(p);
+      })
+      .catch(mostrarError);
+
+    function mostrarError() {
+      document.getElementById('estadoCarga').style.display = 'none';
+      document.getElementById('estadoError').style.display = 'block';
+    }
+
+    function renderizar(p) {
+      document.getElementById('estadoCarga').style.display = 'none';
+      document.getElementById('main').style.display = 'block';
+
+      document.title = p.nombre + ' — Tapicería Miguel Ángel';
+      document.getElementById('tituloPagina').textContent = p.nombre + ' — Tapicería Miguel Ángel';
+      document.getElementById('metaDesc').setAttribute('content', p.descripcion || p.nombre);
+      document.getElementById('canonicalLink').setAttribute('href', 'https://tapiceriamiguelangel-eclat.github.io/producto.html?id=' + p.id);
+
+      document.getElementById('catLabel').textContent = p.categoria;
+      document.getElementById('nombreProducto').textContent = p.nombre;
+      document.getElementById('precioProducto').textContent = fmtAR(p.precio);
+      document.getElementById('descProducto').textContent = p.descripcion || '';
+
+      if (p.oferta) document.getElementById('ofertaBadge').style.display = 'inline-block';
+
+      if (p.imagen) {
+        var foto = document.getElementById('foto');
+        foto.innerHTML = '';
+        var img = document.createElement('img');
+        img.src = p.imagen;
+        img.alt = p.nombre;
+        foto.appendChild(img);
+      }
+
+      var msg = 'Hola! Me interesa: *' + p.nombre + '* (' + p.categoria + ') — ' + fmtAR(p.precio) + '. ¿Me pasás más info?';
+      document.getElementById('btnWa').href = 'https://wa.me/5493512043164?text=' + encodeURIComponent(msg);
+    }
+  </script>
+</body>
+</html>

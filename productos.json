@@ -1,0 +1,282 @@
+[
+  {
+    "id": "p001",
+    "categoria": "Sofá",
+    "nombre": "Sofá 2 Cuerpos",
+    "precio": 210000,
+    "oferta": false,
+    "descripcion": "Retapizado completo de sofá: revisión de estructura, reposición de espuma y resortes cuando hace falta, y tapizado a mano con tela de primera calidad. Incluye retiro y entrega a domicilio en Córdoba capital y alrededores.",
+    "imagen": null,
+    "activo": true
+  },
+  {
+    "id": "p002",
+    "categoria": "Sofá",
+    "nombre": "Sofá 3 Cuerpos",
+    "precio": 320000,
+    "oferta": true,
+    "descripcion": "Retapizado completo de sofá: revisión de estructura, reposición de espuma y resortes cuando hace falta, y tapizado a mano con tela de primera calidad. Incluye retiro y entrega a domicilio en Córdoba capital y alrededores.",
+    "imagen": null,
+    "activo": true
+  },
+  {
+    "id": "p003",
+    "categoria": "Sofá",
+    "nombre": "Sofá Esquinero en L",
+    "precio": 450000,
+    "oferta": false,
+    "descripcion": "Retapizado completo de sofá: revisión de estructura, reposición de espuma y resortes cuando hace falta, y tapizado a mano con tela de primera calidad. Incluye retiro y entrega a domicilio en Córdoba capital y alrededores.",
+    "imagen": null,
+    "activo": true
+  },
+  {
+    "id": "p004",
+    "categoria": "Sofá",
+    "nombre": "Sofá Cama",
+    "precio": 285000,
+    "oferta": false,
+    "descripcion": "Retapizado completo de sofá: revisión de estructura, reposición de espuma y resortes cuando hace falta, y tapizado a mano con tela de primera calidad. Incluye retiro y entrega a domicilio en Córdoba capital y alrededores.",
+    "imagen": null,
+    "activo": true
+  },
+  {
+    "id": "p005",
+    "categoria": "Sofá",
+    "nombre": "Sofá Chesterfield Capitoné",
+    "precio": 520000,
+    "oferta": false,
+    "descripcion": "Retapizado completo de sofá: revisión de estructura, reposición de espuma y resortes cuando hace falta, y tapizado a mano con tela de primera calidad. Incluye retiro y entrega a domicilio en Córdoba capital y alrededores.",
+    "imagen": null,
+    "activo": true
+  },
+  {
+    "id": "p006",
+    "categoria": "Sofá",
+    "nombre": "Diván / Chaise Longue",
+    "precio": 195000,
+    "oferta": false,
+    "descripcion": "Retapizado completo de sofá: revisión de estructura, reposición de espuma y resortes cuando hace falta, y tapizado a mano con tela de primera calidad. Incluye retiro y entrega a domicilio en Córdoba capital y alrededores.",
+    "imagen": null,
+    "activo": true
+  },
+  {
+    "id": "p007",
+    "categoria": "Sillón",
+    "nombre": "Sillón Individual Clásico",
+    "precio": 120000,
+    "oferta": false,
+    "descripcion": "Restauración y retapizado de sillón: se revisa la estructura de madera, se repone relleno y resortes si es necesario, y se tapiza con terminación prolija a mano. Incluye retiro y entrega a domicilio.",
+    "imagen": null,
+    "activo": true
+  },
+  {
+    "id": "p008",
+    "categoria": "Sillón",
+    "nombre": "Sillón Bergère Restaurado",
+    "precio": 185000,
+    "oferta": false,
+    "descripcion": "Restauración y retapizado de sillón: se revisa la estructura de madera, se repone relleno y resortes si es necesario, y se tapiza con terminación prolija a mano. Incluye retiro y entrega a domicilio.",
+    "imagen": null,
+    "activo": true
+  },
+  {
+    "id": "p009",
+    "categoria": "Sillón",
+    "nombre": "Butaca de Living",
+    "precio": 135000,
+    "oferta": true,
+    "descripcion": "Restauración y retapizado de sillón: se revisa la estructura de madera, se repone relleno y resortes si es necesario, y se tapiza con terminación prolija a mano. Incluye retiro y entrega a domicilio.",
+    "imagen": null,
+    "activo": true
+  },
+  {
+    "id": "p010",
+    "categoria": "Sillón",
+    "nombre": "Sillón Reclinable",
+    "precio": 175000,
+    "oferta": false,
+    "descripcion": "Restauración y retapizado de sillón: se revisa la estructura de madera, se repone relleno y resortes si es necesario, y se tapiza con terminación prolija a mano. Incluye retiro y entrega a domicilio.",
+    "imagen": null,
+    "activo": true
+  },
+  {
+    "id": "p011",
+    "categoria": "Sillón",
+    "nombre": "Sillón Orejero",
+    "precio": 165000,
+    "oferta": false,
+    "descripcion": "Restauración y retapizado de sillón: se revisa la estructura de madera, se repone relleno y resortes si es necesario, y se tapiza con terminación prolija a mano. Incluye retiro y entrega a domicilio.",
+    "imagen": null,
+    "activo": true
+  },
+  {
+    "id": "p012",
+    "categoria": "Sillón",
+    "nombre": "Mecedora / Sillón Hamaca",
+    "precio": 145000,
+    "oferta": false,
+    "descripcion": "Restauración y retapizado de sillón: se revisa la estructura de madera, se repone relleno y resortes si es necesario, y se tapiza con terminación prolija a mano. Incluye retiro y entrega a domicilio.",
+    "imagen": null,
+    "activo": true
+  },
+  {
+    "id": "p013",
+    "categoria": "Sillón",
+    "nombre": "Sillón Escandinavo Retapizado",
+    "precio": 155000,
+    "oferta": true,
+    "descripcion": "Restauración y retapizado de sillón: se revisa la estructura de madera, se repone relleno y resortes si es necesario, y se tapiza con terminación prolija a mano. Incluye retiro y entrega a domicilio.",
+    "imagen": null,
+    "activo": true
+  },
+  {
+    "id": "p014",
+    "categoria": "Silla",
+    "nombre": "Silla de Comedor (unidad)",
+    "precio": 45000,
+    "oferta": false,
+    "descripcion": "Tapizado de silla con revisión de estructura y relleno. Trabajo prolijo pensado para uso diario, con la tela y el color que elijas. Incluye retiro y entrega a domicilio en Córdoba capital y alrededores.",
+    "imagen": null,
+    "activo": true
+  },
+  {
+    "id": "p015",
+    "categoria": "Silla",
+    "nombre": "Juego 4 Sillas de Comedor",
+    "precio": 165000,
+    "oferta": false,
+    "descripcion": "Tapizado de silla con revisión de estructura y relleno. Trabajo prolijo pensado para uso diario, con la tela y el color que elijas. Incluye retiro y entrega a domicilio en Córdoba capital y alrededores.",
+    "imagen": null,
+    "activo": true
+  },
+  {
+    "id": "p016",
+    "categoria": "Silla",
+    "nombre": "Juego 6 Sillas de Comedor",
+    "precio": 240000,
+    "oferta": true,
+    "descripcion": "Tapizado de silla con revisión de estructura y relleno. Trabajo prolijo pensado para uso diario, con la tela y el color que elijas. Incluye retiro y entrega a domicilio en Córdoba capital y alrededores.",
+    "imagen": null,
+    "activo": true
+  },
+  {
+    "id": "p017",
+    "categoria": "Silla",
+    "nombre": "Silla Oficina Ejecutiva",
+    "precio": 62000,
+    "oferta": true,
+    "descripcion": "Tapizado de silla con revisión de estructura y relleno. Trabajo prolijo pensado para uso diario, con la tela y el color que elijas. Incluye retiro y entrega a domicilio en Córdoba capital y alrededores.",
+    "imagen": null,
+    "activo": true
+  },
+  {
+    "id": "p018",
+    "categoria": "Silla",
+    "nombre": "Silla Thonet / Vienesa",
+    "precio": 58000,
+    "oferta": false,
+    "descripcion": "Tapizado de silla con revisión de estructura y relleno. Trabajo prolijo pensado para uso diario, con la tela y el color que elijas. Incluye retiro y entrega a domicilio en Córdoba capital y alrededores.",
+    "imagen": null,
+    "activo": true
+  },
+  {
+    "id": "p019",
+    "categoria": "Silla",
+    "nombre": "Banqueta Alta de Barra",
+    "precio": 52000,
+    "oferta": false,
+    "descripcion": "Tapizado de silla con revisión de estructura y relleno. Trabajo prolijo pensado para uso diario, con la tela y el color que elijas. Incluye retiro y entrega a domicilio en Córdoba capital y alrededores.",
+    "imagen": null,
+    "activo": true
+  },
+  {
+    "id": "p020",
+    "categoria": "Respaldo",
+    "nombre": "Respaldo de Cama 1 Plaza",
+    "precio": 72000,
+    "oferta": false,
+    "descripcion": "Fabricación o retapizado de respaldo a medida, con las dimensiones exactas de tu cama y la tela que prefieras. Terminación prolija, con opción de capitoné o tachas.",
+    "imagen": null,
+    "activo": true
+  },
+  {
+    "id": "p021",
+    "categoria": "Respaldo",
+    "nombre": "Respaldo de Cama 2 Plazas",
+    "precio": 95000,
+    "oferta": false,
+    "descripcion": "Fabricación o retapizado de respaldo a medida, con las dimensiones exactas de tu cama y la tela que prefieras. Terminación prolija, con opción de capitoné o tachas.",
+    "imagen": null,
+    "activo": true
+  },
+  {
+    "id": "p022",
+    "categoria": "Respaldo",
+    "nombre": "Respaldo Capitoné King",
+    "precio": 165000,
+    "oferta": true,
+    "descripcion": "Fabricación o retapizado de respaldo a medida, con las dimensiones exactas de tu cama y la tela que prefieras. Terminación prolija, con opción de capitoné o tachas.",
+    "imagen": null,
+    "activo": true
+  },
+  {
+    "id": "p023",
+    "categoria": "Respaldo",
+    "nombre": "Respaldo con Tachas a Medida",
+    "precio": 140000,
+    "oferta": false,
+    "descripcion": "Fabricación o retapizado de respaldo a medida, con las dimensiones exactas de tu cama y la tela que prefieras. Terminación prolija, con opción de capitoné o tachas.",
+    "imagen": null,
+    "activo": true
+  },
+  {
+    "id": "p024",
+    "categoria": "Puff",
+    "nombre": "Puff Redondo a Medida",
+    "precio": 38000,
+    "oferta": false,
+    "descripcion": "Puff o banqueta tapizada a medida, con estructura reforzada y relleno de calidad. Ideal para sumar un toque de color o completar un ambiente.",
+    "imagen": null,
+    "activo": true
+  },
+  {
+    "id": "p025",
+    "categoria": "Puff",
+    "nombre": "Puff Cuadrado con Tapa",
+    "precio": 46000,
+    "oferta": false,
+    "descripcion": "Puff o banqueta tapizada a medida, con estructura reforzada y relleno de calidad. Ideal para sumar un toque de color o completar un ambiente.",
+    "imagen": null,
+    "activo": true
+  },
+  {
+    "id": "p026",
+    "categoria": "Puff",
+    "nombre": "Banqueta de Pie de Cama",
+    "precio": 68000,
+    "oferta": false,
+    "descripcion": "Puff o banqueta tapizada a medida, con estructura reforzada y relleno de calidad. Ideal para sumar un toque de color o completar un ambiente.",
+    "imagen": null,
+    "activo": true
+  },
+  {
+    "id": "p027",
+    "categoria": "Otros",
+    "nombre": "Cabecera de Auto / Tapizado Vehicular",
+    "precio": 110000,
+    "oferta": false,
+    "descripcion": "Trabajo de tapicería a medida. Contanos los detalles de tu proyecto y te asesoramos con la tela y la terminación más adecuada.",
+    "imagen": null,
+    "activo": true
+  },
+  {
+    "id": "p028",
+    "categoria": "Otros",
+    "nombre": "Almohadones a Medida (juego x4)",
+    "precio": 42000,
+    "oferta": false,
+    "descripcion": "Trabajo de tapicería a medida. Contanos los detalles de tu proyecto y te asesoramos con la tela y la terminación más adecuada.",
+    "imagen": null,
+    "activo": true
+  }
+]

@@ -211,14 +211,18 @@
   .dark .card .shine { background:linear-gradient(120deg, transparent, rgba(140,192,232,.18), transparent); }
 
   /* Tacha en tarjetas de producto */
-  .prod > div:first-of-type::after {
+  .prod .prod-img::after {
     content:''; position:absolute; top:8px; left:50%; transform:translateX(-50%); z-index:3;
     width:11px; height:11px; border-radius:50%;
     background:radial-gradient(circle at 35% 30%, #cdd8e6 0 20%, #8CC0E8 45%, #2f4a70 100%);
     box-shadow:0 1px 2px rgba(0,0,0,.45), inset 0 -1px 1px rgba(0,0,0,.35), inset 0 1px 1px rgba(255,255,255,.6);
   }
-  .dark .prod > div:first-of-type::after {
+  .dark .prod .prod-img::after {
     background:radial-gradient(circle at 35% 30%, #aab8c9 0 20%, #5FA3DC 45%, #16233b 100%);
+  }
+  .prod-badge {
+    position:absolute; top:8px; left:8px; z-index:3; font-size:9.5px; font-weight:700;
+    letter-spacing:.04em; color:#fff; background:#dc2626; padding:2px 7px; border-radius:999px;
   }
   .card-tacha::after {
     content:''; position:absolute; top:8px; left:50%; transform:translateX(-50%); z-index:3;
@@ -505,546 +509,7 @@
   </div>
 
   <p id="catCount" class="text-xs text-navy-900/45 mb-3">28 de 28 trabajos</p>
-  <div id="gridCatalogo" class="grid grid-cols-2 lg:grid-cols-3 gap-4">
-      <article class="card prod bg-white rounded-2xl overflow-hidden shadow-sm border border-navy-800/5" data-cat="Sofá" data-precio="210000" data-oferta="0">
-        <span class="shine"></span>
-        <div class="relative aspect-[4/3] overflow-hidden bg-navy-100">
-          <div class="capitone w-full h-full grid place-items-center">
-          <svg class="w-16 h-16 opacity-25" viewBox="0 0 100 100" fill="none" aria-hidden="true">
-            <path d="M62 22 L84 78 L74 78 L69.5 66 L54.5 66 L50 78 L40 78 L62 22 Z M57.5 58 L66.5 58 L62 45.5 L57.5 58 Z" fill="#5FA3DC"/>
-            <path d="M10 78 L10 22 L22 22 L36 52 L50 22 L62 22 L62 78 L52 78 L52 40 L39.5 67 L32.5 67 L20 40 L20 78 Z" fill="#fff"/>
-          </svg>
-        </div>
-        </div>
-        <div class="p-3">
-          <span class="text-[10px] uppercase tracking-wider text-sky-500 font-bold">Sofá</span>
-          <h3 class="font-semibold text-sm leading-snug mt-0.5 mb-2 text-navy-800">Sofá 2 Cuerpos</h3>
-          <div class="flex items-center justify-between gap-2">
-            <span class="font-display font-bold text-lg text-navy-800">$210.000</span>
-            <a href="https://wa.me/5493512043164?text=Hola%21%20Me%20interesa%3A%20%2ASof%C3%A1%202%20Cuerpos%2A%20%28Sof%C3%A1%29%20%E2%80%94%20%24210.000.%20%C2%BFMe%20pas%C3%A1s%20m%C3%A1s%20info%3F" target="_blank" rel="noopener" class="text-xs bg-navy-800 hover:bg-navy-600 text-white px-3 py-1.5 rounded-lg transition shrink-0">Consultar</a>
-          </div>
-        </div>
-      </article>
-      <article class="card prod bg-white rounded-2xl overflow-hidden shadow-sm border border-navy-800/5" data-cat="Sofá" data-precio="320000" data-oferta="1">
-        <span class="shine"></span>
-        <div class="relative aspect-[4/3] overflow-hidden bg-navy-100">
-          <div class="capitone w-full h-full grid place-items-center">
-          <svg class="w-16 h-16 opacity-25" viewBox="0 0 100 100" fill="none" aria-hidden="true">
-            <path d="M62 22 L84 78 L74 78 L69.5 66 L54.5 66 L50 78 L40 78 L62 22 Z M57.5 58 L66.5 58 L62 45.5 L57.5 58 Z" fill="#5FA3DC"/>
-            <path d="M10 78 L10 22 L22 22 L36 52 L50 22 L62 22 L62 78 L52 78 L52 40 L39.5 67 L32.5 67 L20 40 L20 78 Z" fill="#fff"/>
-          </svg>
-        </div>
-        <span class="absolute top-2 left-2 bg-red-600 text-white text-[10px] font-bold px-2 py-1 rounded-full z-[3]">OFERTA</span>
-        </div>
-        <div class="p-3">
-          <span class="text-[10px] uppercase tracking-wider text-sky-500 font-bold">Sofá</span>
-          <h3 class="font-semibold text-sm leading-snug mt-0.5 mb-2 text-navy-800">Sofá 3 Cuerpos</h3>
-          <div class="flex items-center justify-between gap-2">
-            <span class="font-display font-bold text-lg text-red-600">$320.000</span>
-            <a href="https://wa.me/5493512043164?text=Hola%21%20Me%20interesa%3A%20%2ASof%C3%A1%203%20Cuerpos%2A%20%28Sof%C3%A1%29%20%E2%80%94%20%24320.000.%20%C2%BFMe%20pas%C3%A1s%20m%C3%A1s%20info%3F" target="_blank" rel="noopener" class="text-xs bg-navy-800 hover:bg-navy-600 text-white px-3 py-1.5 rounded-lg transition shrink-0">Consultar</a>
-          </div>
-        </div>
-      </article>
-      <article class="card prod bg-white rounded-2xl overflow-hidden shadow-sm border border-navy-800/5" data-cat="Sofá" data-precio="450000" data-oferta="0">
-        <span class="shine"></span>
-        <div class="relative aspect-[4/3] overflow-hidden bg-navy-100">
-          <div class="capitone w-full h-full grid place-items-center">
-          <svg class="w-16 h-16 opacity-25" viewBox="0 0 100 100" fill="none" aria-hidden="true">
-            <path d="M62 22 L84 78 L74 78 L69.5 66 L54.5 66 L50 78 L40 78 L62 22 Z M57.5 58 L66.5 58 L62 45.5 L57.5 58 Z" fill="#5FA3DC"/>
-            <path d="M10 78 L10 22 L22 22 L36 52 L50 22 L62 22 L62 78 L52 78 L52 40 L39.5 67 L32.5 67 L20 40 L20 78 Z" fill="#fff"/>
-          </svg>
-        </div>
-        </div>
-        <div class="p-3">
-          <span class="text-[10px] uppercase tracking-wider text-sky-500 font-bold">Sofá</span>
-          <h3 class="font-semibold text-sm leading-snug mt-0.5 mb-2 text-navy-800">Sofá Esquinero en L</h3>
-          <div class="flex items-center justify-between gap-2">
-            <span class="font-display font-bold text-lg text-navy-800">$450.000</span>
-            <a href="https://wa.me/5493512043164?text=Hola%21%20Me%20interesa%3A%20%2ASof%C3%A1%20Esquinero%20en%20L%2A%20%28Sof%C3%A1%29%20%E2%80%94%20%24450.000.%20%C2%BFMe%20pas%C3%A1s%20m%C3%A1s%20info%3F" target="_blank" rel="noopener" class="text-xs bg-navy-800 hover:bg-navy-600 text-white px-3 py-1.5 rounded-lg transition shrink-0">Consultar</a>
-          </div>
-        </div>
-      </article>
-      <article class="card prod bg-white rounded-2xl overflow-hidden shadow-sm border border-navy-800/5" data-cat="Sofá" data-precio="285000" data-oferta="0">
-        <span class="shine"></span>
-        <div class="relative aspect-[4/3] overflow-hidden bg-navy-100">
-          <div class="capitone w-full h-full grid place-items-center">
-          <svg class="w-16 h-16 opacity-25" viewBox="0 0 100 100" fill="none" aria-hidden="true">
-            <path d="M62 22 L84 78 L74 78 L69.5 66 L54.5 66 L50 78 L40 78 L62 22 Z M57.5 58 L66.5 58 L62 45.5 L57.5 58 Z" fill="#5FA3DC"/>
-            <path d="M10 78 L10 22 L22 22 L36 52 L50 22 L62 22 L62 78 L52 78 L52 40 L39.5 67 L32.5 67 L20 40 L20 78 Z" fill="#fff"/>
-          </svg>
-        </div>
-        </div>
-        <div class="p-3">
-          <span class="text-[10px] uppercase tracking-wider text-sky-500 font-bold">Sofá</span>
-          <h3 class="font-semibold text-sm leading-snug mt-0.5 mb-2 text-navy-800">Sofá Cama</h3>
-          <div class="flex items-center justify-between gap-2">
-            <span class="font-display font-bold text-lg text-navy-800">$285.000</span>
-            <a href="https://wa.me/5493512043164?text=Hola%21%20Me%20interesa%3A%20%2ASof%C3%A1%20Cama%2A%20%28Sof%C3%A1%29%20%E2%80%94%20%24285.000.%20%C2%BFMe%20pas%C3%A1s%20m%C3%A1s%20info%3F" target="_blank" rel="noopener" class="text-xs bg-navy-800 hover:bg-navy-600 text-white px-3 py-1.5 rounded-lg transition shrink-0">Consultar</a>
-          </div>
-        </div>
-      </article>
-      <article class="card prod bg-white rounded-2xl overflow-hidden shadow-sm border border-navy-800/5" data-cat="Sofá" data-precio="520000" data-oferta="0">
-        <span class="shine"></span>
-        <div class="relative aspect-[4/3] overflow-hidden bg-navy-100">
-          <div class="capitone w-full h-full grid place-items-center">
-          <svg class="w-16 h-16 opacity-25" viewBox="0 0 100 100" fill="none" aria-hidden="true">
-            <path d="M62 22 L84 78 L74 78 L69.5 66 L54.5 66 L50 78 L40 78 L62 22 Z M57.5 58 L66.5 58 L62 45.5 L57.5 58 Z" fill="#5FA3DC"/>
-            <path d="M10 78 L10 22 L22 22 L36 52 L50 22 L62 22 L62 78 L52 78 L52 40 L39.5 67 L32.5 67 L20 40 L20 78 Z" fill="#fff"/>
-          </svg>
-        </div>
-        </div>
-        <div class="p-3">
-          <span class="text-[10px] uppercase tracking-wider text-sky-500 font-bold">Sofá</span>
-          <h3 class="font-semibold text-sm leading-snug mt-0.5 mb-2 text-navy-800">Sofá Chesterfield Capitoné</h3>
-          <div class="flex items-center justify-between gap-2">
-            <span class="font-display font-bold text-lg text-navy-800">$520.000</span>
-            <a href="https://wa.me/5493512043164?text=Hola%21%20Me%20interesa%3A%20%2ASof%C3%A1%20Chesterfield%20Capiton%C3%A9%2A%20%28Sof%C3%A1%29%20%E2%80%94%20%24520.000.%20%C2%BFMe%20pas%C3%A1s%20m%C3%A1s%20info%3F" target="_blank" rel="noopener" class="text-xs bg-navy-800 hover:bg-navy-600 text-white px-3 py-1.5 rounded-lg transition shrink-0">Consultar</a>
-          </div>
-        </div>
-      </article>
-      <article class="card prod bg-white rounded-2xl overflow-hidden shadow-sm border border-navy-800/5" data-cat="Sofá" data-precio="195000" data-oferta="0">
-        <span class="shine"></span>
-        <div class="relative aspect-[4/3] overflow-hidden bg-navy-100">
-          <div class="capitone w-full h-full grid place-items-center">
-          <svg class="w-16 h-16 opacity-25" viewBox="0 0 100 100" fill="none" aria-hidden="true">
-            <path d="M62 22 L84 78 L74 78 L69.5 66 L54.5 66 L50 78 L40 78 L62 22 Z M57.5 58 L66.5 58 L62 45.5 L57.5 58 Z" fill="#5FA3DC"/>
-            <path d="M10 78 L10 22 L22 22 L36 52 L50 22 L62 22 L62 78 L52 78 L52 40 L39.5 67 L32.5 67 L20 40 L20 78 Z" fill="#fff"/>
-          </svg>
-        </div>
-        </div>
-        <div class="p-3">
-          <span class="text-[10px] uppercase tracking-wider text-sky-500 font-bold">Sofá</span>
-          <h3 class="font-semibold text-sm leading-snug mt-0.5 mb-2 text-navy-800">Diván / Chaise Longue</h3>
-          <div class="flex items-center justify-between gap-2">
-            <span class="font-display font-bold text-lg text-navy-800">$195.000</span>
-            <a href="https://wa.me/5493512043164?text=Hola%21%20Me%20interesa%3A%20%2ADiv%C3%A1n%20/%20Chaise%20Longue%2A%20%28Sof%C3%A1%29%20%E2%80%94%20%24195.000.%20%C2%BFMe%20pas%C3%A1s%20m%C3%A1s%20info%3F" target="_blank" rel="noopener" class="text-xs bg-navy-800 hover:bg-navy-600 text-white px-3 py-1.5 rounded-lg transition shrink-0">Consultar</a>
-          </div>
-        </div>
-      </article>
-      <article class="card prod bg-white rounded-2xl overflow-hidden shadow-sm border border-navy-800/5" data-cat="Sillón" data-precio="120000" data-oferta="0">
-        <span class="shine"></span>
-        <div class="relative aspect-[4/3] overflow-hidden bg-navy-100">
-          <div class="capitone w-full h-full grid place-items-center">
-          <svg class="w-16 h-16 opacity-25" viewBox="0 0 100 100" fill="none" aria-hidden="true">
-            <path d="M62 22 L84 78 L74 78 L69.5 66 L54.5 66 L50 78 L40 78 L62 22 Z M57.5 58 L66.5 58 L62 45.5 L57.5 58 Z" fill="#5FA3DC"/>
-            <path d="M10 78 L10 22 L22 22 L36 52 L50 22 L62 22 L62 78 L52 78 L52 40 L39.5 67 L32.5 67 L20 40 L20 78 Z" fill="#fff"/>
-          </svg>
-        </div>
-        </div>
-        <div class="p-3">
-          <span class="text-[10px] uppercase tracking-wider text-sky-500 font-bold">Sillón</span>
-          <h3 class="font-semibold text-sm leading-snug mt-0.5 mb-2 text-navy-800">Sillón Individual Clásico</h3>
-          <div class="flex items-center justify-between gap-2">
-            <span class="font-display font-bold text-lg text-navy-800">$120.000</span>
-            <a href="https://wa.me/5493512043164?text=Hola%21%20Me%20interesa%3A%20%2ASill%C3%B3n%20Individual%20Cl%C3%A1sico%2A%20%28Sill%C3%B3n%29%20%E2%80%94%20%24120.000.%20%C2%BFMe%20pas%C3%A1s%20m%C3%A1s%20info%3F" target="_blank" rel="noopener" class="text-xs bg-navy-800 hover:bg-navy-600 text-white px-3 py-1.5 rounded-lg transition shrink-0">Consultar</a>
-          </div>
-        </div>
-      </article>
-      <article class="card prod bg-white rounded-2xl overflow-hidden shadow-sm border border-navy-800/5" data-cat="Sillón" data-precio="185000" data-oferta="0">
-        <span class="shine"></span>
-        <div class="relative aspect-[4/3] overflow-hidden bg-navy-100">
-          <div class="capitone w-full h-full grid place-items-center">
-          <svg class="w-16 h-16 opacity-25" viewBox="0 0 100 100" fill="none" aria-hidden="true">
-            <path d="M62 22 L84 78 L74 78 L69.5 66 L54.5 66 L50 78 L40 78 L62 22 Z M57.5 58 L66.5 58 L62 45.5 L57.5 58 Z" fill="#5FA3DC"/>
-            <path d="M10 78 L10 22 L22 22 L36 52 L50 22 L62 22 L62 78 L52 78 L52 40 L39.5 67 L32.5 67 L20 40 L20 78 Z" fill="#fff"/>
-          </svg>
-        </div>
-        </div>
-        <div class="p-3">
-          <span class="text-[10px] uppercase tracking-wider text-sky-500 font-bold">Sillón</span>
-          <h3 class="font-semibold text-sm leading-snug mt-0.5 mb-2 text-navy-800">Sillón Bergère Restaurado</h3>
-          <div class="flex items-center justify-between gap-2">
-            <span class="font-display font-bold text-lg text-navy-800">$185.000</span>
-            <a href="https://wa.me/5493512043164?text=Hola%21%20Me%20interesa%3A%20%2ASill%C3%B3n%20Berg%C3%A8re%20Restaurado%2A%20%28Sill%C3%B3n%29%20%E2%80%94%20%24185.000.%20%C2%BFMe%20pas%C3%A1s%20m%C3%A1s%20info%3F" target="_blank" rel="noopener" class="text-xs bg-navy-800 hover:bg-navy-600 text-white px-3 py-1.5 rounded-lg transition shrink-0">Consultar</a>
-          </div>
-        </div>
-      </article>
-      <article class="card prod bg-white rounded-2xl overflow-hidden shadow-sm border border-navy-800/5" data-cat="Sillón" data-precio="135000" data-oferta="1">
-        <span class="shine"></span>
-        <div class="relative aspect-[4/3] overflow-hidden bg-navy-100">
-          <div class="capitone w-full h-full grid place-items-center">
-          <svg class="w-16 h-16 opacity-25" viewBox="0 0 100 100" fill="none" aria-hidden="true">
-            <path d="M62 22 L84 78 L74 78 L69.5 66 L54.5 66 L50 78 L40 78 L62 22 Z M57.5 58 L66.5 58 L62 45.5 L57.5 58 Z" fill="#5FA3DC"/>
-            <path d="M10 78 L10 22 L22 22 L36 52 L50 22 L62 22 L62 78 L52 78 L52 40 L39.5 67 L32.5 67 L20 40 L20 78 Z" fill="#fff"/>
-          </svg>
-        </div>
-        <span class="absolute top-2 left-2 bg-red-600 text-white text-[10px] font-bold px-2 py-1 rounded-full z-[3]">OFERTA</span>
-        </div>
-        <div class="p-3">
-          <span class="text-[10px] uppercase tracking-wider text-sky-500 font-bold">Sillón</span>
-          <h3 class="font-semibold text-sm leading-snug mt-0.5 mb-2 text-navy-800">Butaca de Living</h3>
-          <div class="flex items-center justify-between gap-2">
-            <span class="font-display font-bold text-lg text-red-600">$135.000</span>
-            <a href="https://wa.me/5493512043164?text=Hola%21%20Me%20interesa%3A%20%2AButaca%20de%20Living%2A%20%28Sill%C3%B3n%29%20%E2%80%94%20%24135.000.%20%C2%BFMe%20pas%C3%A1s%20m%C3%A1s%20info%3F" target="_blank" rel="noopener" class="text-xs bg-navy-800 hover:bg-navy-600 text-white px-3 py-1.5 rounded-lg transition shrink-0">Consultar</a>
-          </div>
-        </div>
-      </article>
-      <article class="card prod bg-white rounded-2xl overflow-hidden shadow-sm border border-navy-800/5" data-cat="Sillón" data-precio="175000" data-oferta="0">
-        <span class="shine"></span>
-        <div class="relative aspect-[4/3] overflow-hidden bg-navy-100">
-          <div class="capitone w-full h-full grid place-items-center">
-          <svg class="w-16 h-16 opacity-25" viewBox="0 0 100 100" fill="none" aria-hidden="true">
-            <path d="M62 22 L84 78 L74 78 L69.5 66 L54.5 66 L50 78 L40 78 L62 22 Z M57.5 58 L66.5 58 L62 45.5 L57.5 58 Z" fill="#5FA3DC"/>
-            <path d="M10 78 L10 22 L22 22 L36 52 L50 22 L62 22 L62 78 L52 78 L52 40 L39.5 67 L32.5 67 L20 40 L20 78 Z" fill="#fff"/>
-          </svg>
-        </div>
-        </div>
-        <div class="p-3">
-          <span class="text-[10px] uppercase tracking-wider text-sky-500 font-bold">Sillón</span>
-          <h3 class="font-semibold text-sm leading-snug mt-0.5 mb-2 text-navy-800">Sillón Reclinable</h3>
-          <div class="flex items-center justify-between gap-2">
-            <span class="font-display font-bold text-lg text-navy-800">$175.000</span>
-            <a href="https://wa.me/5493512043164?text=Hola%21%20Me%20interesa%3A%20%2ASill%C3%B3n%20Reclinable%2A%20%28Sill%C3%B3n%29%20%E2%80%94%20%24175.000.%20%C2%BFMe%20pas%C3%A1s%20m%C3%A1s%20info%3F" target="_blank" rel="noopener" class="text-xs bg-navy-800 hover:bg-navy-600 text-white px-3 py-1.5 rounded-lg transition shrink-0">Consultar</a>
-          </div>
-        </div>
-      </article>
-      <article class="card prod bg-white rounded-2xl overflow-hidden shadow-sm border border-navy-800/5" data-cat="Sillón" data-precio="165000" data-oferta="0">
-        <span class="shine"></span>
-        <div class="relative aspect-[4/3] overflow-hidden bg-navy-100">
-          <div class="capitone w-full h-full grid place-items-center">
-          <svg class="w-16 h-16 opacity-25" viewBox="0 0 100 100" fill="none" aria-hidden="true">
-            <path d="M62 22 L84 78 L74 78 L69.5 66 L54.5 66 L50 78 L40 78 L62 22 Z M57.5 58 L66.5 58 L62 45.5 L57.5 58 Z" fill="#5FA3DC"/>
-            <path d="M10 78 L10 22 L22 22 L36 52 L50 22 L62 22 L62 78 L52 78 L52 40 L39.5 67 L32.5 67 L20 40 L20 78 Z" fill="#fff"/>
-          </svg>
-        </div>
-        </div>
-        <div class="p-3">
-          <span class="text-[10px] uppercase tracking-wider text-sky-500 font-bold">Sillón</span>
-          <h3 class="font-semibold text-sm leading-snug mt-0.5 mb-2 text-navy-800">Sillón Orejero</h3>
-          <div class="flex items-center justify-between gap-2">
-            <span class="font-display font-bold text-lg text-navy-800">$165.000</span>
-            <a href="https://wa.me/5493512043164?text=Hola%21%20Me%20interesa%3A%20%2ASill%C3%B3n%20Orejero%2A%20%28Sill%C3%B3n%29%20%E2%80%94%20%24165.000.%20%C2%BFMe%20pas%C3%A1s%20m%C3%A1s%20info%3F" target="_blank" rel="noopener" class="text-xs bg-navy-800 hover:bg-navy-600 text-white px-3 py-1.5 rounded-lg transition shrink-0">Consultar</a>
-          </div>
-        </div>
-      </article>
-      <article class="card prod bg-white rounded-2xl overflow-hidden shadow-sm border border-navy-800/5" data-cat="Sillón" data-precio="145000" data-oferta="0">
-        <span class="shine"></span>
-        <div class="relative aspect-[4/3] overflow-hidden bg-navy-100">
-          <div class="capitone w-full h-full grid place-items-center">
-          <svg class="w-16 h-16 opacity-25" viewBox="0 0 100 100" fill="none" aria-hidden="true">
-            <path d="M62 22 L84 78 L74 78 L69.5 66 L54.5 66 L50 78 L40 78 L62 22 Z M57.5 58 L66.5 58 L62 45.5 L57.5 58 Z" fill="#5FA3DC"/>
-            <path d="M10 78 L10 22 L22 22 L36 52 L50 22 L62 22 L62 78 L52 78 L52 40 L39.5 67 L32.5 67 L20 40 L20 78 Z" fill="#fff"/>
-          </svg>
-        </div>
-        </div>
-        <div class="p-3">
-          <span class="text-[10px] uppercase tracking-wider text-sky-500 font-bold">Sillón</span>
-          <h3 class="font-semibold text-sm leading-snug mt-0.5 mb-2 text-navy-800">Mecedora / Sillón Hamaca</h3>
-          <div class="flex items-center justify-between gap-2">
-            <span class="font-display font-bold text-lg text-navy-800">$145.000</span>
-            <a href="https://wa.me/5493512043164?text=Hola%21%20Me%20interesa%3A%20%2AMecedora%20/%20Sill%C3%B3n%20Hamaca%2A%20%28Sill%C3%B3n%29%20%E2%80%94%20%24145.000.%20%C2%BFMe%20pas%C3%A1s%20m%C3%A1s%20info%3F" target="_blank" rel="noopener" class="text-xs bg-navy-800 hover:bg-navy-600 text-white px-3 py-1.5 rounded-lg transition shrink-0">Consultar</a>
-          </div>
-        </div>
-      </article>
-      <article class="card prod bg-white rounded-2xl overflow-hidden shadow-sm border border-navy-800/5" data-cat="Sillón" data-precio="155000" data-oferta="1">
-        <span class="shine"></span>
-        <div class="relative aspect-[4/3] overflow-hidden bg-navy-100">
-          <div class="capitone w-full h-full grid place-items-center">
-          <svg class="w-16 h-16 opacity-25" viewBox="0 0 100 100" fill="none" aria-hidden="true">
-            <path d="M62 22 L84 78 L74 78 L69.5 66 L54.5 66 L50 78 L40 78 L62 22 Z M57.5 58 L66.5 58 L62 45.5 L57.5 58 Z" fill="#5FA3DC"/>
-            <path d="M10 78 L10 22 L22 22 L36 52 L50 22 L62 22 L62 78 L52 78 L52 40 L39.5 67 L32.5 67 L20 40 L20 78 Z" fill="#fff"/>
-          </svg>
-        </div>
-        <span class="absolute top-2 left-2 bg-red-600 text-white text-[10px] font-bold px-2 py-1 rounded-full z-[3]">OFERTA</span>
-        </div>
-        <div class="p-3">
-          <span class="text-[10px] uppercase tracking-wider text-sky-500 font-bold">Sillón</span>
-          <h3 class="font-semibold text-sm leading-snug mt-0.5 mb-2 text-navy-800">Sillón Escandinavo Retapizado</h3>
-          <div class="flex items-center justify-between gap-2">
-            <span class="font-display font-bold text-lg text-red-600">$155.000</span>
-            <a href="https://wa.me/5493512043164?text=Hola%21%20Me%20interesa%3A%20%2ASill%C3%B3n%20Escandinavo%20Retapizado%2A%20%28Sill%C3%B3n%29%20%E2%80%94%20%24155.000.%20%C2%BFMe%20pas%C3%A1s%20m%C3%A1s%20info%3F" target="_blank" rel="noopener" class="text-xs bg-navy-800 hover:bg-navy-600 text-white px-3 py-1.5 rounded-lg transition shrink-0">Consultar</a>
-          </div>
-        </div>
-      </article>
-      <article class="card prod bg-white rounded-2xl overflow-hidden shadow-sm border border-navy-800/5" data-cat="Silla" data-precio="45000" data-oferta="0">
-        <span class="shine"></span>
-        <div class="relative aspect-[4/3] overflow-hidden bg-navy-100">
-          <div class="capitone w-full h-full grid place-items-center">
-          <svg class="w-16 h-16 opacity-25" viewBox="0 0 100 100" fill="none" aria-hidden="true">
-            <path d="M62 22 L84 78 L74 78 L69.5 66 L54.5 66 L50 78 L40 78 L62 22 Z M57.5 58 L66.5 58 L62 45.5 L57.5 58 Z" fill="#5FA3DC"/>
-            <path d="M10 78 L10 22 L22 22 L36 52 L50 22 L62 22 L62 78 L52 78 L52 40 L39.5 67 L32.5 67 L20 40 L20 78 Z" fill="#fff"/>
-          </svg>
-        </div>
-        </div>
-        <div class="p-3">
-          <span class="text-[10px] uppercase tracking-wider text-sky-500 font-bold">Silla</span>
-          <h3 class="font-semibold text-sm leading-snug mt-0.5 mb-2 text-navy-800">Silla de Comedor (unidad)</h3>
-          <div class="flex items-center justify-between gap-2">
-            <span class="font-display font-bold text-lg text-navy-800">$45.000</span>
-            <a href="https://wa.me/5493512043164?text=Hola%21%20Me%20interesa%3A%20%2ASilla%20de%20Comedor%20%28unidad%29%2A%20%28Silla%29%20%E2%80%94%20%2445.000.%20%C2%BFMe%20pas%C3%A1s%20m%C3%A1s%20info%3F" target="_blank" rel="noopener" class="text-xs bg-navy-800 hover:bg-navy-600 text-white px-3 py-1.5 rounded-lg transition shrink-0">Consultar</a>
-          </div>
-        </div>
-      </article>
-      <article class="card prod bg-white rounded-2xl overflow-hidden shadow-sm border border-navy-800/5" data-cat="Silla" data-precio="165000" data-oferta="0">
-        <span class="shine"></span>
-        <div class="relative aspect-[4/3] overflow-hidden bg-navy-100">
-          <div class="capitone w-full h-full grid place-items-center">
-          <svg class="w-16 h-16 opacity-25" viewBox="0 0 100 100" fill="none" aria-hidden="true">
-            <path d="M62 22 L84 78 L74 78 L69.5 66 L54.5 66 L50 78 L40 78 L62 22 Z M57.5 58 L66.5 58 L62 45.5 L57.5 58 Z" fill="#5FA3DC"/>
-            <path d="M10 78 L10 22 L22 22 L36 52 L50 22 L62 22 L62 78 L52 78 L52 40 L39.5 67 L32.5 67 L20 40 L20 78 Z" fill="#fff"/>
-          </svg>
-        </div>
-        </div>
-        <div class="p-3">
-          <span class="text-[10px] uppercase tracking-wider text-sky-500 font-bold">Silla</span>
-          <h3 class="font-semibold text-sm leading-snug mt-0.5 mb-2 text-navy-800">Juego 4 Sillas de Comedor</h3>
-          <div class="flex items-center justify-between gap-2">
-            <span class="font-display font-bold text-lg text-navy-800">$165.000</span>
-            <a href="https://wa.me/5493512043164?text=Hola%21%20Me%20interesa%3A%20%2AJuego%204%20Sillas%20de%20Comedor%2A%20%28Silla%29%20%E2%80%94%20%24165.000.%20%C2%BFMe%20pas%C3%A1s%20m%C3%A1s%20info%3F" target="_blank" rel="noopener" class="text-xs bg-navy-800 hover:bg-navy-600 text-white px-3 py-1.5 rounded-lg transition shrink-0">Consultar</a>
-          </div>
-        </div>
-      </article>
-      <article class="card prod bg-white rounded-2xl overflow-hidden shadow-sm border border-navy-800/5" data-cat="Silla" data-precio="240000" data-oferta="1">
-        <span class="shine"></span>
-        <div class="relative aspect-[4/3] overflow-hidden bg-navy-100">
-          <div class="capitone w-full h-full grid place-items-center">
-          <svg class="w-16 h-16 opacity-25" viewBox="0 0 100 100" fill="none" aria-hidden="true">
-            <path d="M62 22 L84 78 L74 78 L69.5 66 L54.5 66 L50 78 L40 78 L62 22 Z M57.5 58 L66.5 58 L62 45.5 L57.5 58 Z" fill="#5FA3DC"/>
-            <path d="M10 78 L10 22 L22 22 L36 52 L50 22 L62 22 L62 78 L52 78 L52 40 L39.5 67 L32.5 67 L20 40 L20 78 Z" fill="#fff"/>
-          </svg>
-        </div>
-        <span class="absolute top-2 left-2 bg-red-600 text-white text-[10px] font-bold px-2 py-1 rounded-full z-[3]">OFERTA</span>
-        </div>
-        <div class="p-3">
-          <span class="text-[10px] uppercase tracking-wider text-sky-500 font-bold">Silla</span>
-          <h3 class="font-semibold text-sm leading-snug mt-0.5 mb-2 text-navy-800">Juego 6 Sillas de Comedor</h3>
-          <div class="flex items-center justify-between gap-2">
-            <span class="font-display font-bold text-lg text-red-600">$240.000</span>
-            <a href="https://wa.me/5493512043164?text=Hola%21%20Me%20interesa%3A%20%2AJuego%206%20Sillas%20de%20Comedor%2A%20%28Silla%29%20%E2%80%94%20%24240.000.%20%C2%BFMe%20pas%C3%A1s%20m%C3%A1s%20info%3F" target="_blank" rel="noopener" class="text-xs bg-navy-800 hover:bg-navy-600 text-white px-3 py-1.5 rounded-lg transition shrink-0">Consultar</a>
-          </div>
-        </div>
-      </article>
-      <article class="card prod bg-white rounded-2xl overflow-hidden shadow-sm border border-navy-800/5" data-cat="Silla" data-precio="62000" data-oferta="1">
-        <span class="shine"></span>
-        <div class="relative aspect-[4/3] overflow-hidden bg-navy-100">
-          <div class="capitone w-full h-full grid place-items-center">
-          <svg class="w-16 h-16 opacity-25" viewBox="0 0 100 100" fill="none" aria-hidden="true">
-            <path d="M62 22 L84 78 L74 78 L69.5 66 L54.5 66 L50 78 L40 78 L62 22 Z M57.5 58 L66.5 58 L62 45.5 L57.5 58 Z" fill="#5FA3DC"/>
-            <path d="M10 78 L10 22 L22 22 L36 52 L50 22 L62 22 L62 78 L52 78 L52 40 L39.5 67 L32.5 67 L20 40 L20 78 Z" fill="#fff"/>
-          </svg>
-        </div>
-        <span class="absolute top-2 left-2 bg-red-600 text-white text-[10px] font-bold px-2 py-1 rounded-full z-[3]">OFERTA</span>
-        </div>
-        <div class="p-3">
-          <span class="text-[10px] uppercase tracking-wider text-sky-500 font-bold">Silla</span>
-          <h3 class="font-semibold text-sm leading-snug mt-0.5 mb-2 text-navy-800">Silla Oficina Ejecutiva</h3>
-          <div class="flex items-center justify-between gap-2">
-            <span class="font-display font-bold text-lg text-red-600">$62.000</span>
-            <a href="https://wa.me/5493512043164?text=Hola%21%20Me%20interesa%3A%20%2ASilla%20Oficina%20Ejecutiva%2A%20%28Silla%29%20%E2%80%94%20%2462.000.%20%C2%BFMe%20pas%C3%A1s%20m%C3%A1s%20info%3F" target="_blank" rel="noopener" class="text-xs bg-navy-800 hover:bg-navy-600 text-white px-3 py-1.5 rounded-lg transition shrink-0">Consultar</a>
-          </div>
-        </div>
-      </article>
-      <article class="card prod bg-white rounded-2xl overflow-hidden shadow-sm border border-navy-800/5" data-cat="Silla" data-precio="58000" data-oferta="0">
-        <span class="shine"></span>
-        <div class="relative aspect-[4/3] overflow-hidden bg-navy-100">
-          <div class="capitone w-full h-full grid place-items-center">
-          <svg class="w-16 h-16 opacity-25" viewBox="0 0 100 100" fill="none" aria-hidden="true">
-            <path d="M62 22 L84 78 L74 78 L69.5 66 L54.5 66 L50 78 L40 78 L62 22 Z M57.5 58 L66.5 58 L62 45.5 L57.5 58 Z" fill="#5FA3DC"/>
-            <path d="M10 78 L10 22 L22 22 L36 52 L50 22 L62 22 L62 78 L52 78 L52 40 L39.5 67 L32.5 67 L20 40 L20 78 Z" fill="#fff"/>
-          </svg>
-        </div>
-        </div>
-        <div class="p-3">
-          <span class="text-[10px] uppercase tracking-wider text-sky-500 font-bold">Silla</span>
-          <h3 class="font-semibold text-sm leading-snug mt-0.5 mb-2 text-navy-800">Silla Thonet / Vienesa</h3>
-          <div class="flex items-center justify-between gap-2">
-            <span class="font-display font-bold text-lg text-navy-800">$58.000</span>
-            <a href="https://wa.me/5493512043164?text=Hola%21%20Me%20interesa%3A%20%2ASilla%20Thonet%20/%20Vienesa%2A%20%28Silla%29%20%E2%80%94%20%2458.000.%20%C2%BFMe%20pas%C3%A1s%20m%C3%A1s%20info%3F" target="_blank" rel="noopener" class="text-xs bg-navy-800 hover:bg-navy-600 text-white px-3 py-1.5 rounded-lg transition shrink-0">Consultar</a>
-          </div>
-        </div>
-      </article>
-      <article class="card prod bg-white rounded-2xl overflow-hidden shadow-sm border border-navy-800/5" data-cat="Silla" data-precio="52000" data-oferta="0">
-        <span class="shine"></span>
-        <div class="relative aspect-[4/3] overflow-hidden bg-navy-100">
-          <div class="capitone w-full h-full grid place-items-center">
-          <svg class="w-16 h-16 opacity-25" viewBox="0 0 100 100" fill="none" aria-hidden="true">
-            <path d="M62 22 L84 78 L74 78 L69.5 66 L54.5 66 L50 78 L40 78 L62 22 Z M57.5 58 L66.5 58 L62 45.5 L57.5 58 Z" fill="#5FA3DC"/>
-            <path d="M10 78 L10 22 L22 22 L36 52 L50 22 L62 22 L62 78 L52 78 L52 40 L39.5 67 L32.5 67 L20 40 L20 78 Z" fill="#fff"/>
-          </svg>
-        </div>
-        </div>
-        <div class="p-3">
-          <span class="text-[10px] uppercase tracking-wider text-sky-500 font-bold">Silla</span>
-          <h3 class="font-semibold text-sm leading-snug mt-0.5 mb-2 text-navy-800">Banqueta Alta de Barra</h3>
-          <div class="flex items-center justify-between gap-2">
-            <span class="font-display font-bold text-lg text-navy-800">$52.000</span>
-            <a href="https://wa.me/5493512043164?text=Hola%21%20Me%20interesa%3A%20%2ABanqueta%20Alta%20de%20Barra%2A%20%28Silla%29%20%E2%80%94%20%2452.000.%20%C2%BFMe%20pas%C3%A1s%20m%C3%A1s%20info%3F" target="_blank" rel="noopener" class="text-xs bg-navy-800 hover:bg-navy-600 text-white px-3 py-1.5 rounded-lg transition shrink-0">Consultar</a>
-          </div>
-        </div>
-      </article>
-      <article class="card prod bg-white rounded-2xl overflow-hidden shadow-sm border border-navy-800/5" data-cat="Respaldo" data-precio="72000" data-oferta="0">
-        <span class="shine"></span>
-        <div class="relative aspect-[4/3] overflow-hidden bg-navy-100">
-          <div class="capitone w-full h-full grid place-items-center">
-          <svg class="w-16 h-16 opacity-25" viewBox="0 0 100 100" fill="none" aria-hidden="true">
-            <path d="M62 22 L84 78 L74 78 L69.5 66 L54.5 66 L50 78 L40 78 L62 22 Z M57.5 58 L66.5 58 L62 45.5 L57.5 58 Z" fill="#5FA3DC"/>
-            <path d="M10 78 L10 22 L22 22 L36 52 L50 22 L62 22 L62 78 L52 78 L52 40 L39.5 67 L32.5 67 L20 40 L20 78 Z" fill="#fff"/>
-          </svg>
-        </div>
-        </div>
-        <div class="p-3">
-          <span class="text-[10px] uppercase tracking-wider text-sky-500 font-bold">Respaldo</span>
-          <h3 class="font-semibold text-sm leading-snug mt-0.5 mb-2 text-navy-800">Respaldo de Cama 1 Plaza</h3>
-          <div class="flex items-center justify-between gap-2">
-            <span class="font-display font-bold text-lg text-navy-800">$72.000</span>
-            <a href="https://wa.me/5493512043164?text=Hola%21%20Me%20interesa%3A%20%2ARespaldo%20de%20Cama%201%20Plaza%2A%20%28Respaldo%29%20%E2%80%94%20%2472.000.%20%C2%BFMe%20pas%C3%A1s%20m%C3%A1s%20info%3F" target="_blank" rel="noopener" class="text-xs bg-navy-800 hover:bg-navy-600 text-white px-3 py-1.5 rounded-lg transition shrink-0">Consultar</a>
-          </div>
-        </div>
-      </article>
-      <article class="card prod bg-white rounded-2xl overflow-hidden shadow-sm border border-navy-800/5" data-cat="Respaldo" data-precio="95000" data-oferta="0">
-        <span class="shine"></span>
-        <div class="relative aspect-[4/3] overflow-hidden bg-navy-100">
-          <div class="capitone w-full h-full grid place-items-center">
-          <svg class="w-16 h-16 opacity-25" viewBox="0 0 100 100" fill="none" aria-hidden="true">
-            <path d="M62 22 L84 78 L74 78 L69.5 66 L54.5 66 L50 78 L40 78 L62 22 Z M57.5 58 L66.5 58 L62 45.5 L57.5 58 Z" fill="#5FA3DC"/>
-            <path d="M10 78 L10 22 L22 22 L36 52 L50 22 L62 22 L62 78 L52 78 L52 40 L39.5 67 L32.5 67 L20 40 L20 78 Z" fill="#fff"/>
-          </svg>
-        </div>
-        </div>
-        <div class="p-3">
-          <span class="text-[10px] uppercase tracking-wider text-sky-500 font-bold">Respaldo</span>
-          <h3 class="font-semibold text-sm leading-snug mt-0.5 mb-2 text-navy-800">Respaldo de Cama 2 Plazas</h3>
-          <div class="flex items-center justify-between gap-2">
-            <span class="font-display font-bold text-lg text-navy-800">$95.000</span>
-            <a href="https://wa.me/5493512043164?text=Hola%21%20Me%20interesa%3A%20%2ARespaldo%20de%20Cama%202%20Plazas%2A%20%28Respaldo%29%20%E2%80%94%20%2495.000.%20%C2%BFMe%20pas%C3%A1s%20m%C3%A1s%20info%3F" target="_blank" rel="noopener" class="text-xs bg-navy-800 hover:bg-navy-600 text-white px-3 py-1.5 rounded-lg transition shrink-0">Consultar</a>
-          </div>
-        </div>
-      </article>
-      <article class="card prod bg-white rounded-2xl overflow-hidden shadow-sm border border-navy-800/5" data-cat="Respaldo" data-precio="165000" data-oferta="1">
-        <span class="shine"></span>
-        <div class="relative aspect-[4/3] overflow-hidden bg-navy-100">
-          <div class="capitone w-full h-full grid place-items-center">
-          <svg class="w-16 h-16 opacity-25" viewBox="0 0 100 100" fill="none" aria-hidden="true">
-            <path d="M62 22 L84 78 L74 78 L69.5 66 L54.5 66 L50 78 L40 78 L62 22 Z M57.5 58 L66.5 58 L62 45.5 L57.5 58 Z" fill="#5FA3DC"/>
-            <path d="M10 78 L10 22 L22 22 L36 52 L50 22 L62 22 L62 78 L52 78 L52 40 L39.5 67 L32.5 67 L20 40 L20 78 Z" fill="#fff"/>
-          </svg>
-        </div>
-        <span class="absolute top-2 left-2 bg-red-600 text-white text-[10px] font-bold px-2 py-1 rounded-full z-[3]">OFERTA</span>
-        </div>
-        <div class="p-3">
-          <span class="text-[10px] uppercase tracking-wider text-sky-500 font-bold">Respaldo</span>
-          <h3 class="font-semibold text-sm leading-snug mt-0.5 mb-2 text-navy-800">Respaldo Capitoné King</h3>
-          <div class="flex items-center justify-between gap-2">
-            <span class="font-display font-bold text-lg text-red-600">$165.000</span>
-            <a href="https://wa.me/5493512043164?text=Hola%21%20Me%20interesa%3A%20%2ARespaldo%20Capiton%C3%A9%20King%2A%20%28Respaldo%29%20%E2%80%94%20%24165.000.%20%C2%BFMe%20pas%C3%A1s%20m%C3%A1s%20info%3F" target="_blank" rel="noopener" class="text-xs bg-navy-800 hover:bg-navy-600 text-white px-3 py-1.5 rounded-lg transition shrink-0">Consultar</a>
-          </div>
-        </div>
-      </article>
-      <article class="card prod bg-white rounded-2xl overflow-hidden shadow-sm border border-navy-800/5" data-cat="Respaldo" data-precio="140000" data-oferta="0">
-        <span class="shine"></span>
-        <div class="relative aspect-[4/3] overflow-hidden bg-navy-100">
-          <div class="capitone w-full h-full grid place-items-center">
-          <svg class="w-16 h-16 opacity-25" viewBox="0 0 100 100" fill="none" aria-hidden="true">
-            <path d="M62 22 L84 78 L74 78 L69.5 66 L54.5 66 L50 78 L40 78 L62 22 Z M57.5 58 L66.5 58 L62 45.5 L57.5 58 Z" fill="#5FA3DC"/>
-            <path d="M10 78 L10 22 L22 22 L36 52 L50 22 L62 22 L62 78 L52 78 L52 40 L39.5 67 L32.5 67 L20 40 L20 78 Z" fill="#fff"/>
-          </svg>
-        </div>
-        </div>
-        <div class="p-3">
-          <span class="text-[10px] uppercase tracking-wider text-sky-500 font-bold">Respaldo</span>
-          <h3 class="font-semibold text-sm leading-snug mt-0.5 mb-2 text-navy-800">Respaldo con Tachas a Medida</h3>
-          <div class="flex items-center justify-between gap-2">
-            <span class="font-display font-bold text-lg text-navy-800">$140.000</span>
-            <a href="https://wa.me/5493512043164?text=Hola%21%20Me%20interesa%3A%20%2ARespaldo%20con%20Tachas%20a%20Medida%2A%20%28Respaldo%29%20%E2%80%94%20%24140.000.%20%C2%BFMe%20pas%C3%A1s%20m%C3%A1s%20info%3F" target="_blank" rel="noopener" class="text-xs bg-navy-800 hover:bg-navy-600 text-white px-3 py-1.5 rounded-lg transition shrink-0">Consultar</a>
-          </div>
-        </div>
-      </article>
-      <article class="card prod bg-white rounded-2xl overflow-hidden shadow-sm border border-navy-800/5" data-cat="Puff" data-precio="38000" data-oferta="0">
-        <span class="shine"></span>
-        <div class="relative aspect-[4/3] overflow-hidden bg-navy-100">
-          <div class="capitone w-full h-full grid place-items-center">
-          <svg class="w-16 h-16 opacity-25" viewBox="0 0 100 100" fill="none" aria-hidden="true">
-            <path d="M62 22 L84 78 L74 78 L69.5 66 L54.5 66 L50 78 L40 78 L62 22 Z M57.5 58 L66.5 58 L62 45.5 L57.5 58 Z" fill="#5FA3DC"/>
-            <path d="M10 78 L10 22 L22 22 L36 52 L50 22 L62 22 L62 78 L52 78 L52 40 L39.5 67 L32.5 67 L20 40 L20 78 Z" fill="#fff"/>
-          </svg>
-        </div>
-        </div>
-        <div class="p-3">
-          <span class="text-[10px] uppercase tracking-wider text-sky-500 font-bold">Puff</span>
-          <h3 class="font-semibold text-sm leading-snug mt-0.5 mb-2 text-navy-800">Puff Redondo a Medida</h3>
-          <div class="flex items-center justify-between gap-2">
-            <span class="font-display font-bold text-lg text-navy-800">$38.000</span>
-            <a href="https://wa.me/5493512043164?text=Hola%21%20Me%20interesa%3A%20%2APuff%20Redondo%20a%20Medida%2A%20%28Puff%29%20%E2%80%94%20%2438.000.%20%C2%BFMe%20pas%C3%A1s%20m%C3%A1s%20info%3F" target="_blank" rel="noopener" class="text-xs bg-navy-800 hover:bg-navy-600 text-white px-3 py-1.5 rounded-lg transition shrink-0">Consultar</a>
-          </div>
-        </div>
-      </article>
-      <article class="card prod bg-white rounded-2xl overflow-hidden shadow-sm border border-navy-800/5" data-cat="Puff" data-precio="46000" data-oferta="0">
-        <span class="shine"></span>
-        <div class="relative aspect-[4/3] overflow-hidden bg-navy-100">
-          <div class="capitone w-full h-full grid place-items-center">
-          <svg class="w-16 h-16 opacity-25" viewBox="0 0 100 100" fill="none" aria-hidden="true">
-            <path d="M62 22 L84 78 L74 78 L69.5 66 L54.5 66 L50 78 L40 78 L62 22 Z M57.5 58 L66.5 58 L62 45.5 L57.5 58 Z" fill="#5FA3DC"/>
-            <path d="M10 78 L10 22 L22 22 L36 52 L50 22 L62 22 L62 78 L52 78 L52 40 L39.5 67 L32.5 67 L20 40 L20 78 Z" fill="#fff"/>
-          </svg>
-        </div>
-        </div>
-        <div class="p-3">
-          <span class="text-[10px] uppercase tracking-wider text-sky-500 font-bold">Puff</span>
-          <h3 class="font-semibold text-sm leading-snug mt-0.5 mb-2 text-navy-800">Puff Cuadrado con Tapa</h3>
-          <div class="flex items-center justify-between gap-2">
-            <span class="font-display font-bold text-lg text-navy-800">$46.000</span>
-            <a href="https://wa.me/5493512043164?text=Hola%21%20Me%20interesa%3A%20%2APuff%20Cuadrado%20con%20Tapa%2A%20%28Puff%29%20%E2%80%94%20%2446.000.%20%C2%BFMe%20pas%C3%A1s%20m%C3%A1s%20info%3F" target="_blank" rel="noopener" class="text-xs bg-navy-800 hover:bg-navy-600 text-white px-3 py-1.5 rounded-lg transition shrink-0">Consultar</a>
-          </div>
-        </div>
-      </article>
-      <article class="card prod bg-white rounded-2xl overflow-hidden shadow-sm border border-navy-800/5" data-cat="Puff" data-precio="68000" data-oferta="0">
-        <span class="shine"></span>
-        <div class="relative aspect-[4/3] overflow-hidden bg-navy-100">
-          <div class="capitone w-full h-full grid place-items-center">
-          <svg class="w-16 h-16 opacity-25" viewBox="0 0 100 100" fill="none" aria-hidden="true">
-            <path d="M62 22 L84 78 L74 78 L69.5 66 L54.5 66 L50 78 L40 78 L62 22 Z M57.5 58 L66.5 58 L62 45.5 L57.5 58 Z" fill="#5FA3DC"/>
-            <path d="M10 78 L10 22 L22 22 L36 52 L50 22 L62 22 L62 78 L52 78 L52 40 L39.5 67 L32.5 67 L20 40 L20 78 Z" fill="#fff"/>
-          </svg>
-        </div>
-        </div>
-        <div class="p-3">
-          <span class="text-[10px] uppercase tracking-wider text-sky-500 font-bold">Puff</span>
-          <h3 class="font-semibold text-sm leading-snug mt-0.5 mb-2 text-navy-800">Banqueta de Pie de Cama</h3>
-          <div class="flex items-center justify-between gap-2">
-            <span class="font-display font-bold text-lg text-navy-800">$68.000</span>
-            <a href="https://wa.me/5493512043164?text=Hola%21%20Me%20interesa%3A%20%2ABanqueta%20de%20Pie%20de%20Cama%2A%20%28Puff%29%20%E2%80%94%20%2468.000.%20%C2%BFMe%20pas%C3%A1s%20m%C3%A1s%20info%3F" target="_blank" rel="noopener" class="text-xs bg-navy-800 hover:bg-navy-600 text-white px-3 py-1.5 rounded-lg transition shrink-0">Consultar</a>
-          </div>
-        </div>
-      </article>
-      <article class="card prod bg-white rounded-2xl overflow-hidden shadow-sm border border-navy-800/5" data-cat="Otros" data-precio="110000" data-oferta="0">
-        <span class="shine"></span>
-        <div class="relative aspect-[4/3] overflow-hidden bg-navy-100">
-          <div class="capitone w-full h-full grid place-items-center">
-          <svg class="w-16 h-16 opacity-25" viewBox="0 0 100 100" fill="none" aria-hidden="true">
-            <path d="M62 22 L84 78 L74 78 L69.5 66 L54.5 66 L50 78 L40 78 L62 22 Z M57.5 58 L66.5 58 L62 45.5 L57.5 58 Z" fill="#5FA3DC"/>
-            <path d="M10 78 L10 22 L22 22 L36 52 L50 22 L62 22 L62 78 L52 78 L52 40 L39.5 67 L32.5 67 L20 40 L20 78 Z" fill="#fff"/>
-          </svg>
-        </div>
-        </div>
-        <div class="p-3">
-          <span class="text-[10px] uppercase tracking-wider text-sky-500 font-bold">Otros</span>
-          <h3 class="font-semibold text-sm leading-snug mt-0.5 mb-2 text-navy-800">Cabecera de Auto / Tapizado Vehicular</h3>
-          <div class="flex items-center justify-between gap-2">
-            <span class="font-display font-bold text-lg text-navy-800">$110.000</span>
-            <a href="https://wa.me/5493512043164?text=Hola%21%20Me%20interesa%3A%20%2ACabecera%20de%20Auto%20/%20Tapizado%20Vehicular%2A%20%28Otros%29%20%E2%80%94%20%24110.000.%20%C2%BFMe%20pas%C3%A1s%20m%C3%A1s%20info%3F" target="_blank" rel="noopener" class="text-xs bg-navy-800 hover:bg-navy-600 text-white px-3 py-1.5 rounded-lg transition shrink-0">Consultar</a>
-          </div>
-        </div>
-      </article>
-      <article class="card prod bg-white rounded-2xl overflow-hidden shadow-sm border border-navy-800/5" data-cat="Otros" data-precio="42000" data-oferta="0">
-        <span class="shine"></span>
-        <div class="relative aspect-[4/3] overflow-hidden bg-navy-100">
-          <div class="capitone w-full h-full grid place-items-center">
-          <svg class="w-16 h-16 opacity-25" viewBox="0 0 100 100" fill="none" aria-hidden="true">
-            <path d="M62 22 L84 78 L74 78 L69.5 66 L54.5 66 L50 78 L40 78 L62 22 Z M57.5 58 L66.5 58 L62 45.5 L57.5 58 Z" fill="#5FA3DC"/>
-            <path d="M10 78 L10 22 L22 22 L36 52 L50 22 L62 22 L62 78 L52 78 L52 40 L39.5 67 L32.5 67 L20 40 L20 78 Z" fill="#fff"/>
-          </svg>
-        </div>
-        </div>
-        <div class="p-3">
-          <span class="text-[10px] uppercase tracking-wider text-sky-500 font-bold">Otros</span>
-          <h3 class="font-semibold text-sm leading-snug mt-0.5 mb-2 text-navy-800">Almohadones a Medida (juego x4)</h3>
-          <div class="flex items-center justify-between gap-2">
-            <span class="font-display font-bold text-lg text-navy-800">$42.000</span>
-            <a href="https://wa.me/5493512043164?text=Hola%21%20Me%20interesa%3A%20%2AAlmohadones%20a%20Medida%20%28juego%20x4%29%2A%20%28Otros%29%20%E2%80%94%20%2442.000.%20%C2%BFMe%20pas%C3%A1s%20m%C3%A1s%20info%3F" target="_blank" rel="noopener" class="text-xs bg-navy-800 hover:bg-navy-600 text-white px-3 py-1.5 rounded-lg transition shrink-0">Consultar</a>
-          </div>
-        </div>
-      </article>
-  </div>
+  <div id="gridCatalogo" class="grid grid-cols-2 lg:grid-cols-3 gap-4"></div>
   <p id="catVacio" class="hidden text-center py-12 text-sm text-navy-900/45">No hay trabajos con esos filtros.</p>
 
   <!-- TESTIMONIOS -->
@@ -1705,9 +1170,100 @@ $('#btnMenu').addEventListener('click', function () {
   this.setAttribute('aria-expanded', abierto ? 'true' : 'false');
 });
 
-/* ---------- Filtros del catálogo ---------- */
+/* ---------- Catálogo dinámico (productos.json) ---------- */
 var fmtAR = function (n) { return '$' + n.toLocaleString('es-AR'); };
-var PRODS = $$('#gridCatalogo .prod');
+var PRODS = [];
+
+function escapeHtml(s) {
+  return String(s).replace(/[&<>"']/g, function (c) {
+    return { '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c];
+  });
+}
+
+function crearCardProducto(p) {
+  var art = document.createElement('article');
+  art.className = 'card prod bg-white rounded-2xl overflow-hidden shadow-sm border border-navy-800/5';
+  art.dataset.cat = p.categoria;
+  art.dataset.precio = p.precio;
+  art.dataset.oferta = p.oferta ? '1' : '0';
+
+  var imgHtml = p.imagen
+    ? '<img src="' + escapeHtml(p.imagen) + '" alt="' + escapeHtml(p.nombre) + '" class="w-full h-full object-cover" loading="lazy">'
+    : '<div class="capitone w-full h-full grid place-items-center">' +
+        '<svg class="w-16 h-16 opacity-25" viewBox="0 0 100 100" fill="none" aria-hidden="true">' +
+          '<path d="M62 22 L84 78 L74 78 L69.5 66 L54.5 66 L50 78 L40 78 L62 22 Z M57.5 58 L66.5 58 L62 45.5 L57.5 58 Z" fill="#5FA3DC"/>' +
+          '<path d="M10 78 L10 22 L22 22 L36 52 L50 22 L62 22 L62 78 L52 78 L52 40 L39.5 67 L32.5 67 L20 40 L20 78 Z" fill="#fff"/>' +
+        '</svg>' +
+      '</div>';
+
+  var waMsg = 'Hola! Me interesa: *' + p.nombre + '* (' + p.categoria + ') — ' + fmtAR(p.precio) + '. ¿Me pasás más info?';
+  var waHref = 'https://wa.me/5493512043164?text=' + encodeURIComponent(waMsg);
+  var fichaHref = 'producto.html?id=' + encodeURIComponent(p.id);
+
+  art.innerHTML =
+    '<span class="shine"></span>' +
+    '<a href="' + fichaHref + '" target="_blank" rel="noopener" class="block" aria-label="Ver ficha de ' + escapeHtml(p.nombre) + '">' +
+      '<div class="prod-img relative aspect-[4/3] overflow-hidden bg-navy-100">' +
+        (p.oferta ? '<span class="prod-badge">OFERTA</span>' : '') +
+        imgHtml +
+      '</div>' +
+      '<div class="p-3 pb-0">' +
+        '<span class="text-[10px] uppercase tracking-wider text-sky-500 font-bold">' + escapeHtml(p.categoria) + '</span>' +
+        '<h3 class="font-semibold text-sm leading-snug mt-0.5 mb-2 text-navy-800">' + escapeHtml(p.nombre) + '</h3>' +
+      '</div>' +
+    '</a>' +
+    '<div class="p-3 pt-0">' +
+      '<div class="flex items-center justify-between gap-2">' +
+        '<span class="font-display font-bold text-lg text-navy-800">' + fmtAR(p.precio) + '</span>' +
+        '<a href="' + waHref + '" target="_blank" rel="noopener" class="text-xs bg-navy-800 hover:bg-navy-600 text-white px-3 py-1.5 rounded-lg transition shrink-0">Consultar</a>' +
+      '</div>' +
+    '</div>';
+  return art;
+}
+
+function actualizarOpcionesCategoria(productos) {
+  var sel = $('#fCategoria');
+  var actual = sel.value;
+  var orden = ['Sofá','Sillón','Silla','Respaldo','Puff','Otros'];
+  var categorias = [];
+  productos.forEach(function (p) {
+    if (categorias.indexOf(p.categoria) === -1) categorias.push(p.categoria);
+  });
+  categorias.sort(function (a, b) {
+    var ia = orden.indexOf(a), ib = orden.indexOf(b);
+    if (ia === -1) ia = 99; if (ib === -1) ib = 99;
+    return ia - ib || a.localeCompare(b);
+  });
+  sel.innerHTML = '<option value="todas">Todas</option>' + categorias.map(function (c) {
+    return '<option value="' + escapeHtml(c) + '">' + escapeHtml(c) + '</option>';
+  }).join('');
+  if (categorias.indexOf(actual) > -1 || actual === 'todas') sel.value = actual;
+}
+
+function cargarCatalogo() {
+  var grid = $('#gridCatalogo');
+  return fetch('productos.json', { cache: 'no-store' })
+    .then(function (r) { return r.json(); })
+    .then(function (productos) {
+      var activos = productos.filter(function (p) { return p.activo !== false; });
+      actualizarOpcionesCategoria(activos);
+      if (activos.length) {
+        var precios = activos.map(function (p) { return p.precio; });
+        var min = Math.min.apply(null, precios), max = Math.max.apply(null, precios);
+        var rango = $('#fPrecio');
+        rango.min = min; rango.max = max; rango.value = max;
+        $('#fPrecioLabel').textContent = fmtAR(max);
+      }
+      grid.innerHTML = '';
+      activos.forEach(function (p) { grid.appendChild(crearCardProducto(p)); });
+      PRODS = $$('#gridCatalogo .prod');
+      filtrarCatalogo();
+      cascadaCatalogo();
+    })
+    .catch(function () {
+      grid.innerHTML = '<p class="col-span-full text-center text-sm text-navy-900/45 py-10">No pudimos cargar el catálogo. Probá recargar la página.</p>';
+    });
+}
 
 function filtrarCatalogo() {
   var cat = $('#fCategoria').value;
@@ -1839,7 +1395,7 @@ setTimeout(function () {
 (function arranque() {
   var h = (location.hash || '').slice(1);
   if (h && SECCIONES.indexOf(h) > -1 && h !== 'catalogo') irA(h, false);
-  filtrarCatalogo();
+  cargarCatalogo();
 })();
 </script>
 </body>
