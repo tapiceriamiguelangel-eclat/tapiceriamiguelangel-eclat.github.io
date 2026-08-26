@@ -272,15 +272,19 @@
   #waTip.visible { opacity:1; transform:translateY(-50%) scale(1); }
   .dark #waTip, .dark #waTip::after { background:#16233b; color:#e6eef7; }
 
-  /* Intro bordado */
-  #introBordado.oculto { display:none; }
-  #introBordado.saliendo { opacity:0; transition:opacity .5s ease; }
-  .dark #introBordado { background:#0b1526 !important; }
-  .dark #introTitulo > div:first-child { color:#e6eef7 !important; }
-  .dark #introM { stroke:#8CC0E8 !important; }
-  .dark #introLupa > div:first-child { border-color:#8CC0E8 !important; }
+  /* Pantalla de carga */
+  #loader.oculto { opacity:0; pointer-events:none; }
+  #loader .loader-logo { animation: loaderPop .7s cubic-bezier(.34,1.4,.4,1) both; }
+  #loader .loader-hilo { stroke-dasharray:150; stroke-dashoffset:150; animation: loaderHilo 1s .15s ease-out forwards; }
+  #loader .loader-marca { opacity:0; animation: loaderFade .6s .5s ease-out forwards; }
+  @keyframes loaderPop { 0%{ transform:scale(.7); opacity:0 } 100%{ transform:scale(1); opacity:1 } }
+  @keyframes loaderHilo { to { stroke-dashoffset:0 } }
+  @keyframes loaderFade { to { opacity:1 } }
   .dark #loader { background:#0b1526 !important; }
   .dark #loader .text-navy-800 { color:#e6eef7 !important; }
+  @media (prefers-reduced-motion: reduce) {
+    #loader .loader-logo, #loader .loader-hilo, #loader .loader-marca { animation:none !important; opacity:1 !important; stroke-dashoffset:0 !important; }
+  }
 
   /* Cursor aguja */
   body {
@@ -308,44 +312,20 @@
 </head>
 <body class="bg-navy-50 text-navy-900 font-sans antialiased transition-colors">
 
-<!-- ============ LOADER AGUJA + HILO ============ -->
+<!-- ============ PANTALLA DE CARGA ============ -->
 <div id="loader" class="fixed inset-0 z-[100] grid place-items-center transition-opacity duration-500" style="background:#f5f8fc; opacity:1;">
   <div class="text-center px-6">
-    <svg width="150" height="150" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <defs><clipPath id="reveal"><rect id="revealRect" x="0" y="0" width="0" height="100"/></clipPath></defs>
-      <g clip-path="url(#reveal)">
-        <path d="M62 22 L84 78 L74 78 L69.5 66 L54.5 66 L50 78 L40 78 L62 22 Z M57.5 58 L66.5 58 L62 45.5 L57.5 58 Z" fill="#5FA3DC"/>
-        <path d="M10 78 L10 22 L22 22 L36 52 L50 22 L62 22 L62 78 L52 78 L52 40 L39.5 67 L32.5 67 L20 40 L20 78 Z" fill="#152B4E"/>
-      </g>
-      <path id="hilo" d="M10 78 L20 78 L36 52 L50 78 L62 22 L84 78" stroke="none" fill="none"/>
-      <g id="aguja">
-        <line x1="0" y1="18" x2="22" y2="-4" stroke="#152B4E" stroke-width="3" stroke-linecap="round"/>
-        <ellipse cx="19" cy="-1" rx="1.6" ry="3.6" transform="rotate(45 19 -1)" fill="#fff" stroke="#152B4E" stroke-width="1.3"/>
-      </g>
+    <svg class="loader-logo" width="120" height="120" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M62 22 L84 78 L74 78 L69.5 66 L54.5 66 L50 78 L40 78 L62 22 Z M57.5 58 L66.5 58 L62 45.5 L57.5 58 Z" fill="#5FA3DC"/>
+      <path d="M10 78 L10 22 L22 22 L36 52 L50 22 L62 22 L62 78 L52 78 L52 40 L39.5 67 L32.5 67 L20 40 L20 78 Z" fill="#152B4E"/>
     </svg>
-    <div class="font-display text-lg font-bold text-navy-800 mt-3">Tapicería Miguel Ángel</div>
-    <div class="text-[9px] tracking-[0.3em] text-sky-400 font-semibold">ECLAT</div>
-  </div>
-</div>
-
-<!-- ============ INTRO BORDADO ============ -->
-<div id="introBordado" class="fixed inset-0 z-[100] grid place-items-center" style="background:#f5f8fc">
-  <svg id="introSvg" width="240" height="240" viewBox="0 0 100 100" style="transition:transform .8s cubic-bezier(.34,1.3,.5,1)">
-    <path id="introM" d="M10 78 L10 22 L22 22 L36 52 L50 22 L62 22 L62 78 L52 78 L52 40 L39.5 67 L32.5 67 L20 40 L20 78 Z" fill="none" stroke="#152B4E" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
-    <path id="introA" d="M62 22 L84 78 L74 78 L69.5 66 L54.5 66 L50 78 L40 78 L62 22 Z M57.5 58 L66.5 58 L62 45.5 L57.5 58 Z" fill="none" stroke="#5FA3DC" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
-    <g id="introAguja" style="opacity:0">
-      <line x1="0" y1="0" x2="9" y2="-15" stroke="#5f5e5a" stroke-width="1.5" stroke-linecap="round"/>
-      <circle cx="8" cy="-13" r="1.2" fill="none" stroke="#5f5e5a" stroke-width="0.7"/>
-    </g>
-  </svg>
-  <div id="introLupa" style="position:absolute;width:150px;height:150px;opacity:0;pointer-events:none">
-    <div style="position:absolute;inset:0;border-radius:50%;border:5px solid #152B4E;box-shadow:0 8px 24px rgba(21,43,78,.28), inset 0 0 0 7px rgba(255,255,255,.55);background:radial-gradient(circle at 35% 30%, rgba(255,255,255,.35), rgba(95,163,220,.06) 55%, transparent)"></div>
-    <div style="position:absolute;bottom:-36px;right:-10px;width:15px;height:54px;background:linear-gradient(90deg,#1d3a67,#152B4E);border-radius:8px;transform:rotate(-45deg);transform-origin:top;box-shadow:0 3px 8px rgba(21,43,78,.3)"></div>
-    <div style="position:absolute;bottom:-48px;right:-13px;width:22px;height:16px;background:#5FA3DC;border-radius:6px;transform:rotate(-45deg);transform-origin:top"></div>
-  </div>
-  <div id="introTitulo" style="position:absolute;bottom:16%;text-align:center;opacity:0;transition:opacity .6s ease">
-    <div class="font-display text-3xl font-bold" style="color:#152B4E">Miguel Ángel</div>
-    <div class="text-[11px] tracking-[0.28em] font-semibold mt-1" style="color:#5FA3DC">TAPICERÍA · ECLAT</div>
+    <svg class="mx-auto -mt-1" width="120" height="14" viewBox="0 0 120 14" fill="none">
+      <path class="loader-hilo" d="M4 7 Q60 -4 116 7" stroke="#5FA3DC" stroke-width="2" stroke-linecap="round" fill="none"/>
+    </svg>
+    <div class="loader-marca mt-2">
+      <div class="font-display text-lg font-bold text-navy-800">Miguel Ángel</div>
+      <div class="text-[9px] tracking-[0.3em] text-sky-400 font-semibold">TAPICERÍA · ECLAT</div>
+    </div>
   </div>
 </div>
 
@@ -1650,101 +1630,18 @@ $$('.btn-tela').forEach(function (btn) {
 /* ---------- Año ---------- */
 $('#anio').textContent = new Date().getFullYear();
 
-/* ---------- Loader aguja + hilo ---------- */
-(function animarLoader() {
-  var hilo = document.getElementById('hilo'), aguja = document.getElementById('aguja'),
-      rect = document.getElementById('revealRect'), loader = document.getElementById('loader');
-  if (!hilo || !aguja || !rect || !loader) return;
-  var largo = hilo.getTotalLength(), t0 = performance.now(), DUR = 1400;
-  (function paso(now) {
-    var p = Math.min(1, (now - t0) / DUR);
-    rect.setAttribute('width', (p * 100).toFixed(1));
-    var punto = hilo.getPointAtLength(largo * p);
-    aguja.setAttribute('transform', 'translate(' + punto.x + ',' + (punto.y - 2) + ')');
-    if (p < 1) requestAnimationFrame(paso);
-  })(t0);
-})();
-
+/* ---------- Pantalla de carga ---------- */
 function ocultarLoader() {
   var l = document.getElementById('loader');
   if (!l) return;
-  l.style.opacity = '0';
+  l.classList.add('oculto');
   setTimeout(function () { if (l.parentNode) l.parentNode.removeChild(l); }, 500);
 }
 
-/* ---------- Intro bordado (una vez por sesión) ---------- */
-(function introBordado() {
-  var ov = document.getElementById('introBordado');
-  if (!ov) return;
-
+(function loaderInit() {
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var visto = false;
-  try { visto = sessionStorage.getItem('introVisto') === '1'; } catch (e) {}
-  if (visto || reduce) { ov.classList.add('oculto'); setTimeout(ocultarLoader, 900); return; }
-
-  var svg = document.getElementById('introSvg'), mp = document.getElementById('introM'),
-      ap = document.getElementById('introA'), ag = document.getElementById('introAguja'),
-      tit = document.getElementById('introTitulo'), lupa = document.getElementById('introLupa');
-  var mLen = mp.getTotalLength(), aLen = ap.getTotalLength(), STITCH = 3.5, GAP = 3;
-
-  document.body.style.overflow = 'hidden';
-
-  function stitchArray(drawnLen, totalLen) {
-    var pattern = [], acc = 0;
-    while (acc < drawnLen) {
-      var s = Math.min(STITCH, drawnLen - acc); pattern.push(s.toFixed(2)); acc += s;
-      if (acc >= drawnLen) break;
-      pattern.push(GAP.toFixed(2)); acc += GAP;
-    }
-    pattern.push(totalLen.toFixed(2));
-    return pattern.join(' ');
-  }
-
-  mp.setAttribute('stroke-dasharray', '0 ' + mLen);
-  ap.setAttribute('stroke-dasharray', '0 ' + aLen);
-
-  var start = null, DUR = 7000, STITCH_END = 0.9;
-
-  function frame(ts) {
-    if (!start) start = ts;
-    var p = Math.min((ts - start) / DUR, 1), sp = p / STITCH_END;
-    ag.style.opacity = (p > 0 && p < STITCH_END) ? '1' : '0';
-
-    if (sp < 0.5) {
-      var dl = mLen * (sp / 0.5);
-      mp.setAttribute('stroke-dasharray', stitchArray(dl, mLen));
-      var pt = mp.getPointAtLength(dl);
-      ag.setAttribute('transform', 'translate(' + pt.x + ',' + pt.y + ')');
-    } else if (sp < 1) {
-      var dl2 = aLen * ((sp - 0.5) / 0.5);
-      mp.setAttribute('stroke-dasharray', stitchArray(mLen, mLen));
-      ap.setAttribute('stroke-dasharray', stitchArray(dl2, aLen));
-      var pt2 = ap.getPointAtLength(dl2);
-      ag.setAttribute('transform', 'translate(' + pt2.x + ',' + pt2.y + ')');
-    } else {
-      mp.setAttribute('stroke-dasharray', stitchArray(mLen, mLen));
-      ap.setAttribute('stroke-dasharray', stitchArray(aLen, aLen));
-    }
-
-    if (p >= 1) {
-      lupa.style.transition = 'opacity .4s ease';
-      lupa.style.opacity = '1';
-      svg.style.transform = 'scale(1.55)';
-      setTimeout(function () { tit.style.opacity = '1'; lupa.style.opacity = '0'; }, 900);
-      setTimeout(function () {
-        ov.classList.add('saliendo');
-        setTimeout(function () {
-          ov.classList.add('oculto');
-          document.body.style.overflow = '';
-          try { sessionStorage.setItem('introVisto', '1'); } catch (e) {}
-          ocultarLoader();
-          cascadaCatalogo();
-        }, 500);
-      }, 2100);
-    }
-    if (p < 1) requestAnimationFrame(frame);
-  }
-  requestAnimationFrame(frame);
+  var espera = reduce ? 400 : 1200;
+  setTimeout(function () { ocultarLoader(); cascadaCatalogo(); }, espera);
 })();
 
 /* ---------- Reveals (puntadas y needle-rules) ---------- */
