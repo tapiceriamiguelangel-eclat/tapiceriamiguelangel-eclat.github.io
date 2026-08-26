@@ -1549,6 +1549,41 @@ $('#btnTema').addEventListener('click', function () {
 /* ---------- Navegación por paneles ---------- */
 var SECCIONES = ['catalogo','telas','taller','nosotros','contacto'];
 
+var META_SECCIONES = {
+  catalogo: {
+    title: 'Catálogo — Tapicería Miguel Ángel | Sillones y sofás tapizados en Córdoba',
+    desc:  'Catálogo de sillones, sofás, sillas de comedor y respaldos tapizados por Tapicería Miguel Ángel en Córdoba. Precios y consulta directa por WhatsApp.'
+  },
+  telas: {
+    title: 'Telas — Tapicería Miguel Ángel | Muestrario de telas para tapizar en Córdoba',
+    desc:  'Elegí entre nuestro muestrario de telas para tapizado: pana, símil cuero, chenille y más. Asesoramiento personalizado en Córdoba.'
+  },
+  taller: {
+    title: 'El Taller — Tapicería Miguel Ángel | Proceso de tapizado artesanal en Córdoba',
+    desc:  'Conocé el proceso de trabajo de nuestro taller de tapicería artesanal en Córdoba: diagnóstico, armado, tapizado y terminación a medida.'
+  },
+  nosotros: {
+    title: 'Nosotros — Tapicería Miguel Ángel | Más de 20 años de oficio en Córdoba',
+    desc:  'Tapicería Miguel Ángel (Eclat): más de 20 años restaurando sillones, sofás y muebles en Córdoba con trabajo 100% artesanal.'
+  },
+  contacto: {
+    title: 'Contacto — Tapicería Miguel Ángel | Presupuesto sin cargo en Córdoba',
+    desc:  'Contactanos por WhatsApp para pedir tu presupuesto sin cargo. Retiro y entrega a domicilio en Córdoba capital y alrededores.'
+  }
+};
+var TITULO_BASE = document.title;
+var metaDescEl = document.querySelector('meta[name="description"]');
+var canonicalEl = document.querySelector('link[rel="canonical"]');
+var CANONICAL_BASE = canonicalEl ? canonicalEl.getAttribute('href').split('#')[0] : '';
+
+function actualizarMeta(id) {
+  var m = META_SECCIONES[id];
+  if (!m) return;
+  document.title = m.title;
+  if (metaDescEl) metaDescEl.setAttribute('content', m.desc);
+  if (canonicalEl) canonicalEl.setAttribute('href', CANONICAL_BASE + '#' + id);
+}
+
 function irA(id, empujarHistorial) {
   if (SECCIONES.indexOf(id) === -1) id = 'catalogo';
   $$('[data-section]').forEach(function (s) { s.classList.add('hidden'); });
@@ -1563,8 +1598,11 @@ function irA(id, empujarHistorial) {
   }
   window.scrollTo({ top: 0, behavior: 'smooth' });
   refrescarReveals(sec);
+  actualizarMeta(id);
   if (id === 'catalogo') cascadaCatalogo();
 }
+
+actualizarMeta((location.hash || '#catalogo').slice(1));
 
 $$('[data-nav]').forEach(function (a) {
   a.addEventListener('click', function (e) { e.preventDefault(); irA(a.dataset.nav); });
