@@ -353,6 +353,38 @@
   a:focus-visible, button:focus-visible, summary:focus-visible, select:focus-visible, input:focus-visible {
     outline:3px solid #5FA3DC; outline-offset:2px;
   }
+
+  /* ===== HERO ANIMADO (Inicio) ===== */
+  .hero-hilo { stroke-dashoffset:0; animation: hiloRecorrido 26s linear infinite; }
+  @keyframes hiloRecorrido { to { stroke-dashoffset:-320; } }
+
+  .hero-swatch {
+    position:absolute; z-index:0; border-radius:9999px; pointer-events:none;
+    box-shadow:0 10px 24px -8px rgba(0,0,0,.35), inset 0 0 0 2px rgba(255,255,255,.18);
+    animation: swatchFloat 7s ease-in-out infinite;
+  }
+  .hero-swatch-1 { width:64px; height:64px; top:14%; right:20%; background:radial-gradient(circle at 35% 30%, #8CC0E8, #2f74b0); animation-delay:0s; opacity:.55; }
+  .hero-swatch-2 { width:38px; height:38px; top:62%; right:9%; background:radial-gradient(circle at 35% 30%, #fff, #b9d6ef); animation-delay:1.4s; opacity:.4; }
+  .hero-swatch-3 { width:24px; height:24px; top:30%; right:6%; background:radial-gradient(circle at 35% 30%, #5FA3DC, #152B4E); animation-delay:2.6s; opacity:.5; }
+  @keyframes swatchFloat {
+    0%, 100% { transform:translateY(0) rotate(0deg); }
+    50%      { transform:translateY(-16px) rotate(8deg); }
+  }
+
+  /* Teaser antes/después animado en Inicio */
+  .teaser-ad-despues {
+    clip-path: inset(0 55% 0 0);
+    animation: teaserSwipe 5s ease-in-out infinite;
+  }
+  @keyframes teaserSwipe {
+    0%, 100% { clip-path: inset(0 78% 0 0); }
+    50%      { clip-path: inset(0 15% 0 0); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-hilo, .hero-swatch, .teaser-ad-despues { animation:none !important; }
+    .teaser-ad-despues { clip-path: inset(0 50% 0 0) !important; }
+  }
 </style>
 </head>
 <body class="bg-navy-50 text-navy-900 font-sans antialiased transition-colors">
@@ -377,7 +409,7 @@
 <!-- ============ HEADER / NAV ============ -->
 <header class="sticky top-0 z-40 bg-white/95 backdrop-blur border-b border-navy-800/10">
   <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between gap-2">
-    <a href="#catalogo" data-nav="catalogo" class="flex items-center gap-2.5">
+    <a href="#inicio" data-nav="inicio" class="flex items-center gap-2.5">
       <svg class="h-10 w-10 shrink-0" viewBox="0 0 100 100" fill="none" aria-label="Tapicería Miguel Ángel">
         <path d="M62 22 L84 78 L74 78 L69.5 66 L54.5 66 L50 78 L40 78 L62 22 Z M57.5 58 L66.5 58 L62 45.5 L57.5 58 Z" fill="#5FA3DC"/>
         <path d="M10 78 L10 22 L22 22 L36 52 L50 22 L62 22 L62 78 L52 78 L52 40 L39.5 67 L32.5 67 L20 40 L20 78 Z" fill="#152B4E"/>
@@ -392,7 +424,7 @@
     </a>
 
     <nav class="hidden md:flex gap-7 text-sm font-medium h-full">
-      <a href="#catalogo" data-nav="catalogo" class="nav-link active flex items-center px-1 text-navy-800">Catálogo</a>
+      <a href="#inicio"   data-nav="inicio"   class="nav-link active flex items-center px-1 text-navy-800">Inicio</a>
       <a href="#telas"    data-nav="telas"    class="nav-link flex items-center px-1 text-navy-800">Telas</a>
       <a href="#taller"   data-nav="taller"   class="nav-link flex items-center px-1 text-navy-800">El Taller</a>
       <a href="#antes-despues" data-nav="antes-despues" class="nav-link flex items-center px-1 text-navy-800">Antes / Después</a>
@@ -416,7 +448,7 @@
   </div>
 
   <nav id="mobileMenu" class="hidden md:hidden border-t border-navy-800/10 bg-white">
-    <a href="#catalogo" data-nav="catalogo" class="block px-4 py-3 border-b border-navy-800/5 text-sm font-medium">Catálogo</a>
+    <a href="#inicio"   data-nav="inicio"   class="block px-4 py-3 border-b border-navy-800/5 text-sm font-medium">Inicio</a>
     <a href="#telas"    data-nav="telas"    class="block px-4 py-3 border-b border-navy-800/5 text-sm font-medium">Telas</a>
     <a href="#taller"   data-nav="taller"   class="block px-4 py-3 border-b border-navy-800/5 text-sm font-medium">El Taller</a>
     <a href="#antes-despues" data-nav="antes-despues" class="block px-4 py-3 border-b border-navy-800/5 text-sm font-medium">Antes / Después</a>
@@ -427,31 +459,41 @@
 
 <main class="max-w-6xl mx-auto px-4 py-4 md:py-6 pb-28">
 
-<!-- ══════════════ CATÁLOGO ══════════════ -->
-<section id="sec-catalogo" data-section>
+<!-- ══════════════ INICIO ══════════════ -->
+<section id="sec-inicio" data-section>
 
-  <!-- HERO -->
-  <div class="hero relative overflow-hidden rounded-3xl px-5 py-6 md:px-12 md:py-16 mb-8 text-white">
+  <!-- HERO ANIMADO -->
+  <div class="hero relative overflow-hidden rounded-3xl px-5 py-8 md:px-12 md:py-20 mb-8 text-white">
+    <!-- hilo animado recorriendo el borde -->
+    <svg class="absolute inset-0 w-full h-full pointer-events-none" preserveAspectRatio="none" aria-hidden="true">
+      <rect x="2" y="2" width="calc(100% - 4px)" height="calc(100% - 4px)" rx="22" fill="none"
+            stroke="#8CC0E8" stroke-width="1.4" stroke-dasharray="9 7" opacity=".45" class="hero-hilo"/>
+    </svg>
+    <!-- tachas / botones flotantes -->
+    <span class="hero-swatch hero-swatch-1" aria-hidden="true"></span>
+    <span class="hero-swatch hero-swatch-2" aria-hidden="true"></span>
+    <span class="hero-swatch hero-swatch-3" aria-hidden="true"></span>
+
     <div class="relative z-10 max-w-2xl">
-      <span class="inline-block text-[10px] tracking-[0.3em] text-sky-300 font-bold mb-2 md:mb-3">CÓRDOBA · DESDE HACE MÁS DE 20 AÑOS</span>
-      <h1 class="font-display text-2xl md:text-5xl font-bold leading-[1.1] md:leading-[1.05] mb-2 md:mb-3">
-        Tapizado y restauración<br>de muebles en Córdoba
+      <span class="inline-block text-[10px] tracking-[0.3em] text-sky-300 font-bold mb-2 md:mb-3 fade-up" style="animation-delay:.05s">CÓRDOBA · DESDE HACE MÁS DE 20 AÑOS</span>
+      <h1 class="font-display text-3xl md:text-5xl font-bold leading-[1.1] md:leading-[1.05] mb-2 md:mb-3 fade-up" style="animation-delay:.12s">
+        Le devolvemos la vida<br>a tus muebles favoritos
       </h1>
-      <p class="hidden md:block text-sm md:text-base text-white/70 leading-relaxed mb-6 max-w-xl">
+      <p class="hidden md:block text-sm md:text-base text-white/70 leading-relaxed mb-6 max-w-xl fade-up" style="animation-delay:.2s">
         Tapicería Miguel Ángel restaura sillones, sofás, sillas de comedor y respaldos de cama con trabajo artesanal, telas de primera calidad y terminaciones a medida. Retiramos y entregamos a domicilio.
       </p>
-      <p class="md:hidden text-xs text-white/70 leading-snug mb-4 max-w-xl">
+      <p class="md:hidden text-xs text-white/70 leading-snug mb-4 max-w-xl fade-up" style="animation-delay:.2s">
         Restauramos sillones, sofás y sillas con trabajo artesanal. Retiro y entrega a domicilio.
       </p>
-      <div class="flex flex-wrap gap-2.5 md:gap-3">
+      <div class="flex flex-wrap gap-2.5 md:gap-3 fade-up" style="animation-delay:.3s">
         <a href="https://wa.me/5493512043164?text=Hola!%20Quisiera%20una%20consulta%20sobre%20tapizado."
            target="_blank" rel="noopener"
-           class="bg-[#25D366] hover:bg-[#1ebe5a] text-white text-xs md:text-sm font-semibold px-4 md:px-5 py-2 md:py-2.5 rounded-lg transition shadow-lg shadow-black/20">
+           class="wa-float bg-[#25D366] hover:bg-[#1ebe5a] text-white text-xs md:text-sm font-semibold px-4 md:px-5 py-2 md:py-2.5 rounded-lg transition shadow-lg shadow-black/20">
           Pedir presupuesto por WhatsApp
         </a>
-        <button type="button" onclick="irA('telas'); setTimeout(function(){ document.getElementById('calculadora').scrollIntoView({behavior:'smooth', block:'start'}); }, 150)"
+        <button type="button" onclick="irA('catalogo')"
            class="border border-white/30 hover:border-white bg-white/5 hover:bg-white/15 text-white text-xs md:text-sm font-semibold px-4 md:px-5 py-2 md:py-2.5 rounded-lg transition-all hover:-translate-y-0.5 active:translate-y-0">
-          Calculadora de presupuesto
+          Ver catálogo y precios
         </button>
       </div>
     </div>
@@ -462,7 +504,7 @@
   </div>
 
   <!-- FRANJA DE CONFIANZA -->
-  <div class="grid grid-cols-3 gap-3 mb-8">
+  <div class="grid grid-cols-3 gap-3 mb-10">
     <div class="franja-stat card bg-white rounded-xl border border-navy-800/5 p-3 md:p-4 text-center">
       <div class="font-display text-2xl md:text-3xl font-bold text-navy-800" data-count="20" data-suffix="+">0</div>
       <div class="text-[10px] md:text-xs text-navy-900/50 font-medium">Años de oficio</div>
@@ -477,43 +519,55 @@
     </div>
   </div>
 
-  <div class="needle-rule mb-6"><span class="needle-dot"></span></div>
-
-  <h2 class="font-display text-3xl md:text-4xl font-bold text-navy-800">Catálogo</h2>
-  <p class="text-sm text-navy-900/55 mb-5">Precios de referencia por trabajo de tapizado. El presupuesto final se confirma al ver el mueble.</p>
-
-  <!-- FILTROS -->
-  <div class="bg-white rounded-2xl p-4 shadow-sm border border-navy-800/5 mb-6 grid gap-4 md:grid-cols-3 md:items-end">
-    <div>
-      <label for="fCategoria" class="block text-xs font-semibold mb-1.5 text-navy-800">Categoría</label>
-      <select id="fCategoria" class="w-full rounded-lg border border-navy-800/15 p-2.5 text-sm bg-white">
-        <option value="todas">Todas</option>
-        <option value="Sofá">Sofá</option>
-        <option value="Sillón">Sillón</option>
-        <option value="Silla">Silla</option>
-        <option value="Respaldo">Respaldo</option>
-        <option value="Puff">Puff</option>
-        <option value="Otros">Otros</option>
-      </select>
-    </div>
-    <div>
-      <label for="fPrecio" class="block text-xs font-semibold mb-1.5 text-navy-800">
-        Precio máximo: <span id="fPrecioLabel" class="text-sky-500 font-bold">$520.000</span>
-      </label>
-      <input id="fPrecio" type="range" min="38000" max="520000" step="1000" value="520000" class="w-full accent-sky-400">
-    </div>
-    <label class="flex items-center gap-2.5 md:pb-2.5 select-none">
-      <input id="fOferta" type="checkbox" class="w-4 h-4 rounded accent-sky-500">
-      <span class="text-sm font-medium">Solo ofertas 🔥</span>
-    </label>
+  <!-- QUÉ HACEMOS -->
+  <svg class="stitch-line mb-6" viewBox="0 0 400 10" preserveAspectRatio="none" aria-hidden="true"><path d="M0 5 L20 1 L40 9 L60 1 L80 9 L100 1 L120 9 L140 1 L160 9 L180 1 L200 9 L220 1 L240 9 L260 1 L280 9 L300 1 L320 9 L340 1 L360 9 L380 1 L400 5"/></svg>
+  <h2 class="font-display text-2xl md:text-3xl font-bold text-navy-800 text-center mb-1">Qué hacemos</h2>
+  <p class="text-sm text-navy-900/55 text-center mb-6">Cada pieza pasa por revisión de estructura, relleno nuevo y tapizado a mano.</p>
+  <div class="grid gap-4 grid-cols-2 lg:grid-cols-4 mb-12">
+    <article class="card bg-white rounded-2xl p-4 shadow-sm border border-navy-800/5 text-center">
+      <span class="shine"></span>
+      <svg class="w-9 h-9 mx-auto mb-2 text-sky-400" viewBox="0 0 100 100" fill="currentColor" aria-hidden="true"><path d="M12 40 Q12 30 24 30 H76 Q88 30 88 40 V58 H12 Z"/><rect x="8" y="55" width="84" height="20" rx="8"/><rect x="4" y="46" width="12" height="30" rx="6"/><rect x="84" y="46" width="12" height="30" rx="6"/></svg>
+      <h3 class="font-semibold text-sm text-navy-800">Sofás y sillones</h3>
+    </article>
+    <article class="card bg-white rounded-2xl p-4 shadow-sm border border-navy-800/5 text-center">
+      <span class="shine"></span>
+      <svg class="w-9 h-9 mx-auto mb-2 text-sky-400" viewBox="0 0 100 100" fill="currentColor" aria-hidden="true"><rect x="32" y="14" width="36" height="34" rx="6"/><rect x="26" y="48" width="48" height="9" rx="3"/><path d="M30 57 L27 88 M70 57 L73 88" stroke="currentColor" stroke-width="4" stroke-linecap="round" fill="none"/></svg>
+      <h3 class="font-semibold text-sm text-navy-800">Sillas de comedor</h3>
+    </article>
+    <article class="card bg-white rounded-2xl p-4 shadow-sm border border-navy-800/5 text-center">
+      <span class="shine"></span>
+      <svg class="w-9 h-9 mx-auto mb-2 text-sky-400" viewBox="0 0 100 100" fill="currentColor" aria-hidden="true"><path d="M20 80 V32 Q20 14 50 14 Q80 14 80 32 V80 Z"/><rect x="6" y="80" width="88" height="8" rx="3"/></svg>
+      <h3 class="font-semibold text-sm text-navy-800">Respaldos a medida</h3>
+    </article>
+    <article class="card bg-white rounded-2xl p-4 shadow-sm border border-navy-800/5 text-center">
+      <span class="shine"></span>
+      <svg class="w-9 h-9 mx-auto mb-2 text-sky-400" viewBox="0 0 100 100" fill="currentColor" aria-hidden="true"><path d="M62 22 L84 78 L74 78 L69.5 66 L54.5 66 L50 78 L40 78 L62 22 Z M57.5 58 L66.5 58 L62 45.5 L57.5 58 Z"/><path d="M10 78 L10 22 L22 22 L36 52 L50 22 L62 22 L62 78 L52 78 L52 40 L39.5 67 L32.5 67 L20 40 L20 78 Z"/></svg>
+      <h3 class="font-semibold text-sm text-navy-800">Muebles antiguos</h3>
+    </article>
   </div>
 
-  <p id="catCount" class="text-xs text-navy-900/45 mb-3">28 de 28 trabajos</p>
-  <div id="gridCatalogo" class="grid grid-cols-2 lg:grid-cols-3 gap-4"></div>
-  <p id="catVacio" class="hidden text-center py-12 text-sm text-navy-900/45">No hay trabajos con esos filtros.</p>
+  <!-- TEASER ANTES / DESPUÉS -->
+  <div class="card bg-navy-800 rounded-2xl p-6 md:p-8 text-white relative overflow-hidden mb-12">
+    <div class="absolute inset-0 opacity-[0.06] pointer-events-none" style="background-image:repeating-linear-gradient(45deg,#fff 0 1px,transparent 1px 12px)"></div>
+    <div class="relative grid gap-6 md:grid-cols-2 items-center">
+      <div>
+        <div class="text-[10px] tracking-[0.25em] text-sky-300 font-bold mb-2">TRANSFORMACIONES REALES</div>
+        <h3 class="font-display text-2xl md:text-3xl font-bold mb-2">Mirá el antes y el después</h3>
+        <p class="text-sm text-white/65 mb-5 max-w-md">Deslizá la foto de un mueble restaurado y ves la diferencia con tus propios ojos.</p>
+        <button type="button" onclick="irA('antes-despues')"
+           class="inline-block bg-sky-400 hover:bg-sky-500 text-white text-sm font-semibold px-5 py-2.5 rounded-lg transition">
+          Ver comparador
+        </button>
+      </div>
+      <div class="relative aspect-[16/10] rounded-xl overflow-hidden border border-white/15 teaser-ad">
+        <div class="ad-antes absolute inset-0"></div>
+        <div class="capitone absolute inset-0 teaser-ad-despues"></div>
+      </div>
+    </div>
+  </div>
 
   <!-- TESTIMONIOS -->
-  <div class="mt-12">
+  <div class="mb-4">
     <svg class="stitch-line mb-6" viewBox="0 0 400 10" preserveAspectRatio="none" aria-hidden="true"><path d="M0 5 L20 1 L40 9 L60 1 L80 9 L100 1 L120 9 L140 1 L160 9 L180 1 L200 9 L220 1 L240 9 L260 1 L280 9 L300 1 L320 9 L340 1 L360 9 L380 1 L400 5"/></svg>
     <h2 class="font-display text-2xl md:text-3xl font-bold text-navy-800 text-center mb-1">Lo que dicen nuestros clientes</h2>
     <p class="text-sm text-navy-900/55 text-center mb-6">Trabajos entregados en Córdoba y alrededores.</p>
@@ -556,6 +610,69 @@
       </blockquote>
     </div>
   </div>
+
+  <!-- CTA de cierre -->
+  <div class="mt-10 bg-navy-800 rounded-2xl p-6 md:p-8 text-center text-white relative overflow-hidden">
+    <div class="absolute inset-0 opacity-[0.06]" style="background-image:repeating-linear-gradient(45deg,#fff 0 1px,transparent 1px 12px)"></div>
+    <div class="relative">
+      <h3 class="font-display text-2xl font-bold mb-1.5">¿Listo para renovar tu mueble?</h3>
+      <p class="text-sm text-white/65 mb-5 max-w-md mx-auto">Mirá precios de referencia en el catálogo o mandanos una foto y te pasamos un presupuesto sin cargo.</p>
+      <div class="flex flex-wrap gap-3 justify-center">
+        <button type="button" onclick="irA('catalogo')"
+           class="inline-block bg-sky-400 hover:bg-sky-500 text-white text-sm font-semibold px-6 py-2.5 rounded-lg transition">
+          Ver catálogo
+        </button>
+        <a href="https://wa.me/5493512043164?text=Hola!%20Quisiera%20una%20consulta%20sobre%20tapizado." target="_blank" rel="noopener"
+           class="inline-block bg-[#25D366] hover:bg-[#1ebe5a] text-white text-sm font-semibold px-6 py-2.5 rounded-lg transition">
+          Consultar por WhatsApp
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ CATÁLOGO ══════════════ -->
+<section id="sec-catalogo" data-section class="hidden">
+
+  <button type="button" onclick="irA('inicio')" class="inline-flex items-center gap-1.5 text-xs font-semibold text-navy-800/60 hover:text-sky-500 mb-4 transition">
+    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+    Volver al inicio
+  </button>
+
+  <div class="needle-rule mb-6"><span class="needle-dot"></span></div>
+
+  <h2 class="font-display text-3xl md:text-4xl font-bold text-navy-800">Catálogo</h2>
+  <p class="text-sm text-navy-900/55 mb-5">Precios de referencia por trabajo de tapizado. El presupuesto final se confirma al ver el mueble.</p>
+
+  <!-- FILTROS -->
+  <div class="bg-white rounded-2xl p-4 shadow-sm border border-navy-800/5 mb-6 grid gap-4 md:grid-cols-3 md:items-end">
+    <div>
+      <label for="fCategoria" class="block text-xs font-semibold mb-1.5 text-navy-800">Categoría</label>
+      <select id="fCategoria" class="w-full rounded-lg border border-navy-800/15 p-2.5 text-sm bg-white">
+        <option value="todas">Todas</option>
+        <option value="Sofá">Sofá</option>
+        <option value="Sillón">Sillón</option>
+        <option value="Silla">Silla</option>
+        <option value="Respaldo">Respaldo</option>
+        <option value="Puff">Puff</option>
+        <option value="Otros">Otros</option>
+      </select>
+    </div>
+    <div>
+      <label for="fPrecio" class="block text-xs font-semibold mb-1.5 text-navy-800">
+        Precio máximo: <span id="fPrecioLabel" class="text-sky-500 font-bold">$520.000</span>
+      </label>
+      <input id="fPrecio" type="range" min="38000" max="520000" step="1000" value="520000" class="w-full accent-sky-400">
+    </div>
+    <label class="flex items-center gap-2.5 md:pb-2.5 select-none">
+      <input id="fOferta" type="checkbox" class="w-4 h-4 rounded accent-sky-500">
+      <span class="text-sm font-medium">Solo ofertas 🔥</span>
+    </label>
+  </div>
+
+  <p id="catCount" class="text-xs text-navy-900/45 mb-3">28 de 28 trabajos</p>
+  <div id="gridCatalogo" class="grid grid-cols-2 lg:grid-cols-3 gap-4"></div>
+  <p id="catVacio" class="hidden text-center py-12 text-sm text-navy-900/45">No hay trabajos con esos filtros.</p>
 
   <!-- CTA de cierre -->
   <div class="mt-10 bg-navy-800 rounded-2xl p-6 md:p-8 text-center text-white relative overflow-hidden">
@@ -1142,9 +1259,13 @@ $('#btnTema').addEventListener('click', function () {
 })();
 
 /* ---------- Navegación por paneles ---------- */
-var SECCIONES = ['catalogo','telas','taller','antes-despues','nosotros','contacto'];
+var SECCIONES = ['inicio','catalogo','telas','taller','antes-despues','nosotros','contacto'];
 
 var META_SECCIONES = {
+  inicio: {
+    title: 'Tapicería Miguel Ángel — Eclat | Tapizado y restauración de muebles en Córdoba',
+    desc:  'Tapicería Miguel Ángel (Eclat): tapizado artesanal en Córdoba capital. Restauración de sillones, sofás, sillas de comedor y respaldos. Presupuesto sin cargo por WhatsApp.'
+  },
   catalogo: {
     title: 'Catálogo — Tapicería Miguel Ángel | Sillones y sofás tapizados en Córdoba',
     desc:  'Catálogo de sillones, sofás, sillas de comedor y respaldos tapizados por Tapicería Miguel Ángel en Córdoba. Precios y consulta directa por WhatsApp.'
@@ -1184,7 +1305,7 @@ function actualizarMeta(id) {
 }
 
 function irA(id, empujarHistorial) {
-  if (SECCIONES.indexOf(id) === -1) id = 'catalogo';
+  if (SECCIONES.indexOf(id) === -1) id = 'inicio';
   $$('[data-section]').forEach(function (s) { s.classList.add('hidden'); });
   var sec = $('#sec-' + id);
   sec.classList.remove('hidden');
@@ -1201,13 +1322,13 @@ function irA(id, empujarHistorial) {
   if (id === 'catalogo') cascadaCatalogo();
 }
 
-actualizarMeta((location.hash || '#catalogo').slice(1));
+actualizarMeta((location.hash || '#inicio').slice(1));
 
 $$('[data-nav]').forEach(function (a) {
   a.addEventListener('click', function (e) { e.preventDefault(); irA(a.dataset.nav); });
 });
 window.addEventListener('popstate', function () {
-  irA((location.hash || '#catalogo').slice(1), false);
+  irA((location.hash || '#inicio').slice(1), false);
 });
 
 /* ---------- Menú móvil ---------- */
@@ -1475,7 +1596,7 @@ setTimeout(function () {
 /* ---------- Arranque: respetar el hash de la URL ---------- */
 (function arranque() {
   var h = (location.hash || '').slice(1);
-  if (h && SECCIONES.indexOf(h) > -1 && h !== 'catalogo') irA(h, false);
+  if (h && SECCIONES.indexOf(h) > -1 && h !== 'inicio') irA(h, false);
   cargarCatalogo();
 })();
 </script>
