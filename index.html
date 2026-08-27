@@ -295,15 +295,13 @@
   }
   .stitch-line.seen path { stroke-dashoffset:0; }
 
-  /* Acento latón en modo oscuro */
+  /* Hero en modo oscuro: misma paleta navy/celeste, más profunda */
   .dark .hero { background:
-      repeating-linear-gradient(135deg, rgba(212,175,110,.05) 0 2px, transparent 2px 14px),
-      radial-gradient(circle at 78% 25%, rgba(212,175,110,.18), transparent 55%),
-      linear-gradient(135deg, #1a1410 0%, #2a2018 55%, #0e0a06 100%) !important; }
-  .dark .needle-dot { background:#d4af6e !important; }
-  .dark .needle-rule::before { background:linear-gradient(90deg, transparent, #d4af6e) !important; }
-  .dark .needle-rule::after  { background:linear-gradient(90deg, #d4af6e, transparent) !important; }
-  .dark .stitch-line path { stroke:#d4af6e; }
+      repeating-linear-gradient(135deg, rgba(140,192,232,.06) 0 2px, transparent 2px 14px),
+      radial-gradient(circle at 78% 20%, rgba(95,163,220,.28), transparent 52%),
+      radial-gradient(circle at 8% 100%, rgba(95,163,220,.14), transparent 45%),
+      linear-gradient(135deg, #0e1c34 0%, #0b1526 55%, #060c18 100%) !important; }
+  .dark .hero::after { border-color:rgba(140,192,232,.18) !important; }
 
   /* Globito de WhatsApp */
   #waTip {
@@ -451,10 +449,10 @@
            class="bg-[#25D366] hover:bg-[#1ebe5a] text-white text-xs md:text-sm font-semibold px-4 md:px-5 py-2 md:py-2.5 rounded-lg transition shadow-lg shadow-black/20">
           Pedir presupuesto por WhatsApp
         </a>
-        <a href="https://script.google.com/macros/s/AKfycbzixqTUfjkbpP61JKQRv1hyQKRx19a8x54PiSTPVc5vMYymWmeOxEJqrcZ6sQqxdEYQ/exec"
+        <button type="button" onclick="document.getElementById('calculadora').scrollIntoView({behavior:'smooth', block:'start'})"
            class="border border-white/25 hover:border-white/60 hover:bg-white/5 text-white text-xs md:text-sm font-semibold px-4 md:px-5 py-2 md:py-2.5 rounded-lg transition">
-          Calculadora y simulador
-        </a>
+          Calculadora de presupuesto
+        </button>
       </div>
     </div>
     <svg class="absolute -right-8 -bottom-10 w-56 h-56 md:w-72 md:h-72 opacity-[0.07] pointer-events-none" viewBox="0 0 100 100" fill="none" aria-hidden="true">
@@ -742,10 +740,50 @@
     <b>Referencia rápida de consumo:</b> sillón 1 cuerpo ≈ 3-4 m · sofá 2 cuerpos ≈ 6-8 m · sofá 3 cuerpos ≈ 9-12 m · silla de comedor ≈ 0,8-1 m c/u · respaldo 2 plazas ≈ 4-5 m.
   </div>
 
-  <p class="text-sm text-navy-900/55 mt-6 leading-relaxed">
-    ¿Querés calcular cuánto sale tu trabajo con una tela puntual, o ver cómo queda sobre una foto de tu mueble?
-    <a href="https://script.google.com/macros/s/AKfycbzixqTUfjkbpP61JKQRv1hyQKRx19a8x54PiSTPVc5vMYymWmeOxEJqrcZ6sQqxdEYQ/exec" class="text-sky-500 font-semibold hover:underline">Abrí la calculadora y el simulador →</a>
-  </p>
+  <!-- CALCULADORA DE PRESUPUESTO -->
+  <div id="calculadora" class="mt-10 bg-white rounded-2xl border border-navy-800/5 shadow-sm p-5 md:p-6 scroll-mt-20">
+    <h3 class="font-display text-xl font-bold text-navy-800 mb-1">Calculadora de presupuesto</h3>
+    <p class="text-xs text-navy-900/55 mb-5">Estimá cuánto sale la tela para tu mueble. El presupuesto final incluye además la mano de obra y se confirma al ver el mueble.</p>
+    <div class="grid gap-4 md:grid-cols-3 md:items-end">
+      <div>
+        <label for="calcMueble" class="block text-xs font-semibold mb-1.5 text-navy-800">Tipo de mueble</label>
+        <select id="calcMueble" class="w-full rounded-lg border border-navy-800/15 p-2.5 text-sm bg-white">
+          <option value="3.5">Sillón 1 cuerpo (≈3,5 m)</option>
+          <option value="2">Puff / banqueta (≈2 m)</option>
+          <option value="0.9">Silla de comedor, unidad (≈0,9 m)</option>
+          <option value="3">Respaldo 1 plaza (≈3 m)</option>
+          <option value="4.5">Respaldo 2 plazas (≈4,5 m)</option>
+          <option value="7" selected>Sofá 2 cuerpos (≈7 m)</option>
+          <option value="10.5">Sofá 3 cuerpos (≈10,5 m)</option>
+          <option value="14">Sofá esquinero en L (≈14 m)</option>
+        </select>
+      </div>
+      <div>
+        <label for="calcTela" class="block text-xs font-semibold mb-1.5 text-navy-800">Tela</label>
+        <select id="calcTela" class="w-full rounded-lg border border-navy-800/15 p-2.5 text-sm bg-white">
+          <option value="14500">Gabardina Reforzada ($14.500/m)</option>
+          <option value="18500" selected>Chenille Premium ($18.500/m)</option>
+          <option value="22000">Pana Lisa Clásica ($22.000/m)</option>
+          <option value="24000">Chenille Antimanchas ($24.000/m)</option>
+          <option value="26500">Lino Rústico ($26.500/m)</option>
+          <option value="29500">Terciopelo Velvet ($29.500/m)</option>
+          <option value="31000">Ecocuero Soft Touch ($31.000/m)</option>
+          <option value="34500">Bouclé Texturado ($34.500/m)</option>
+        </select>
+      </div>
+      <div>
+        <div class="text-xs font-semibold mb-1.5 text-navy-800">Tela estimada</div>
+        <div id="calcResultado" class="rounded-lg bg-navy-100 border border-sky-300/40 p-2.5 text-sm font-bold text-navy-800 font-display"></div>
+      </div>
+    </div>
+    <p class="text-[11px] text-navy-900/45 mt-4 leading-relaxed">
+      * Estimado solo de tela, según el consumo promedio del mueble elegido. No incluye mano de obra, espuma ni resortes — eso se confirma al ver el mueble, sin cargo.
+    </p>
+    <a id="calcWa" href="#" target="_blank" rel="noopener"
+       class="inline-block mt-4 bg-[#25D366] hover:bg-[#1ebe5a] text-white text-sm font-semibold px-5 py-2.5 rounded-lg transition">
+      Confirmar este estimado por WhatsApp
+    </a>
+  </div>
 </section>
 
 <!-- ══════════════ EL TALLER ══════════════ -->
@@ -998,22 +1036,8 @@
         </div>
       </a>
 
-      <a href="https://script.google.com/macros/s/AKfycbzixqTUfjkbpP61JKQRv1hyQKRx19a8x54PiSTPVc5vMYymWmeOxEJqrcZ6sQqxdEYQ/exec"
-         class="card block bg-white rounded-2xl border border-navy-800/5 shadow-sm p-5">
-        <span class="shine"></span>
-        <div class="flex items-center gap-4">
-          <span class="w-12 h-12 rounded-full bg-sky-400 grid place-items-center shrink-0">
-            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 9h18M9 21V9M5 3h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2z"/></svg>
-          </span>
-          <span>
-            <span class="block font-semibold text-base text-navy-800">Formulario de encargo</span>
-            <span class="block text-sm text-navy-900/55">Subí fotos y videos del mueble desde la app</span>
-          </span>
-        </div>
-      </a>
-
       <div class="bg-navy-100 border border-sky-300/40 rounded-xl p-4 text-xs text-navy-800 leading-relaxed">
-        <b>Para que el presupuesto salga más preciso,</b> mandanos: una foto del mueble completo, una del detalle que más te preocupa (tela rota, apoyabrazos hundido) y, si podés, la medida del largo.
+        <b>Para que el presupuesto salga más preciso,</b> mandanos por WhatsApp: una foto del mueble completo, una del detalle que más te preocupa (tela rota, apoyabrazos hundido) y, si podés, la medida del largo.
       </div>
     </div>
 
@@ -1316,6 +1340,31 @@ function cascadaCatalogo() {
     el.classList.add('card-in');
   });
 }
+
+/* ---------- Calculadora de presupuesto ---------- */
+(function () {
+  var mueble = $('#calcMueble'), tela = $('#calcTela'), resultado = $('#calcResultado'), btnWa = $('#calcWa');
+  if (!mueble || !tela || !resultado) return;
+
+  function actualizarCalculo() {
+    var metros = +mueble.value;
+    var precioMetro = +tela.value;
+    var min = metros * precioMetro * 0.9;
+    var max = metros * precioMetro * 1.1;
+    resultado.textContent = fmtAR(Math.round(min / 500) * 500) + ' – ' + fmtAR(Math.round(max / 500) * 500);
+
+    var muebleTexto = mueble.options[mueble.selectedIndex].text;
+    var telaTexto = tela.options[tela.selectedIndex].text;
+    var msg = 'Hola! Estimé un presupuesto con la calculadora: *' + muebleTexto + '* con *' + telaTexto +
+      '* — tela aprox. ' + fmtAR(Math.round(min / 500) * 500) + ' a ' + fmtAR(Math.round(max / 500) * 500) +
+      '. ¿Me confirmás el presupuesto final?';
+    btnWa.href = 'https://wa.me/5493512043164?text=' + encodeURIComponent(msg);
+  }
+
+  mueble.addEventListener('input', actualizarCalculo);
+  tela.addEventListener('input', actualizarCalculo);
+  actualizarCalculo();
+})();
 
 /* ---------- Filtros de telas ---------- */
 var TELAS_EL = $$('#gridTelas .tela');
