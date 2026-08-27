@@ -88,12 +88,7 @@
   <main id="main" style="display:none">
     <div class="grid">
       <div class="foto" id="foto">
-        <div class="placeholder">
-          <svg width="72" height="72" viewBox="0 0 100 100" fill="none" opacity="0.35" aria-hidden="true">
-            <path d="M62 22 L84 78 L74 78 L69.5 66 L54.5 66 L50 78 L40 78 L62 22 Z M57.5 58 L66.5 58 L62 45.5 L57.5 58 Z" fill="#5FA3DC"/>
-            <path d="M10 78 L10 22 L22 22 L36 52 L50 22 L62 22 L62 78 L52 78 L52 40 L39.5 67 L32.5 67 L20 40 L20 78 Z" fill="#fff"/>
-          </svg>
-        </div>
+        <div class="placeholder" id="fotoPlaceholder"></div>
       </div>
       <div>
         <span class="badge-cat" id="catLabel"></span>
@@ -122,6 +117,21 @@
     document.getElementById('anio').textContent = new Date().getFullYear();
 
     function fmtAR(n) { return '$' + Number(n).toLocaleString('es-AR'); }
+
+    var ICONOS_MUEBLE = {
+      'Sofá': '<path d="M12 40 Q12 30 24 30 H76 Q88 30 88 40 V58 H12 Z"/><rect x="8" y="55" width="84" height="20" rx="8"/><rect x="4" y="46" width="12" height="30" rx="6"/><rect x="84" y="46" width="12" height="30" rx="6"/>',
+      'Sillón': '<path d="M20 38 Q20 26 32 26 H68 Q80 26 80 38 V56 H20 Z"/><rect x="16" y="53" width="68" height="22" rx="8"/><rect x="8" y="42" width="14" height="34" rx="6"/><rect x="78" y="42" width="14" height="34" rx="6"/>',
+      'Silla': '<rect x="32" y="14" width="36" height="34" rx="6"/><rect x="26" y="48" width="48" height="9" rx="3"/><line x1="30" y1="57" x2="27" y2="88" stroke-width="4" stroke-linecap="round"/><line x1="70" y1="57" x2="73" y2="88" stroke-width="4" stroke-linecap="round"/>',
+      'Respaldo': '<path d="M20 80 V32 Q20 14 50 14 Q80 14 80 32 V80 Z"/><rect x="6" y="80" width="88" height="8" rx="3"/>',
+      'Puff': '<ellipse cx="50" cy="36" rx="28" ry="10"/><rect x="22" y="36" width="56" height="38" rx="16"/>',
+      'Otros': '<path d="M20 30 Q20 20 30 20 H70 Q80 20 80 30 V70 Q80 80 70 80 H30 Q20 80 20 70 Z"/><path d="M20 20 L32 32 M80 80 L68 68" stroke-width="3" fill="none" stroke-linecap="round"/>'
+    };
+    var ICONO_DEFAULT = '<path d="M62 22 L84 78 L74 78 L69.5 66 L54.5 66 L50 78 L40 78 L62 22 Z M57.5 58 L66.5 58 L62 45.5 L57.5 58 Z"/><path d="M10 78 L10 22 L22 22 L36 52 L50 22 L62 22 L62 78 L52 78 L52 40 L39.5 67 L32.5 67 L20 40 L20 78 Z"/>';
+
+    function svgMueble(categoria) {
+      var contenido = ICONOS_MUEBLE[categoria] || ICONO_DEFAULT;
+      return '<svg width="80" height="80" viewBox="0 0 100 100" fill="#5FA3DC" opacity="0.4" aria-hidden="true">' + contenido + '</svg>';
+    }
 
     var params = new URLSearchParams(location.search);
     var id = params.get('id');
@@ -163,6 +173,8 @@
         img.src = p.imagen;
         img.alt = p.nombre;
         foto.appendChild(img);
+      } else {
+        document.getElementById('fotoPlaceholder').innerHTML = svgMueble(p.categoria);
       }
 
       var msg = 'Hola! Me interesa: *' + p.nombre + '* (' + p.categoria + ') — ' + fmtAR(p.precio) + '. ¿Me pasás más info?';
