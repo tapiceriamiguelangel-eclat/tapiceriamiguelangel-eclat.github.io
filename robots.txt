@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /admin.html
 
-Sitemap: https://tapiceriamiguelangel-eclat.github.io/sitemap.xml
+Sitemap: https://portafoliofg.github.io/sitemap.xml
